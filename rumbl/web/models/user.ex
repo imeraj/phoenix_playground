@@ -17,6 +17,7 @@ defmodule Rumbl.User do
     |> validate_required([:name, :username, :password])
     |> validate_length(:username, min: 3, max: 10)
     |> validate_length(:password, min: 5, max: 15)
+    |> unique_constraint(:username)
   end
 
   def registration_changeset(model, params) do

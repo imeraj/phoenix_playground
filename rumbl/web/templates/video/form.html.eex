@@ -9,6 +9,7 @@
      <%= label f, :category_id, "Category", class: "control-label" %>
      <%= select f, :category_id, @categories, class: "form-control",
                     prompt: "Choose a category" %>
+     <%= error_tag f, :category_id %>
  </div>
 
   <div class="form-group">
