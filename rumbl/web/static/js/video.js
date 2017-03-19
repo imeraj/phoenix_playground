@@ -13,7 +13,7 @@ let Video = {
       },
 
       onReady(videoId, socket) {
-        let msgContainter = document.getElementById("msg-container")
+        let msgContainer = document.getElementById("msg-container")
         let msgInput = document.getElementById("msg-input")
         let postButton = document.getElementById("msg-submit")
         let vidChannel = socket.channel("videos:" + videoId)
@@ -26,11 +26,13 @@ let Video = {
         })
 
         vidChannel.on("new_annotation", (resp) => {
-          this.renderAnnotation(msgContainter, resp)
+          this.renderAnnotation(msgContainer, resp)
         })
 
         vidChannel.join()
-          .receive("ok", resp => console.log("Joined the video channel", resp))
+          .receive("ok", ({annotations}) => {
+            annotations.forEach(ann => this.renderAnnotation(msgContainer, ann))
+          })
           .receive("error", reason => console.log("Join failed", reason))
       },
 
@@ -41,6 +43,7 @@ let Video = {
       },
 
       renderAnnotation(msgContainer, {user, body, at}) {
+        console.log("" + user + body + at)
         let template = document.createElement("div")
 
         template.innerHTML = `
