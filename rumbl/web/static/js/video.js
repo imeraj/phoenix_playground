@@ -43,12 +43,11 @@ let Video = {
       },
 
       renderAnnotation(msgContainer, {user, body, at}) {
-        console.log("" + user + body + at)
         let template = document.createElement("div")
 
         template.innerHTML = `
           <a href="#" data-seek="${this.esc(at)}">
-          <b>${this.esc(user.username)}</b>:${this.esc(body)}
+          <b>[${at / (60 * 1000)}]:${this.esc(user.username)}</b>:${this.esc(body)}
           </a>
           `
 
