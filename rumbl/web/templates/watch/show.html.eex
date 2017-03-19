@@ -10,7 +10,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">Annotations</h3>
       </div>
-      <div id="msg-containter" class="panel-body annotations">
+      <div id="msg-container" class="panel-body annotations">
       </div>
 
       <div class="panel-footer">
