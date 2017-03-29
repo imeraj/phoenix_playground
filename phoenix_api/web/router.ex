@@ -13,9 +13,16 @@ defmodule PhoenixApi.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", PhoenixApi do
-    pipe_through :api # Use the default browser stack
+  scope "/api", PhoenixApi.Api do
+    pipe_through :api
 
+    scope "/v1", V1 do
+      resources "/users", UserController, only: [:show, :create, :index]
+    end
+
+    scope "/v2", V2 do
+      resources "/users", UserController, only: [:show, :create, :index]
+    end
   end
 
   # Other scopes may use custom stacks.
