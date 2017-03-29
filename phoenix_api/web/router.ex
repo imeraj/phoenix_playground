@@ -17,11 +17,13 @@ defmodule PhoenixApi.Router do
     pipe_through :api
 
     scope "/v1", V1 do
-      resources "/users", UserController, only: [:show, :create, :index]
+      post "/signup", UserController, :create
+
+      resources "/users", UserController, only: [:show]
     end
 
     scope "/v2", V2 do
-      resources "/users", UserController, only: [:show, :create, :index]
+      resources "/users", UserController, only: [:index]
     end
   end
 
