@@ -18,6 +18,7 @@ defmodule PhoenixApi.Router do
 
     scope "/v1", V1 do
       post "/signup", UserController, :create
+      post "/login",  SessionController, :create
 
       resources "/users", UserController, only: [:show]
     end
