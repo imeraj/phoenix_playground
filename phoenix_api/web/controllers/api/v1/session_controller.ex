@@ -25,14 +25,19 @@ defmodule PhoenixApi.Api.V1.SessionController do
 
   def destory(conn, _params) do
     jwt = Guardian.Plug.current_token(conn)
-    {:ok, claims} = Guardian.Plug.claims(conn)
-    case Guardian.revoke!(jwt, claims) do
-      :ok ->
+    case Guardian.Plug.claims(conn) do
+      {:ok, claims} ->
+        case Guardian.revoke!(jwt, claims) do
+          :ok ->
+            conn
+            |> json(%{message: "Logout successful!"})
+          {:error, reason}->
+            conn
+            |>json(%{message: "Logout failed!", error: reason})
+        end
+      {:error, reason} ->
         conn
-        |> json(%{message: "Logout successful!"})
-      _->
-        conn
-        |>json(%{message: "Logout failed!"})
+        |>json(%{message: "Logout failed!", error: reason})
     end
   end
 
