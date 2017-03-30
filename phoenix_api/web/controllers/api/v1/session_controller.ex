@@ -18,9 +18,22 @@ defmodule PhoenixApi.Api.V1.SessionController do
             |> json(%{access_token: jwt, expires_in: exp})
         {:error, reason} ->
             conn
-            |> put_status(401)
+            |> put_status(reason)
             |> json(%{message: "Login failed!", reason: reason})
     end
+  end
+
+  def destory(conn, _params) do
+    jwt = Guardian.Plug.current_token(conn)
+    {:ok, claims} = Guardian.Plug.claims(conn)
+    case Guardian.revoke!(jwt, claims) do
+      :ok ->
+        conn
+        |> json(%{message: "Logged out successfully!"})
+      _->
+        conn
+        |>json(%{message: "Logout failed!"})
+      end
   end
 
   defp login_by_username_pass(email, given_pass) do

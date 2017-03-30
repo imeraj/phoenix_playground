@@ -13,12 +13,18 @@ defmodule PhoenixApi.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
+  end
+
   scope "/api", PhoenixApi.Api do
-    pipe_through :api
+    pipe_through [:api, :api_auth]
 
     scope "/v1", V1 do
       post "/signup", UserController, :create
       post "/login",  SessionController, :create
+      delete "/logout", SessionController, :destory
 
       resources "/users", UserController, only: [:show]
     end
