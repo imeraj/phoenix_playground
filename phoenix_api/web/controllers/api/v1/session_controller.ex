@@ -29,7 +29,7 @@ defmodule PhoenixApi.Api.V1.SessionController do
     case Guardian.revoke!(jwt, claims) do
       :ok ->
         conn
-        |> json(%{message: "Logged out successfully!"})
+        |> json(%{message: "Logout successful!"})
       _->
         conn
         |>json(%{message: "Logout failed!"})
