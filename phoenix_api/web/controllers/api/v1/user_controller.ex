@@ -3,6 +3,7 @@ defmodule PhoenixApi.Api.V1.UserController do
   alias PhoenixApi.Repo
   alias PhoenixApi.User
 
+  plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:index, :show]
   plug :scrub_params, "user" when action in [:create]
 
   def index(conn, _params) do
@@ -37,5 +38,11 @@ defmodule PhoenixApi.Api.V1.UserController do
         |> put_status(:unprocessable_entity)
         |> render(PhoenixApi.ChangesetView, "error.json", changeset: changeset)
     end
+  end
+
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(:unauthorized)
+    |> json(%{message: "Authentication required", error: :unauthorized})
   end
 end

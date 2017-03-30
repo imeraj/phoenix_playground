@@ -19,7 +19,7 @@ defmodule PhoenixApi.Mixfile do
   def application do
     [mod: {PhoenixApi, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :mariaex, :comeonin]]
+                    :phoenix_ecto, :mariaex, :comeonin, :distillery, :guardian_db]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,7 +39,10 @@ defmodule PhoenixApi.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 3.0"},
-     {:guardian, "~> 0.14"}]
+     {:guardian, "~> 0.14"},
+     {:guardian_db, "~> 0.8.0"},
+     {:distillery, "~> 1.3"}
+     ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

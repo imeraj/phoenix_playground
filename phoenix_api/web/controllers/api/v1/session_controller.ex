@@ -33,7 +33,7 @@ defmodule PhoenixApi.Api.V1.SessionController do
       _->
         conn
         |>json(%{message: "Logout failed!"})
-      end
+    end
   end
 
   defp login_by_username_pass(email, given_pass) do
