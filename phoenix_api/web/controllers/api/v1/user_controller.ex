@@ -1,9 +1,10 @@
 defmodule PhoenixApi.Api.V1.UserController do
   use PhoenixApi.Web, :controller
+  import PhoenixApi.AuthHelper
   alias PhoenixApi.Repo
   alias PhoenixApi.User
 
-  plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:index, :show]
+  plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:index, :show, :delete]
   plug :scrub_params, "user" when action in [:create]
 
   def index(conn, _params) do
@@ -37,6 +38,21 @@ defmodule PhoenixApi.Api.V1.UserController do
         conn
         |> put_status(:unprocessable_entity)
         |> render(PhoenixApi.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
+
+  def delete(conn, _params) do
+    case Guardian.Plug.current_resource(conn) do
+      nil ->
+        conn
+        |> put_status(:not_found)
+        |> json(%{message: "User not found", error: :not_found})
+      user ->
+        Repo.delete!(user)
+        remove_token(conn)
+        conn
+        |> put_status(:no_content)
+        |> json(%{})
     end
   end
 

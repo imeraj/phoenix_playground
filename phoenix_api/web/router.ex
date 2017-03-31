@@ -26,7 +26,7 @@ defmodule PhoenixApi.Router do
       post "/login",  SessionController, :create
       delete "/logout", SessionController, :destory
 
-      resources "/users", UserController, only: [:show, :index, :show]
+      resources "/users", UserController, only: [:show, :index, :delete]
     end
 
     scope "/v2", V2 do
