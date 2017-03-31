@@ -1,6 +1,6 @@
 defmodule PhoenixApi.Api.V1.SessionController do
+  import PhoenixApi.AuthHelper
   use PhoenixApi.Web, :controller
-  import Comeonin.Bcrypt, only: [checkpw: 2]
 
   plug :scrub_params, "session" when action in [:create]
 
@@ -38,19 +38,6 @@ defmodule PhoenixApi.Api.V1.SessionController do
       {:error, reason} ->
         conn
         |>json(%{message: "Logout failed!", error: reason})
-    end
-  end
-
-  defp login_by_username_pass(email, given_pass) do
-    user = PhoenixApi.Repo.get_by(PhoenixApi.User, email: email)
-
-    cond do
-      user && checkpw(given_pass, user.encrypted_password) ->
-        {:ok, user}
-      user ->
-        {:error, :unauthorized}
-      true ->
-        {:error, :not_found}
     end
   end
 end
