@@ -4,7 +4,7 @@ defmodule PhoenixApi.Api.V1.UserController do
   alias PhoenixApi.Repo
   alias PhoenixApi.User
 
-  plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:index, :show, :delete]
+  plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:index, :show, :delete, :update]
   plug :scrub_params, "user" when action in [:create]
 
   def index(conn, _params) do
@@ -53,6 +53,22 @@ defmodule PhoenixApi.Api.V1.UserController do
         conn
         |> put_status(:no_content)
         |> json(%{})
+    end
+  end
+
+  def update(conn, %{"user" => user_params}) do
+    user = Guardian.Plug.current_resource(conn)
+    changeset = User.changeset(user, user_params)
+
+    case Repo.update(changeset) do
+      {:ok, user} ->
+        conn
+        |> put_status(:ok)
+        |> render("show.json", user: user)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(PhoenixApi.ChangesetView, "error.json", changeset: changeset)
     end
   end
 
