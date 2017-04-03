@@ -58,7 +58,7 @@ defmodule PhoenixApi.Api.V1.UserController do
 
   def update(conn, %{"user" => user_params}) do
     user = Guardian.Plug.current_resource(conn)
-    changeset = User.changeset(user, user_params)
+    changeset = User.registration_changeset(user, user_params)
 
     case Repo.update(changeset) do
       {:ok, user} ->
