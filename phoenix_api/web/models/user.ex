@@ -11,7 +11,6 @@ defmodule PhoenixApi.User do
   end
 
   def changeset(model, params \\ %{}) do
-    IO.inspect  params
     model
     |> cast(params, [:name, :email, :password])
     |> validate_required([:name, :email, :password])
