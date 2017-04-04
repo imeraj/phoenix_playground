@@ -1,6 +1,5 @@
 defmodule PhoenixApi.Api.V1.ProductController do
   use PhoenixApi.Web, :controller
-
   alias PhoenixApi.Product
 
   def index(conn, _params) do
@@ -34,13 +33,14 @@ defmodule PhoenixApi.Api.V1.ProductController do
   end
 
   def update(conn, %{"id" => id, "product" => product_params}) do
-    product = Repo.get!(Product, id)
+    user = Guardian.Plug.current_resource(conn)
+    product = Repo.get!(user_products(user), id)
     changeset = Product.changeset(product, product_params)
 
     case Repo.update(changeset) do
-      {:ok, product} ->
-        render(conn, "show.json", product: product)
-      {:error, changeset} ->
+        {:ok, product} ->
+            render(conn, "show.json", product: product)
+        {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
         |> render(PhoenixApi.ChangesetView, "error.json", changeset: changeset)
@@ -48,12 +48,17 @@ defmodule PhoenixApi.Api.V1.ProductController do
   end
 
   def delete(conn, %{"id" => id}) do
-    product = Repo.get!(Product, id)
+    user = Guardian.Plug.current_resource(conn)
+    product = Repo.get!(user_products(user), id)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
     Repo.delete!(product)
 
     send_resp(conn, :no_content, "")
+  end
+
+  defp user_products(user) do
+      assoc(user, :products)
   end
 end
