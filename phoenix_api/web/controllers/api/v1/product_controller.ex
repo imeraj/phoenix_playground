@@ -9,7 +9,11 @@ defmodule PhoenixApi.Api.V1.ProductController do
   end
 
   def create(conn, %{"product" => product_params}) do
-    changeset = Product.changeset(%Product{}, product_params)
+    user = Guardian.Plug.current_resource(conn)
+    changeset =
+        user
+        |> build_assoc(:products)
+        |> Product.changeset(product_params)
 
     case Repo.insert(changeset) do
       {:ok, product} ->

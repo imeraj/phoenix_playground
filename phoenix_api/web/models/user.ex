@@ -6,8 +6,8 @@ defmodule PhoenixApi.User do
     field :email, :string
     field :password, :string, virtual: true
     field :encrypted_password, :string
-    has_many :products, PhoenixApi.Product, on_delete: :delete_all
-
+    has_many :products, PhoenixApi.Product
+    
     timestamps()
   end
 

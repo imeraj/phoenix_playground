@@ -6,7 +6,7 @@ defmodule PhoenixApi.Repo.Migrations.CreateProduct do
       add :title, :string
       add :price, :decimal
       add :published, :boolean, default: false, null: false
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :delete_all)
 
       timestamps()
     end
