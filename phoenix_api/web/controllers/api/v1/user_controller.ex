@@ -50,9 +50,7 @@ defmodule PhoenixApi.Api.V1.UserController do
       user ->
         Repo.delete!(user)
         remove_token(conn)
-        conn
-        |> put_status(:no_content)
-        |> json(%{})
+        send_resp(conn, :no_content, "")
     end
   end
 
