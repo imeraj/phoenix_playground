@@ -17,5 +17,6 @@ defmodule PhoenixApi.Product do
     struct
     |> cast(params, [:title, :price, :published])
     |> validate_required([:title, :price, :published])
+    |> validate_number(:price, greater_than: 0)
   end
 end
