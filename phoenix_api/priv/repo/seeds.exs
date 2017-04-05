@@ -28,7 +28,7 @@ Enum.each(ids, fn id ->
     Repo.insert! %PhoenixApi.Product{
        title: Faker.Commerce.product_name,
        price: Faker.Commerce.price,
-       published: if(is_even(i), do: true, else: false),
+       published: is_even(i),
        user_id: id
     }
   end
