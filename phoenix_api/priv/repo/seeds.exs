@@ -10,6 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 import Ecto.Query, only: [from: 2]
+import Integer, only: [is_even: 1]
 alias PhoenixApi.Repo
 
 for _x <- 1..50, do:
@@ -23,11 +24,11 @@ query = from u in "users",
         select: u.id
 ids = Repo.all(query)
 Enum.each(ids, fn id ->
-  for _i <- 1..50, do:
+  for i <- 1..50, do:
     Repo.insert! %PhoenixApi.Product{
        title: Faker.Commerce.product_name,
        price: Faker.Commerce.price,
-       published: true,
+       published: if(is_even(i), do: true, else: false),
        user_id: id
     }
   end
