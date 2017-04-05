@@ -5,12 +5,13 @@ defmodule PhoenixApi.Api.V1.UserController do
   alias PhoenixApi.User
 
   plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:index, :show, :delete, :update]
-  plug :scrub_params, "user" when action in [:create]
+  plug :scrub_params, "user" when action in [:create, :update]
 
-  def index(conn, _params) do
-    users = Repo.all(User)
+  def index(conn, %{"page" => page, "per_page" => per_page}) do
+    page = User
+           |> Repo.paginate(page: page, page_size: per_page)
     conn
-    |> render("index.json", users: users)
+    |> render("index.json", users: page.entries)
   end
 
   def show(conn,_params) do

@@ -2,9 +2,15 @@ defmodule PhoenixApi.Api.V1.ProductController do
   use PhoenixApi.Web, :controller
   alias PhoenixApi.Product
 
-  def index(conn, _params) do
-    products = Repo.all(Product)
-    render(conn, "index.json", products: products)
+  plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:index, :create, :show, :delete, :update]
+  plug :scrub_params, "product" when action in [:create, :update]
+
+  def index(conn, %{"page" => page, "per_page" => per_page}) do
+    page = Product
+           |> where([p], p.published == true)
+           |> Repo.paginate(page: page, page_size: per_page)
+    conn
+    |> render("index.json", products: page.entries)
   end
 
   def create(conn, %{"product" => product_params}) do
@@ -60,5 +66,11 @@ defmodule PhoenixApi.Api.V1.ProductController do
 
   defp user_products(user) do
       assoc(user, :products)
+  end
+
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(:unauthorized)
+    |> json(%{message: "Authentication required", error: :unauthorized})
   end
 end
