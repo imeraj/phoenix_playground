@@ -10,6 +10,6 @@ defmodule PhoenixApi.Api.V1.OrderView do
   end
 
   def render("order.json", %{order: order}) do
-    %{id: order.id}
+    %{id: order.id, total: order.total}
   end
 end

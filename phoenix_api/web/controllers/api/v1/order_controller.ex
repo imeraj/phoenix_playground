@@ -5,7 +5,7 @@ defmodule PhoenixApi.Api.V1.OrderController do
   alias PhoenixApi.OrderProduct
 
   plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:create, :show]
-  plug :scrub_params, "order" when action in [:create, :show]
+  plug :scrub_params, "order" when action in [:create]
 
   def create(conn, %{"order" => order_params}) do
     user = Guardian.Plug.current_resource(conn)
@@ -52,5 +52,11 @@ defmodule PhoenixApi.Api.V1.OrderController do
           changeset = OrderProduct.changeset(%OrderProduct{}, %{order_id: order.id, product_id: product_id})
           Repo.insert!(changeset)
       end)
+  end
+
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(:unauthorized)
+    |> json(%{message: "Authentication required", error: :unauthorized})
   end
 end
