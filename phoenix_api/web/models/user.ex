@@ -7,7 +7,8 @@ defmodule PhoenixApi.User do
     field :password, :string, virtual: true
     field :encrypted_password, :string
     has_many :products, PhoenixApi.Product
-    
+    has_many :orders, PhoenixApi.Order
+
     timestamps()
   end
 

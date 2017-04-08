@@ -28,6 +28,7 @@ defmodule PhoenixApi.Router do
 
       resources "/users", UserController, only: [:show, :index, :delete, :update]
       resources "/products", ProductController, except: [:new, :edit]
+      resources "/orders", OrderController, only: [:create, :show]
     end
 
     scope "/v2", V2 do
