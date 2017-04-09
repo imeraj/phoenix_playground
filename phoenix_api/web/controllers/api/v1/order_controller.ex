@@ -34,15 +34,13 @@ defmodule PhoenixApi.Api.V1.OrderController do
   end
 
   def show(conn, %{"id" => id}) do
-    order = Repo.get!(Order, id)
+    order = Repo.get!(Order, id) |> Repo.preload(:order_products)
     product_ids = order
     |> Ecto.assoc(:order_products)
     |> select([op], op.product_id)
     |> Repo.all
 
-    conn
-    |> put_status(:ok)
-    |> json(%{data: %{id: order.id, total: order.total, product_ids: product_ids}})
+    PhoenixETag.render_if_stale(conn, :show, order: order)
   end
 
   defp calcualte_total(%{"product_ids" => ids}) do

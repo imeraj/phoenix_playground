@@ -46,7 +46,8 @@ defmodule PhoenixApi.Mixfile do
      {:faker, "~> 0.7"},
      {:scrivener_ecto, "~> 1.0"},
      {:bamboo, "~> 0.7"},
-     {:bamboo_smtp, "~> 1.2.1"}
+     {:bamboo_smtp, "~> 1.2.1"},
+     {:phoenix_etag, "~> 0.1"}
      ]
   end
 
