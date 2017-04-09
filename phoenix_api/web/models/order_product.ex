@@ -14,7 +14,8 @@ defmodule PhoenixApi.OrderProduct do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:order_id, :product_id])
-    |> assoc_constraint(:order)
-    |> assoc_constraint(:product)
+    |> validate_required([:order_id, :product_id])
+    |> foreign_key_constraint(:product_id)
+    |> foreign_key_constraint(:order_id)
   end
 end

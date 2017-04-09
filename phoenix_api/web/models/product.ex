@@ -6,7 +6,7 @@ defmodule PhoenixApi.Product do
     field :price, :decimal
     field :published, :boolean, default: true
     belongs_to :user, PhoenixApi.User
-
+    
     timestamps()
   end
 

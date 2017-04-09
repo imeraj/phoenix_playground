@@ -16,8 +16,8 @@ defmodule PhoenixApi.Api.V1.OrderController do
 
     case Repo.insert(changeset) do
       {:ok, order} ->
-        order
-        |> populate_order_product(order_params)
+        conn
+        |> populate_order_product(order, order_params)
 
         conn
         |> put_status(:created)
@@ -43,14 +43,20 @@ defmodule PhoenixApi.Api.V1.OrderController do
       |> Enum.reduce(Decimal.new(0), &Decimal.add/2)
   end
 
-  defp populate_order_product(order, %{"product_ids" => ids}) do
+  defp populate_order_product(conn, order, %{"product_ids" => ids}) do
       query = from p in "products",
               select: p.id,
               where: p.id in ^ids
       Repo.all(query)
       |> Enum.each(fn(product_id) ->
           changeset = OrderProduct.changeset(%OrderProduct{}, %{order_id: order.id, product_id: product_id})
-          Repo.insert!(changeset)
+          case Repo.insert(changeset) do
+              {:ok, _} -> conn
+              {:error, changeset} ->
+                  conn
+                  |> put_status(:unprocessable_entity)
+                  |> render(PhoenixApi.ChangesetView, "error.json", changeset: changeset)
+            end
       end)
   end
 

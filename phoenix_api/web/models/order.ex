@@ -4,6 +4,7 @@ defmodule PhoenixApi.Order do
   schema "orders" do
     field :total,               :decimal
     belongs_to :user,           PhoenixApi.User
+#    many_to_many :products, PhoenixApi.Product, join_through: PhoenixApi.OrderProduct
 
     timestamps()
   end
