@@ -35,11 +35,6 @@ defmodule PhoenixApi.Api.V1.OrderController do
 
   def show(conn, %{"id" => id}) do
     order = Repo.get!(Order, id) |> Repo.preload(:order_products)
-    product_ids = order
-    |> Ecto.assoc(:order_products)
-    |> select([op], op.product_id)
-    |> Repo.all
-
     PhoenixETag.render_if_stale(conn, :show, order: order)
   end
 
