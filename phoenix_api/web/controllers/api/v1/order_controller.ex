@@ -19,7 +19,7 @@ defmodule PhoenixApi.Api.V1.OrderController do
         conn
         |> populate_order_product(order, order_params)
 
-        PhoenixApi.Email.order_confirmation_text_email("meraj.enigma@gmail.com")
+        PhoenixApi.Email.order_confirmation_html_email("meraj.enigma@gmail.com")
         |> PhoenixApi.Mailer.deliver_later
 
         conn
