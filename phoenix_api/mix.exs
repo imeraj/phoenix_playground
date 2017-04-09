@@ -19,7 +19,8 @@ defmodule PhoenixApi.Mixfile do
   def application do
     [mod: {PhoenixApi, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :mariaex, :comeonin, :distillery, :guardian_db, :faker, :scrivener_ecto]]
+                    :phoenix_ecto, :mariaex, :comeonin, :distillery, :guardian_db, :faker, :scrivener_ecto,
+                    :bamboo, :bamboo_smtp]]
   end
 
   # Specifies which paths to compile per environment.
@@ -43,7 +44,9 @@ defmodule PhoenixApi.Mixfile do
      {:guardian_db, "~> 0.8.0"},
      {:distillery, "~> 1.3"},
      {:faker, "~> 0.7"},
-     {:scrivener_ecto, "~> 1.0"}
+     {:scrivener_ecto, "~> 1.0"},
+     {:bamboo, "~> 0.7"},
+     {:bamboo_smtp, "~> 1.2.1"}
      ]
   end
 

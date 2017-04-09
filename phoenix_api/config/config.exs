@@ -43,3 +43,13 @@ config :guardian, Guardian,
 config :guardian_db, GuardianDb,
              repo: PhoenixApi.Repo,
              sweep_interval: 120
+
+config :phoenix_api, PhoenixApi.Mailer,
+    adapter: Bamboo.SMTPAdapter,
+    server: "smtp.gmail.com",
+    port: 587,
+    username: "demo.rails007",
+    password: "mcmxcd123",
+    tls: :if_available, # can be `:always` or `:never`
+    ssl: false, # can be `true`
+    retries: 3

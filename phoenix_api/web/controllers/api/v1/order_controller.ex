@@ -19,6 +19,9 @@ defmodule PhoenixApi.Api.V1.OrderController do
         conn
         |> populate_order_product(order, order_params)
 
+        PhoenixApi.Email.order_confirmation_text_email("meraj.enigma@gmail.com")
+        |> PhoenixApi.Mailer.deliver_later
+
         conn
         |> put_status(:created)
         |> put_resp_header("location", order_path(conn, :show, order))
