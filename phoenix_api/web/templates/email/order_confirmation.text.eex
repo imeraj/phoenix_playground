@@ -1,0 +1,5 @@
+
+  Your order is confirmed!
+
+  Your order id is: <%= @order.id %>
+  Your order total is: <%= @order.total %> USD
