@@ -22,7 +22,7 @@ defmodule PhoenixApi.Api.V1.OrderController do
         conn
         |> put_status(:created)
         |> put_resp_header("location", order_path(conn, :show, order))
-        |> render("show.json", order: order)
+        |> json(%{data: %{id: order.id, total: order.total, product_ids: order_params["product_ids"]}})
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -32,7 +32,14 @@ defmodule PhoenixApi.Api.V1.OrderController do
 
   def show(conn, %{"id" => id}) do
     order = Repo.get!(Order, id)
-    render(conn, "show.json", order: order)
+    product_ids = order
+    |> Ecto.assoc(:order_products)
+    |> select([op], op.product_id)
+    |> Repo.all
+
+    conn
+    |> put_status(:ok)
+    |> json(%{data: %{id: order.id, total: order.total, product_ids: product_ids}})
   end
 
   defp calcualte_total(%{"product_ids" => ids}) do
