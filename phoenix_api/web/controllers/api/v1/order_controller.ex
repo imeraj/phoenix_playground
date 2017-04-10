@@ -3,6 +3,7 @@ defmodule PhoenixApi.Api.V1.OrderController do
 
   alias PhoenixApi.Order
   alias PhoenixApi.OrderProduct
+  alias PhoenixApi.EventManager
 
   plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:create, :show]
   plug :scrub_params, "order" when action in [:create]
@@ -19,8 +20,10 @@ defmodule PhoenixApi.Api.V1.OrderController do
         conn
         |> populate_order_products(order, order_params)
 
-        PhoenixApi.Email.order_confirmation_text_email(user.email, order |> Repo.preload(order_products: :product))
-        |> PhoenixApi.Mailer.deliver_later
+        order = order |> Repo.preload(order_products: :product)
+
+        # notify event
+        EventManager.notify(:order_confirmation, %{user: user, order: order})
 
         conn
         |> put_status(:created)
