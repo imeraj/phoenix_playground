@@ -17,9 +17,9 @@ defmodule PhoenixApi.Api.V1.OrderController do
     case Repo.insert(changeset) do
       {:ok, order} ->
         conn
-        |> populate_order_product(order, order_params)
+        |> populate_order_products(order, order_params)
 
-        PhoenixApi.Email.order_confirmation_html_email(user.email, order)
+        PhoenixApi.Email.order_confirmation_text_email(user.email, order |> Repo.preload(order_products: :product))
         |> PhoenixApi.Mailer.deliver_later
 
         conn
@@ -35,7 +35,6 @@ defmodule PhoenixApi.Api.V1.OrderController do
 
   def show(conn, %{"id" => id}) do
     order = Repo.get!(Order, id) |> Repo.preload(order_products: :product)
-    IO.inspect order
     PhoenixETag.render_if_stale(conn, :show, order: order)
   end
 
@@ -47,7 +46,7 @@ defmodule PhoenixApi.Api.V1.OrderController do
       |> Enum.reduce(Decimal.new(0), &Decimal.add/2)
   end
 
-  defp populate_order_product(conn, order, %{"product_ids" => ids}) do
+  defp populate_order_products(conn, order, %{"product_ids" => ids}) do
       query = from p in "products",
               select: p.id,
               where: p.id in ^ids

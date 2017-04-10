@@ -3,3 +3,7 @@
 
   Your order id is: <%= @order.id %>
   Your order total is: <%= @order.total %> USD
+
+  <%= for op <- @order.order_products do %>
+      <%= op.product.title %> - <%= op.product.price %> USD
+  <% end %>
