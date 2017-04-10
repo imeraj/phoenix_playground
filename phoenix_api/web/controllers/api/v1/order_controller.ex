@@ -34,7 +34,8 @@ defmodule PhoenixApi.Api.V1.OrderController do
   end
 
   def show(conn, %{"id" => id}) do
-    order = Repo.get!(Order, id) |> Repo.preload(:order_products)
+    order = Repo.get!(Order, id) |> Repo.preload(order_products: :product)
+    IO.inspect order
     PhoenixETag.render_if_stale(conn, :show, order: order)
   end
 

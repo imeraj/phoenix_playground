@@ -5,9 +5,10 @@ defmodule PhoenixApi.Product do
     field :title, :string
     field :price, :decimal
     field :published, :boolean, default: true
-    belongs_to :user, PhoenixApi.User
+
+    belongs_to :user,         PhoenixApi.User
     has_many :order_products, PhoenixApi.OrderProduct
-    has_many :products, through: [:order_products, :product]
+    has_many :orders, through: [:order_products, :order]
 
     timestamps()
   end

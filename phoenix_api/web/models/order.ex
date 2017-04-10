@@ -3,9 +3,10 @@ defmodule PhoenixApi.Order do
 
   schema "orders" do
     field :total,               :decimal
-    belongs_to :user,           PhoenixApi.User
+
+    belongs_to :user,         PhoenixApi.User
     has_many :order_products, PhoenixApi.OrderProduct
-    has_many :orders, through: [:order_products, :order]
+    has_many :products, through: [:order_products, :product]
 
     timestamps()
   end
