@@ -7,8 +7,6 @@ defmodule PhoenixApi.Product do
     field :published, :boolean, default: true
 
     belongs_to :user,         PhoenixApi.User
-    has_many :order_products, PhoenixApi.OrderProduct
-    has_many :orders, through: [:order_products, :order]
 
     timestamps()
   end
