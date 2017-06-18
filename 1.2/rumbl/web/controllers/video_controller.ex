@@ -25,10 +25,10 @@ defmodule Rumbl.VideoController do
   end
 
   def create(conn, %{"video" => video_params}, user) do
-      changeset =
-          user
-          |> build_assoc(:videos)
-          |> Video.changeset(video_params)
+    changeset =
+      user
+      |> build_assoc(:videos)
+      |> Video.changeset(video_params)
 
     case Repo.insert(changeset) do
       {:ok, _video} ->

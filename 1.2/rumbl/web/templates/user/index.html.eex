@@ -2,9 +2,9 @@
 
 <table class=​"table"​>
   <%= for user <- @users do %>
-  <tr>
-    <td><b><%= render "user.html", user: user %></td>
-    <td><%= link "View", to: user_path(@conn, :show, user.id) %></td>
-  <tr>
-    <% end %>
+    <tr>
+      <td><b><%= render "user.html", user: user %></td>
+      <td><%= link "View", to: user_path(@conn, :show, user.id) %></td>
+    <tr>
+  <% end %>
 </table>
