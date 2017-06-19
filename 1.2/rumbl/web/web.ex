@@ -37,6 +37,7 @@ defmodule Rumbl.Web do
       import Ecto.Query
 
       import Rumbl.Router.Helpers
+
       import Rumbl.Gettext
       import Rumbl.Auth, only: [authenticate_user: 2]
     end

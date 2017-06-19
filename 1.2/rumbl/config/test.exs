@@ -16,4 +16,5 @@ config :rumbl, Rumbl.Repo,
   password: "phoenix",
   database: "rumbl_dev",
   hostname: "localhost",
-  pool_size: Ecto.Adapters.SQL.Sandbox
+  pool_size: 10,
+  pool: Ecto.Adapters.SQL.Sandbox
