@@ -64,4 +64,6 @@ defmodule Rumbl.Auth do
     |> assign(:current_user, user)
     |> assign(:user_token, token)
   end
+
 end
+

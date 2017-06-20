@@ -6,7 +6,7 @@ defmodule Rumbl.VideoControllerTest do
 
     @valid_attrs %{description: "Chris McCord | Keynote: Phoenix - Gauging Progress",
                  title: "Chris McCord | Keynote: Phoenix - Gauging Progress",
-                 url: "https://www.youtube.com/watch?v=pfFpIjFOL-I", category_id: 2,
+                 url: "https://www.youtube.com/watch?v=pfFpIjFOL-I",
                  slug: Video.slugify("Chris McCord | Keynote: Phoenix - Gauging Progress")}
     @invalid_attrs %{title: "Invalid"}
 
@@ -65,7 +65,6 @@ defmodule Rumbl.VideoControllerTest do
    	    # there seems a bug: insert_video does not give id for returned assocation
    	    # so fetch the last inserted video
         video = Repo.one(from v in Rumbl.Video, order_by: [desc: v.id], limit: 1)
-        IO.inspect( video)
         non_owner = insert_user(%{username: "sneaky"})
         conn = assign(conn, :current_user, non_owner)
 
