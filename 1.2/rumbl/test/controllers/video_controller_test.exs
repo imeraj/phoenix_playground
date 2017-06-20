@@ -1,12 +1,16 @@
 defmodule Rumbl.VideoControllerTest do
-  use Rumbl.ConnCase
+    use Rumbl.ConnCase
 
-	alias Rumbl.TestHelpers
+    alias Rumbl.TestHelpers
+    alias Rumbl.Video
 
-  @valid_attrs %{description: "some content", title: "some content", url: "some content"}
-  @invalid_attrs %{}
+    @valid_attrs %{description: "Chris McCord | Keynote: Phoenix - Gauging Progress",
+                 title: "Chris McCord | Keynote: Phoenix - Gauging Progress",
+                 url: "https://www.youtube.com/watch?v=pfFpIjFOL-I", category_id: 2,
+                 slug: Video.slugify("Chris McCord | Keynote: Phoenix - Gauging Progress")}
+    @invalid_attrs %{title: "Invalid"}
 
-	defp video_count(query), do: Repo.one(from v in query, select: count(v.id))
+    defp video_count(query), do: Repo.one(from v in query, select: count(v.id))
 
 	setup %{conn: conn} = config do
 		if username = config[:login_as] do
@@ -54,5 +58,34 @@ defmodule Rumbl.VideoControllerTest do
 		count_after = video_count(Rumbl.Video)
 		assert count_after == count_before
 	end
+
+	@tag login_as: "max"
+	test "autorizes actions against access by other users", %{user: owner, conn: conn} do
+   	    insert_video(owner, @valid_attrs)
+   	    # there seems a bug: insert_video does not give id for returned assocation
+   	    # so fetch the last inserted video
+        video = Repo.one(from v in Rumbl.Video, order_by: [desc: v.id], limit: 1)
+        IO.inspect( video)
+        non_owner = insert_user(%{username: "sneaky"})
+        conn = assign(conn, :current_user, non_owner)
+
+        assert_error_sent :not_found, fn ->
+            get(conn, video_path(conn, :show, video))
+        end
+
+        assert_error_sent :not_found, fn ->
+            get(conn, video_path(conn, :edit, video))
+        end
+
+        assert_error_sent :not_found, fn ->
+            get(conn, video_path(conn, :update, video, video: @valid_attrs))
+        end
+
+        assert_error_sent :not_found, fn ->
+            get(conn, video_path(conn, :edit, video))
+        end
+	end
+
 end
+
 
