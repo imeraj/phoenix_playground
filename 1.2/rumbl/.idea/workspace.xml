@@ -20,16 +20,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="video_view_test.exs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/views/video_view_test.exs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="user_controller.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/controllers/user_controller.ex">
           <provider selected="true" editor-type-id="text-editor">
@@ -60,11 +50,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_test.exs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user_test.exs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/models/user_test.exs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="41" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_repo_test.exs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/models/user_repo_test.exs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new.html.eex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/templates/user/new.html.eex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_helpers.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/support/test_helpers.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sandbox.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/ecto/lib/ecto/adapters/sql/sandbox.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-214">
+              <caret line="274" column="10" lean-forward="false" selection-start-line="274" selection-start-column="10" selection-end-line="274" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -80,41 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="annotation_test.exs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/models/annotation_test.exs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="category_test.exs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/models/category_test.exs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="user.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/models/user.ex">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
               <caret line="19" column="49" lean-forward="false" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="auth_test.exs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/controllers/auth_test.exs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="28" column="16" lean-forward="true" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -131,6 +131,7 @@
       <find>L</find>
       <find>Listing</find>
       <find>Listing videos</find>
+      <find>insert_user</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -151,13 +152,14 @@
         <option value="$PROJECT_DIR$/web/web.ex" />
         <option value="$PROJECT_DIR$/web/models/video.ex" />
         <option value="$PROJECT_DIR$/test/controllers/video_controller_test.exs" />
-        <option value="$PROJECT_DIR$/test/support/test_helpers.ex" />
         <option value="$PROJECT_DIR$/web/plugs/auth.ex" />
         <option value="$PROJECT_DIR$/test/controllers/auth_test.exs" />
         <option value="$PROJECT_DIR$/config/test.exs" />
         <option value="$PROJECT_DIR$/test/views/video_view_test.exs" />
         <option value="$PROJECT_DIR$/web/models/user.ex" />
         <option value="$PROJECT_DIR$/test/models/user_test.exs" />
+        <option value="$PROJECT_DIR$/test/support/test_helpers.ex" />
+        <option value="$PROJECT_DIR$/test/models/user_repo_test.exs" />
       </list>
     </option>
   </component>
@@ -264,6 +266,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="video" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rumbl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rumbl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -846,27 +870,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/templates/video/edit.html.eex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/priv/repo/migrations/20170311160815_create_user.exs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/priv/repo/migrations/20170315145258_create_video.exs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="61" lean-forward="false" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/priv/repo/migrations/20170315164017_create_category.exs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
@@ -1086,14 +1089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/support/test_helpers.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/support/channel_case.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1198,6 +1193,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/support/model_case.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="62" column="79" lean-forward="true" selection-start-line="62" selection-start-column="79" selection-end-line="62" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/models/video_test.exs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -1206,10 +1209,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/controllers/user_controller.ex">
+    <entry file="file://$PROJECT_DIR$/test/models/user_test.exs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="34" column="25" lean-forward="false" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="41" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deps/ecto/lib/ecto/adapters/sql/sandbox.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-214">
+          <caret line="274" column="10" lean-forward="false" selection-start-line="274" selection-start-column="10" selection-end-line="274" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -1222,18 +1233,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/support/model_case.ex">
+    <entry file="file://$PROJECT_DIR$/test/support/test_helpers.ex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="62" column="79" lean-forward="true" selection-start-line="62" selection-start-column="79" selection-end-line="62" selection-end-column="79" />
+        <state relative-caret-position="48">
+          <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/models/user_test.exs">
+    <entry file="file://$PROJECT_DIR$/web/controllers/user_controller.ex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state relative-caret-position="544">
+          <caret line="34" column="25" lean-forward="false" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/templates/user/new.html.eex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/models/user_repo_test.exs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
           <folding />
         </state>
       </provider>
