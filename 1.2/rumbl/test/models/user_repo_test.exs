@@ -5,7 +5,6 @@ defmodule Rumbl.UserRepoTest do
   alias Rumbl.User
 
   @valid_attrs %{name: "A User", username: "eva", password: "secret"}
-  @invalid_attrs %{}
 
 	test "converts unique_constraint on username to error" do
 	  TestHelpers.insert_user(%{username: "eva"})
