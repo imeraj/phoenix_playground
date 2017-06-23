@@ -2,15 +2,17 @@ import Player from "./player"
 
 let Video = {
   init (socket, element) {
-      if (!element) return
-      let playerId = element.getAttribute("data-player-id")
-      let videoId = element.getAttribute("data-id")
+     if (!element) return
 
-      socket.connect()
-      Player.init(element.id, playerId, () => {
-        this.onReady(videoId, socket)
-      })
-    },
+     let playerId = element.getAttribute("data-player-id")
+     let videoId = element.getAttribute("data-id")
+
+     socket.connect()
+
+     Player.init(element.id, playerId, () => {
+       this.onReady(videoId, socket)
+     })
+  },
 
   onReady(videoId, socket) {
     let msgContainer = document.getElementById("msg-container")
@@ -38,27 +40,27 @@ let Video = {
         }
         annotations.forEach(ann => this.renderAnnotation(msgContainer, ann))
       })
-      .receive("error", reason => console.log("Join failed", reason))
-    },
+      .receive("error", reason => console.log("join failed", reason))
+   },
 
-    esc(str) {
-      let div = document.createElement("div")
-      div.appendChild(document.createTextNode(str))
-      return div.innerHTML
-    },
+   esc(str) {
+     let div = document.createElement("div")
+     div.appendChild(document.createTextNode(str))
+     return div.innerHTML
+   },
 
-    renderAnnotation(msgContainer, {user, body, at}) {
-      let template = document.createElement("div")
+   renderAnnotation(msgContainer, {user, body, at}) {
+     let template = document.createElement("div")
 
-      template.innerHTML = `
-        <a href="#" data-seek="${this.esc(at)}">
-        <b>[${at / (60 * 1000)}]:${this.esc(user.username)}</b>:${this.esc(body)}
-        </a>
-        `
+     template.innerHTML = `
+       <a href="#" data-seek="${this.esc(at)}">
+       <b>[${at / (60 * 1000)}]:${this.esc(user.username)}</b>:${this.esc(body)}
+       </a>
+       `
 
-      msgContainer.appendChild(template)
-      msgContainer.scrollTop = msgContainer.scrollHeight
-    }
+     msgContainer.appendChild(template)
+     msgContainer.scrollTop = msgContainer.scrollHeight
+   }
 }
 
 export default Video
