@@ -10,8 +10,9 @@ defmodule Rumbl.Repo.Migrations.CreateAnnotation do
 
       timestamps()
     end
-    create index(:annotations, [:user_id])
-    create index(:annotations, [:video_id])
 
+    create index(:annotations, [:user_id, :video_id])
   end
+
 end
+

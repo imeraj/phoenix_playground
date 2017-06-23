@@ -40,7 +40,6 @@ defmodule Rumbl.VideoChannel do
           at: annotation.at
         }
         {:reply, :ok, socket}
-
       {:error, changeset} ->
         {:reply, {:error, %{errors: changeset}}, socket}
     end
