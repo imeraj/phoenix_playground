@@ -29,11 +29,11 @@ let Video = {
 
     vidChannel.on("new_annotation", (resp) => {
       vidChannel.params.last_seen_id = resp.id
+      console.log(`last_seen_id  ${vidChannel.params.last_seen_id}`)
       this.renderAnnotation(msgContainer, resp)
     })
 
 		msgContainer.addEventListener("click", e => {
-		  console.log("here")
 			e.preventDefault()
 
 			let seconds = e.target.getAttribute("data-seek") ||
@@ -48,7 +48,7 @@ let Video = {
       .receive("ok", ({annotations}) => {
         let ids = annotations.map(ann => ann.id)
         if (ids.length > 0) {
-          vidChannel.params.last_seen_id == Math.max(...ids)
+          vidChannel.params.last_seen_id = Math.max(...ids)
         }
         annotations.forEach(ann => this.renderAnnotation(msgContainer, ann))
       })
