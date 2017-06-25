@@ -12,6 +12,12 @@
 alias Rumbl.Repo
 alias Rumbl.Category
 
-for category <- ~w(Action Drama Romance Comedy Sci-fi Educational) do
-    Repo.insert!(%Category{name: category})
+case Mix.env() do
+	:dev ->
+		IO.inspect(Mix.env())
+		for category <- ~w(Action Drama Romance Comedy Sci-fi Educational) do
+      Repo.insert!(%Category{name: category})
+    end
+  _ -> :ignore
 end
+

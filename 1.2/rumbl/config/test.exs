@@ -18,7 +18,7 @@ config :rumbl, Rumbl.Repo,
   adapter: Ecto.Adapters.MySQL,
   username: "root",
   password: "phoenix",
-  database: "rumbl_dev",
+  database: "rumbl_dev_test",
   hostname: "localhost",
   pool_size: 10,
   pool: Ecto.Adapters.SQL.Sandbox
