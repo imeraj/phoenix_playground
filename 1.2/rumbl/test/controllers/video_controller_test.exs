@@ -1,16 +1,16 @@
 defmodule Rumbl.VideoControllerTest do
-    use Rumbl.ConnCase
+  use Rumbl.ConnCase
 
-    alias Rumbl.TestHelpers
-    alias Rumbl.Video
+  alias Rumbl.TestHelpers
+  alias Rumbl.Video
 
-    @valid_attrs %{description: "Chris McCord | Keynote: Phoenix - Gauging Progress",
+  @valid_attrs %{description: "Chris McCord | Keynote: Phoenix - Gauging Progress",
                  title: "Chris McCord | Keynote: Phoenix - Gauging Progress",
                  url: "https://www.youtube.com/watch?v=pfFpIjFOL-I",
                  slug: Video.slugify("Chris McCord | Keynote: Phoenix - Gauging Progress")}
-    @invalid_attrs %{title: "Invalid"}
+  @invalid_attrs %{title: "Invalid"}
 
-    defp video_count(query), do: Repo.one(from v in query, select: count(v.id))
+  defp video_count(query), do: Repo.one(from v in query, select: count(v.id))
 
 	setup %{conn: conn} = config do
 		if username = config[:login_as] do

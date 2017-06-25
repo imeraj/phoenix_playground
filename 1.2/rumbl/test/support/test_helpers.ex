@@ -1,5 +1,6 @@
 defmodule Rumbl.TestHelpers do
   alias Rumbl.Repo
+  alias Rumbl.Video
 
   def insert_user(attrs \\ %{}) do
     params = Map.merge(%{name: "Meraj", username: "meraj", password: "secret"}, attrs)
@@ -13,6 +14,6 @@ defmodule Rumbl.TestHelpers do
     user
     |> Ecto.build_assoc(:videos, attrs)
     |> Repo.insert!()
-  end
+	end
 
 end
