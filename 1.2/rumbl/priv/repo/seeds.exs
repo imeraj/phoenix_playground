@@ -9,15 +9,22 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias Rumbl.Repo
-alias Rumbl.Category
+defmodule Rumbl.DevelopmentSeeder do
+  alias Rumbl.Repo
+  alias Rumbl.Category
+
+  @category_list ~w(Action Drama Romance Comedy Sci-fi Educational)
+
+  def insert_data do
+    for category <- @category_list do
+        Repo.insert!(%Category{name: category})
+    end
+  end
+end
 
 case Mix.env() do
 	:dev ->
-		IO.inspect(Mix.env())
-		for category <- ~w(Action Drama Romance Comedy Sci-fi Educational) do
-      Repo.insert!(%Category{name: category})
-    end
-  _ -> :ignore
+        Rumbl.DevelopmentSeeder.insert_data()
+    _ -> :ignore
 end
 
