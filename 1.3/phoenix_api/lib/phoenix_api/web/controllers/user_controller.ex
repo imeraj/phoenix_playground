@@ -7,9 +7,8 @@ defmodule PhoenixApi.Web.UserController do
   action_fallback PhoenixApi.Web.FallbackController
 
   def index(%{assigns: %{version: :v1}} = conn, _params) do
-    IO.inspect(conn)
     users = Accounts.list_users()
-    render(conn, "index.json", users: users)
+    render(conn, "index.v1.json", users: users)
   end
 
   def create(%{assigns: %{version: :v1}} = conn, %{"user" => user_params}) do
@@ -17,20 +16,20 @@ defmodule PhoenixApi.Web.UserController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", user_path(conn, :show, user))
-      |> render("show.json", user: user)
+      |> render("show.v1.json", user: user)
     end
   end
 
   def show(%{assigns: %{version: :v1}} = conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    render(conn, "show.json", user: user)
+    render(conn, "show.v1.json", user: user)
   end
 
   def update(%{assigns: %{version: :v1}} = conn, %{"id" => id, "user" => user_params}) do
     user = Accounts.get_user!(id)
 
     with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
-      render(conn, "show.json", user: user)
+      render(conn, "show.v1.json", user: user)
     end
   end
 

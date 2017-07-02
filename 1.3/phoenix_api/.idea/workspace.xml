@@ -17,31 +17,31 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="user.ex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/phoenix_api/accounts/user.ex">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="user_controller.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/controllers/user_controller.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="42" column="3" lean-forward="false" selection-start-line="42" selection-start-column="3" selection-end-line="42" selection-end-column="3" />
+            <state relative-caret-position="128">
+              <caret line="8" column="59" lean-forward="false" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="accounts.ex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/phoenix_api/accounts/accounts.ex">
+      <file leaf-file-name="fallback_controller.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/controllers/fallback_controller.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="320">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_view.ex" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/views/user_view.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="16" column="6" lean-forward="true" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -57,8 +57,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="error_handler.ex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/plugs/versionary/error_handler.ex">
+      <file leaf-file-name="error_view.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/views/error_view.ex">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -107,7 +107,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.exs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config.exs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/config.exs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="512">
@@ -118,6 +118,11 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>json</find>
+    </findStrings>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -133,12 +138,12 @@
         <option value="$PROJECT_DIR$/config/dev.exs" />
         <option value="$PROJECT_DIR$/priv/repo/migrations/20170701153520_create_accounts_user.exs" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/accounts/user.ex" />
-        <option value="$PROJECT_DIR$/lib/phoenix_api/web/views/user_view.ex" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/web/router.ex" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/web/plugs/versionary/verify_header.ex" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/web/plugs/versionary/ensure_version.ex" />
-        <option value="$PROJECT_DIR$/lib/phoenix_api/web/controllers/user_controller.ex" />
         <option value="$PROJECT_DIR$/config/config.exs" />
+        <option value="$PROJECT_DIR$/lib/phoenix_api/web/views/user_view.ex" />
+        <option value="$PROJECT_DIR$/lib/phoenix_api/web/controllers/user_controller.ex" />
       </list>
     </option>
   </component>
@@ -212,6 +217,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phoenix_api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phoenix_api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phoenix_api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -821,13 +852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/controllers/fallback_controller.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/dev.exs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="576">
@@ -852,14 +876,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/views/error_view.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/views/error_helpers.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -872,14 +888,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/views/user_view.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -940,14 +948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/controllers/user_controller.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="42" column="3" lean-forward="false" selection-start-line="42" selection-start-column="3" selection-end-line="42" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/plugs/versionary/ensure_version.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -960,6 +960,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="512">
           <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/views/error_view.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/controllers/fallback_controller.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/controllers/user_controller.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="8" column="59" lean-forward="false" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/views/user_view.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" column="6" lean-forward="true" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
           <folding />
         </state>
       </provider>
