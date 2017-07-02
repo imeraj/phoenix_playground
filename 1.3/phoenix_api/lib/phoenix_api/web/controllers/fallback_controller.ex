@@ -23,4 +23,12 @@ defmodule PhoenixApi.Web.FallbackController do
     |> put_status(:unauthorized)
     |> render(PhoenixApi.Web.ErrorView, :"401")
   end
+
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(:unauthorized)
+    |> json(%{message: "Authentication required", error: :unauthorized})
+  end
+
 end
+
