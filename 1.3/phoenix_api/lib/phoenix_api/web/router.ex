@@ -2,7 +2,8 @@ defmodule PhoenixApi.Web.Router do
   use PhoenixApi.Web, :router
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug Versionary.Plug.VerifyHeader, accepts: [:v1, :v2]
+    plug Versionary.Plug.EnsureVersion, handler: Versionary.Plug.PhoenixErrorHandler
   end
 
   scope "/api", PhoenixApi.Web do

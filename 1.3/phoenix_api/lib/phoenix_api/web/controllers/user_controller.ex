@@ -6,12 +6,13 @@ defmodule PhoenixApi.Web.UserController do
 
   action_fallback PhoenixApi.Web.FallbackController
 
-  def index(conn, _params) do
+  def index(%{assigns: %{version: :v1}} = conn, _params) do
+    IO.inspect(conn)
     users = Accounts.list_users()
     render(conn, "index.json", users: users)
   end
 
-  def create(conn, %{"user" => user_params}) do
+  def create(%{assigns: %{version: :v1}} = conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
       conn
       |> put_status(:created)
@@ -20,12 +21,12 @@ defmodule PhoenixApi.Web.UserController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(%{assigns: %{version: :v1}} = conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     render(conn, "show.json", user: user)
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
+  def update(%{assigns: %{version: :v1}} = conn, %{"id" => id, "user" => user_params}) do
     user = Accounts.get_user!(id)
 
     with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
@@ -33,7 +34,7 @@ defmodule PhoenixApi.Web.UserController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(%{assigns: %{version: :v1}} = conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     with {:ok, %User{}} <- Accounts.delete_user(user) do
       send_resp(conn, :no_content, "")
