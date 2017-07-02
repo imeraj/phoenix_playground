@@ -20,7 +20,7 @@ defmodule PhoenixApi.Web.SessionController do
 			{:error, reason} ->
         conn
         |> put_status(reason)
-        |> json(%{message: "Login failed!", reason: reason})
+        |> json(%{message: "Login failed!", error: reason})
 		end
 	end
 
