@@ -5,6 +5,7 @@ defmodule PhoenixApi.Web.UserController do
   alias PhoenixApi.Accounts.User
 
   action_fallback PhoenixApi.Web.FallbackController
+	plug :scrub_params, "user" when action in [:create, :update]
 
   def index(%{assigns: %{version: :v1}} = conn, _params) do
     users = Accounts.list_users()
@@ -35,6 +36,7 @@ defmodule PhoenixApi.Web.UserController do
 
   def delete(%{assigns: %{version: :v1}} = conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
+
     with {:ok, %User{}} <- Accounts.delete_user(user) do
       send_resp(conn, :no_content, "")
     end

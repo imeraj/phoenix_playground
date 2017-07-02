@@ -9,6 +9,8 @@ defmodule PhoenixApi.Web.Router do
   scope "/api", PhoenixApi.Web do
     pipe_through :api
 
-    resources "/users", UserController, except: [:new, :edit]
+		post "/signup", UserController, :create
+
+    resources "/users", UserController, only: [:show, :index, :delete, :update]
   end
 end
