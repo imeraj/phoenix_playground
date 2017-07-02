@@ -17,4 +17,10 @@ defmodule PhoenixApi.Web.FallbackController do
     |> put_status(:not_found)
     |> render(PhoenixApi.Web.ErrorView, :"404")
   end
+
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> render(PhoenixApi.Web.ErrorView, :"401")
+  end
 end

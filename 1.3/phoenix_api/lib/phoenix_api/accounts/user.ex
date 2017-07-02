@@ -51,3 +51,4 @@ defmodule PhoenixApi.Accounts.User do
 
 end
 
+

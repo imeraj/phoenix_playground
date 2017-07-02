@@ -8,6 +8,7 @@ defmodule PhoenixApi.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
+      worker(GuardianDb.ExpiredSweeper, []),
       # Start the Ecto repository
       supervisor(PhoenixApi.Repo, []),
       # Start the endpoint when the application starts

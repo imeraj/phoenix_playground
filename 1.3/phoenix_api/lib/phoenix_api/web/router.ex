@@ -6,11 +6,22 @@ defmodule PhoenixApi.Web.Router do
     plug Versionary.Plug.EnsureVersion, handler: Versionary.Plug.PhoenixErrorHandler
   end
 
+	pipeline :api_auth do
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
+  end
+
   scope "/api", PhoenixApi.Web do
-    pipe_through :api
+    pipe_through [:api, :api_auth]
 
 		post "/signup", UserController, :create
+    post "/login",  SessionController, :create
+    delete "/logout", SessionController, :destory
 
     resources "/users", UserController, only: [:show, :index, :delete, :update]
   end
+
 end
+
+
+

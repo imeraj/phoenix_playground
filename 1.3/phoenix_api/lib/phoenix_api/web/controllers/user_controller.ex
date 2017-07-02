@@ -5,6 +5,7 @@ defmodule PhoenixApi.Web.UserController do
   alias PhoenixApi.Accounts.User
 
   action_fallback PhoenixApi.Web.FallbackController
+  plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:index, :show, :delete, :update]
 	plug :scrub_params, "user" when action in [:create, :update]
 
   def index(%{assigns: %{version: :v1}} = conn, _params) do
@@ -27,7 +28,7 @@ defmodule PhoenixApi.Web.UserController do
   end
 
   def update(%{assigns: %{version: :v1}} = conn, %{"id" => id, "user" => user_params}) do
-    user = Accounts.get_user!(id)
+    user = Guardian.Plug.current_resource(conn)
 
     with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
       render(conn, "show.v1.json", user: user)
@@ -40,5 +41,11 @@ defmodule PhoenixApi.Web.UserController do
     with {:ok, %User{}} <- Accounts.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+	def unauthenticated(conn, _params) do
+    conn
+    |> put_status(:unauthorized)
+    |> json(%{message: "Authentication required", error: :unauthorized})
   end
 end

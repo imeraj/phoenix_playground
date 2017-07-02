@@ -5,6 +5,10 @@ defmodule PhoenixApi.Web.ErrorView do
     %{errors: %{detail: "Page not found"}}
   end
 
+	def render("401.json", _assigns) do
+    %{errors: %{detail: "Unauthorized"}}
+  end
+
   def render("500.json", _assigns) do
     %{errors: %{detail: "Internal server error"}}
   end

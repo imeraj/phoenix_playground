@@ -30,3 +30,21 @@ config :mime, :types, %{
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+# config Guardian
+config :guardian, Guardian,
+  hooks: GuardianDb,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "PhoenixApi",
+  ttl: { 30, :days },
+  allowed_drift: 2000,
+  verify_issuer: true, # optional
+  # generated using: JOSE.JWK.generate_key({:oct, 16}) |> JOSE.JWK.to_map |> elem(1)
+  secret_key: %{"k" => "3gx0vXjUD2BJ8xfo_aQWIA", "kty" => "oct"},
+  serializer: PhoenixApi.GuardianSerializer
+
+# config GuardianDB
+config :guardian_db, GuardianDb,
+        repo: PhoenixApi.Repo,
+        sweep_interval: 120
