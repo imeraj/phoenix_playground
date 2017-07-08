@@ -9,9 +9,14 @@ defmodule PhoenixApi.Web.ProductController do
     when action in [:index, :create, :delete, :update]
   plug :scrub_params, "product" when action in [:create, :update]
 
-  def index(%{assigns: %{version: :v1}} = conn, _params) do
-    products = Sales.list_products()
-    render(conn, "index.v1.json", products: products)
+  def index(%{assigns: %{version: :v1}} = conn, %{"page" => page, "per_page" => page_size}) do
+		page = Sales.get_product_page(page, page_size)
+    render(conn, "index.v1.json",
+                      products: page.entries,
+                      page_number: page.page_number,
+                      page_size: page.page_size,
+                      total_pages: page.total_pages,
+                      total_entries: page.total_entries)
   end
 
   def create(%{assigns: %{version: :v1}} = conn, %{"product" => product_params}) do

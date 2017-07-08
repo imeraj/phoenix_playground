@@ -35,8 +35,7 @@ defmodule Versionary.Plug.EnsureVersion do
     case conn.private[:version_verified] do
       true ->
         {:ok, [version]} = Map.fetch(@versions, conn.assigns[:version])
-        conn =
-          conn
+        conn
           |> Plug.Conn.put_req_header("accept", "application/json")
 					|> assign(:version, version)
       false ->

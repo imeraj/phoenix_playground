@@ -22,6 +22,12 @@ defmodule PhoenixApi.Sales do
     Repo.all(from p in Product, where: p.published == true)
   end
 
+  def get_product_page(page, page_size) do
+    Product
+    |> where([p], p.published == true)
+    |> Repo.paginate(page: page, page_size: page_size)
+  end
+
   @doc """
   Gets a single product.
 
