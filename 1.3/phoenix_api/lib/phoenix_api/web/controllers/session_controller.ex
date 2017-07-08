@@ -33,7 +33,7 @@ defmodule PhoenixApi.Web.SessionController do
         |> json(%{message: "Logout failed!", error: reason})
 		end
 	end
-
 end
+
 
 

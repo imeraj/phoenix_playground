@@ -4,6 +4,7 @@ defmodule PhoenixApi.Web.Router do
   pipeline :api do
     plug Versionary.Plug.VerifyHeader, accepts: [:v1, :v2]
     plug Versionary.Plug.EnsureVersion, handler: Versionary.Plug.PhoenixErrorHandler
+		plug :accepts, ["json"]
   end
 
 	pipeline :api_auth do
@@ -19,8 +20,8 @@ defmodule PhoenixApi.Web.Router do
     delete "/logout", SessionController, :destory
 
     resources "/users", UserController, only: [:show, :index, :delete, :update]
+    resources "/products", ProductController, except: [:new, :edit]
   end
-
 end
 
 

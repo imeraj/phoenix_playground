@@ -25,5 +25,4 @@ defmodule PhoenixApi.AuthHelper do
 	     {:error, :not_found}
 	  end
 	end
-
 end

@@ -29,6 +29,6 @@ defmodule PhoenixApi.Web.FallbackController do
     |> put_status(:unauthorized)
     |> json(%{message: "Authentication required", error: :unauthorized})
   end
-
 end
+
 

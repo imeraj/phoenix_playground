@@ -5,7 +5,8 @@ defmodule PhoenixApi.Web.UserController do
   alias PhoenixApi.Accounts.User
 
   action_fallback PhoenixApi.Web.FallbackController
-  plug Guardian.Plug.EnsureAuthenticated, [handler: PhoenixApi.Web.FallbackController]  when action in [:index, :show, :delete, :update]
+  plug Guardian.Plug.EnsureAuthenticated, [handler: PhoenixApi.Web.FallbackController]
+    when action in [:index, :show, :delete, :update]
 	plug :scrub_params, "user" when action in [:create, :update]
 
   def index(%{assigns: %{version: :v1}} = conn, _params) do
@@ -27,7 +28,7 @@ defmodule PhoenixApi.Web.UserController do
     render(conn, "show.v1.json", user: user)
   end
 
-  def update(%{assigns: %{version: :v1}} = conn, %{"id" => id, "user" => user_params}) do
+  def update(%{assigns: %{version: :v1}} = conn, %{"id" => _id, "user" => user_params}) do
     user = Guardian.Plug.current_resource(conn)
 
     with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do

@@ -48,7 +48,6 @@ defmodule PhoenixApi.Accounts.User do
 	      changeset
 	  end
 	end
-
 end
 
 
