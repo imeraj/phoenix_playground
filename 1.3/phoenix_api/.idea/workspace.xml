@@ -47,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product_view.ex" pinned="false" current-in-tab="true">
+      <file leaf-file-name="product_view.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/views/product_view.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="3" lean-forward="true" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+            <state relative-caret-position="465">
+              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -77,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mix.exs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mix.exs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mix.exs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="14" lean-forward="false" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+            <state relative-caret-position="285">
+              <caret line="19" column="77" lean-forward="false" selection-start-line="19" selection-start-column="77" selection-end-line="19" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -162,12 +162,12 @@
         <option value="$PROJECT_DIR$/lib/phoenix_api/web/controllers/user_controller.ex" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/web/controllers/fallback_controller.ex" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/web/router.ex" />
-        <option value="$PROJECT_DIR$/mix.exs" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/repo.ex" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/web/plugs/versionary/ensure_version.ex" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/sales/sales.ex" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/web/controllers/product_controller.ex" />
         <option value="$PROJECT_DIR$/lib/phoenix_api/web/views/product_view.ex" />
+        <option value="$PROJECT_DIR$/mix.exs" />
       </list>
     </option>
   </component>
@@ -1028,14 +1028,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mix.exs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="14" lean-forward="false" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/phoenix_api/application.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1086,8 +1078,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/phoenix_api/web/views/product_view.ex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="3" lean-forward="true" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+        <state relative-caret-position="465">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mix.exs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="77" lean-forward="false" selection-start-line="19" selection-start-column="77" selection-end-line="19" selection-end-column="77" />
           <folding />
         </state>
       </provider>

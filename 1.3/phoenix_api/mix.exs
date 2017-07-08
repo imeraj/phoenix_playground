@@ -17,7 +17,7 @@ defmodule PhoenixApi.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {PhoenixApi.Application, []},
-     extra_applications: [:logger, :runtime_tools, :comeonin]]
+     extra_applications: [:logger, :runtime_tools, :comeonin, :scrivener_ecto]]
   end
 
   # Specifies which paths to compile per environment.
