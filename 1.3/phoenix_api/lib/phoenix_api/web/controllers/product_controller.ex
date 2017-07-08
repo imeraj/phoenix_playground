@@ -6,7 +6,7 @@ defmodule PhoenixApi.Web.ProductController do
 
   action_fallback PhoenixApi.Web.FallbackController
   plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]
-    when action in [:index, :create, :show, :delete, :update]
+    when action in [:index, :create, :delete, :update]
   plug :scrub_params, "product" when action in [:create, :update]
 
   def index(%{assigns: %{version: :v1}} = conn, _params) do
@@ -22,11 +22,6 @@ defmodule PhoenixApi.Web.ProductController do
       |> put_resp_header("location", product_path(conn, :show, product))
       |> render("show.v1.json", product: product)
     end
-  end
-
-  def show(%{assigns: %{version: :v1}} = conn, %{"id" => id}) do
-    product = Sales.get_product!(id)
-    render(conn, "show.v1.json", product: product)
   end
 
   def update(%{assigns: %{version: :v1}} = conn, %{"id" => id, "product" => product_params}) do

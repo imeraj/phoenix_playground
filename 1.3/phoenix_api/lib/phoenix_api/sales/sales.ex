@@ -94,7 +94,7 @@ defmodule PhoenixApi.Sales do
   def delete_product(%Product{} = product, %User{} = user) do
     cond do
       product.accounts_users_id == user.id ->
-        Repo.delete!(product)
+        Repo.delete(product)
       true ->
         {:error, :unauthorized}
     end

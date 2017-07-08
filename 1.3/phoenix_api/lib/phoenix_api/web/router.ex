@@ -20,7 +20,7 @@ defmodule PhoenixApi.Web.Router do
     delete "/logout", SessionController, :destory
 
     resources "/users", UserController, only: [:show, :index, :delete, :update]
-    resources "/products", ProductController, except: [:new, :edit]
+    resources "/products", ProductController, only: [:create, :index, :delete, :update]
   end
 end
 
