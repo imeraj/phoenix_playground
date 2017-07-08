@@ -21,6 +21,11 @@ defmodule PhoenixApi.Accounts do
     Repo.all(User)
   end
 
+  def get_user_page(page, page_size) do
+    User
+    |> Repo.paginate(page: page, page_size: page_size)
+  end
+
   @doc """
   Gets a single user.
 

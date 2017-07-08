@@ -15,7 +15,6 @@ defmodule PhoenixApi.Web.ProductView do
             total_pages: total_pages,
             total_entries: total_entries}
      }
-
   end
 
   def render("show.v1.json", %{product: product}) do
