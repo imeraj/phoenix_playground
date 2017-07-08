@@ -17,7 +17,7 @@ defmodule PhoenixApi.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {PhoenixApi.Application, []},
-     extra_applications: [:logger, :runtime_tools, :comeonin, :scrivener_ecto]]
+     extra_applications: [:logger, :runtime_tools, :comeonin, :scrivener_ecto, :faker]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,7 +37,8 @@ defmodule PhoenixApi.Mixfile do
      {:comeonin, "~> 3.0"},
      {:guardian, "~> 0.14.4"},
      {:guardian_db, "~> 0.8.0"},
-     {:scrivener_ecto, "~> 1.0"}]
+     {:scrivener_ecto, "~> 1.0"},
+     {:faker, "~> 0.8"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
