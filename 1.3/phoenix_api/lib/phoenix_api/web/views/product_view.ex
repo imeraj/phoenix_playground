@@ -13,7 +13,8 @@ defmodule PhoenixApi.Web.ProductView do
           %{page_number: page_number,
             page_size: page_size,
             total_pages: total_pages,
-            total_entries: total_entries}
+            total_entries: total_entries
+            }
      }
   end
 
@@ -25,6 +26,6 @@ defmodule PhoenixApi.Web.ProductView do
     %{id: product.id,
       title: product.title,
       price: product.price
-      }
+     }
   end
 end

@@ -5,7 +5,7 @@ defmodule PhoenixApi.Web.ProductController do
   alias PhoenixApi.Sales.Product
 
   action_fallback PhoenixApi.Web.FallbackController
-  plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]
+  plug Guardian.Plug.EnsureAuthenticated, [handler: PhoenixApi.Web.FallbackController]
     when action in [:index, :create, :delete, :update]
   plug :scrub_params, "product" when action in [:create, :update]
 
@@ -21,7 +21,7 @@ defmodule PhoenixApi.Web.ProductController do
 
   def create(%{assigns: %{version: :v1}} = conn, %{"product" => product_params}) do
     user = Guardian.Plug.current_resource(conn)
-    with {:ok, %Product{} = product} <- Sales.create_product(product_params, user) do
+    with {:ok, %Product{} = product} <- Sales.create_product(Map.put_new(product_params, "accounts_users_id", user.id)) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", product_path(conn, :show, product))

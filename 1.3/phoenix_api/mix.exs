@@ -38,7 +38,8 @@ defmodule PhoenixApi.Mixfile do
      {:guardian, "~> 0.14.4"},
      {:guardian_db, "~> 0.8.0"},
      {:scrivener_ecto, "~> 1.0"},
-     {:faker, "~> 0.8"}]
+     {:faker, "~> 0.8"},
+     {:phoenix_etag, "~> 0.1"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

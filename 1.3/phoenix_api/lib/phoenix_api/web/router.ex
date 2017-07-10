@@ -21,6 +21,7 @@ defmodule PhoenixApi.Web.Router do
 
     resources "/users", UserController, only: [:show, :index, :delete, :update]
     resources "/products", ProductController, only: [:create, :index, :delete, :update]
+    resources "/orders", OrderController, only: [:create, :show]
   end
 end
 

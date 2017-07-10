@@ -3,7 +3,6 @@ defmodule PhoenixApi.Sales.Product do
   import Ecto.Changeset
   alias PhoenixApi.Sales.Product
 
-
   schema "sales_products" do
     field :price, :decimal
     field :published, :boolean, default: true
@@ -19,5 +18,6 @@ defmodule PhoenixApi.Sales.Product do
     |> cast(attrs, [:title, :price, :published, :accounts_users_id])
     |> validate_required([:title, :price, :published, :accounts_users_id])
     |> validate_number(:price, greater_than: 0)
+    |> foreign_key_constraint(:accounts_user_id)
   end
 end
