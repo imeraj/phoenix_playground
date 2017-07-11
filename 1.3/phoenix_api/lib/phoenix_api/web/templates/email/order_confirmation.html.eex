@@ -1,0 +1,12 @@
+<p>
+  <strong>Your order is confirmed!</strong>
+</p>
+<p>
+   Your order id is: <%= @order.id %><br>
+   Your order total is: <%= @order.total %> USD
+</p>
+<ul>
+  <%= for p <- @order.sales_products do %>
+      <li><%= p.title %> - <%= p.price %> USD</li>
+  <% end %>
+</ul>
