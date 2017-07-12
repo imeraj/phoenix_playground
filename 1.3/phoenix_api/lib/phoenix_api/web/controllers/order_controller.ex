@@ -3,8 +3,7 @@ defmodule PhoenixApi.Web.OrderController do
 
   alias PhoenixApi.Sales
   alias PhoenixApi.Sales.Order
-  alias PhoenixApi.Email
-	alias PhoenixApi.Mailer
+	alias PhoenixApi.EventManager
 
   action_fallback PhoenixApi.Web.FallbackController
   plug Guardian.Plug.EnsureAuthenticated, [handler: PhoenixApi.Web.FallbackController]
@@ -14,8 +13,7 @@ defmodule PhoenixApi.Web.OrderController do
   def create(%{assigns: %{version: :v1}} = conn, %{"order" => order_params}) do
     user = Guardian.Plug.current_resource(conn)
     with {:ok, %Order{} = order} <- Sales.create_order(Map.put_new(order_params, "accounts_users_id", user.id)) do
-      Email.order_confirmation_html_email(user.email, order)
-      |> Mailer.deliver_later()
+      EventManager.notify(:order_confirmation, %{user: user, order: order})
 
       conn
       |> put_status(:created)
