@@ -19,6 +19,7 @@ defmodule PhoenixApi.Web do
   def controller do
     quote do
       use Phoenix.Controller, namespace: PhoenixApi.Web
+      use ScoutApm.Instrumentation
       import Plug.Conn
       import PhoenixApi.Web.Router.Helpers
       import PhoenixApi.Web.Gettext

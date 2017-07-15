@@ -58,3 +58,10 @@ config :phoenix_api, PhoenixApi.Mailer,
     tls: :if_available, # can be `:always` or `:never`
     ssl: false, # can be `true`
     retries: 3
+
+# config/config.exs
+import_config "scout_apm.exs"
+
+config :phoenix_api, PhoenixApi.Repo,
+  loggers: [{Ecto.LogEntry, :log, []},
+            {ScoutApm.Instruments.EctoLogger, :log, []}]

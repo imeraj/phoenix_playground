@@ -18,7 +18,7 @@ defmodule PhoenixApi.Mixfile do
   def application do
     [mod: {PhoenixApi.Application, []},
      extra_applications: [:logger, :runtime_tools, :comeonin, :scrivener_ecto,
-        :faker, :bamboo, :bamboo_smtp]]
+        :faker, :bamboo, :bamboo_smtp, :scout_apm]]
   end
 
   # Specifies which paths to compile per environment.
@@ -43,7 +43,8 @@ defmodule PhoenixApi.Mixfile do
      {:faker, "~> 0.8"},
      {:phoenix_etag, "~> 0.1"},
      {:bamboo, "~> 0.8"},
-     {:bamboo_smtp, "~> 1.4.0"}
+     {:bamboo_smtp, "~> 1.4.0"},
+     {:scout_apm, "~> 0.0"}
      ]
   end
 

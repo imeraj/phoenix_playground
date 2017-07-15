@@ -2,7 +2,6 @@ defmodule PhoenixApi.Sales do
   @moduledoc """
   The boundary for the Sales system.
   """
-
   import Ecto.Query, warn: false
   alias PhoenixApi.Repo
 
