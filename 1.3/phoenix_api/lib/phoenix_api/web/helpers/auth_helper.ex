@@ -1,5 +1,6 @@
 defmodule PhoenixApi.AuthHelper do
   @moduledoc false
+
 	import Comeonin.Bcrypt, only: [checkpw: 2]
 	alias PhoenixApi.Repo
 	alias PhoenixApi.Accounts.User

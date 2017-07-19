@@ -15,14 +15,14 @@ defmodule PhoenixApi.Application do
       supervisor(PhoenixApi.Web.Endpoint, []),
       # Start your own worker by calling: PhoenixApi.Worker.start_link(arg1, arg2, arg3)
       # worker(PhoenixApi.Worker, [arg1, arg2, arg3]),
-      PhoenixApi.EventManager.child_spec
+      supervisor(Registry, [:unique, :pubsub_elixir_registry])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: PhoenixApi.Supervisor]
     with {:ok, pid} <- Supervisor.start_link(children, opts) do
-      PhoenixApi.EventManager.register_event_manager()
+      PhoenixApi.EventDispatcher.subscribe_to_topic(:notification)
       {:ok, pid}
     end
   end
