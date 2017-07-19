@@ -27,7 +27,7 @@ defmodule PhoenixApi.EventDispatcher do
 				PhoenixApi.EventHandler.handle_event({:order_confirmation, message.payload})
 			_ -> "Unknown event!"
 		end
-	  {:noreply, [message | state]}
+	  {:noreply, state}
 	end
 end
 
