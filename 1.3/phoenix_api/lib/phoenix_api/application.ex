@@ -15,7 +15,11 @@ defmodule PhoenixApi.Application do
       supervisor(PhoenixApi.Web.Endpoint, []),
       # Start your own worker by calling: PhoenixApi.Worker.start_link(arg1, arg2, arg3)
       # worker(PhoenixApi.Worker, [arg1, arg2, arg3]),
-      supervisor(Registry, [:unique, :pubsub_elixir_registry])
+      supervisor(Registry, [:unique, :pubsub_elixir_registry]),
+      supervisor(ConCache, [[ttl_check: :timer.seconds(5),
+                             ttl: :timer.seconds(60),
+                             touch_on_read: true
+                            ], [name: :db_cache]])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

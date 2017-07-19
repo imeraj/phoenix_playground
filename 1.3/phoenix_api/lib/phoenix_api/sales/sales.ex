@@ -155,8 +155,10 @@ defmodule PhoenixApi.Sales do
 
   """
   def get_order!(id) do
-   Repo.get!(Order, id) |> Repo.preload(:sales_products)
-	end
+		ConCache.get_or_store(:db_cache, :get_order_by_id, fn() ->
+        Repo.get!(Order, id) |> Repo.preload(:sales_products)
+    end)
+  end
 
   @doc """
   Creates a order.
