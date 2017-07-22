@@ -8,7 +8,7 @@ defmodule BlogAppGql.Accounts.User do
     field :email, :string
     field :name, :string
 
-		has_many :blog_posts, BlogAppGql.Blog.Post, foreign_key: :accounts_users_id
+		has_many :blog_posts, BlogAppGql.Blog.Post, foreign_key: :accounts_user_id
 
     timestamps()
   end

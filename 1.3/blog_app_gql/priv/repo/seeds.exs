@@ -27,6 +27,6 @@ for _ <- 1..40 do
   Repo.insert!(%Post{
     title: Faker.Lorem.sentence,
     body: Faker.Lorem.sentences(%Range{first: 1, last: 3}) |> Enum.join("\n\n"),
-    accounts_users_id: Enum.random(1..10) # Pick random user for post to belong to
+    accounts_user_id: Enum.random(1..10) # Pick random user for post to belong to
   })
 end

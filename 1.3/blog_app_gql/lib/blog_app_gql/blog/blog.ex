@@ -37,6 +37,8 @@ defmodule BlogAppGql.Blog do
   """
   def get_post!(id), do: Repo.get!(Post, id)
 
+  def get_post_by_id(id), do: Repo.get(Post, id)
+
   @doc """
   Creates a post.
 

@@ -13,7 +13,7 @@ defmodule BlogAppGql.Web.Schema.Types do
     field :id, :id
     field :title, :string
     field :body, :string
-    field :user, :accounts_user, resolve: assoc(:accounts_users)
+    field :user, :accounts_user, resolve: assoc(:accounts_user)
   end
 end
 
