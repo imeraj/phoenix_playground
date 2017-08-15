@@ -13,7 +13,7 @@ defmodule BlogAppGql.Web.Router do
   end
 
 
-	forward "/graph", Absinthe.Plug,
+	forward "/graphql", Absinthe.Plug,
     schema: BlogAppGql.Web.Schema
 
   forward "/graphiql", Absinthe.Plug.GraphiQL,
