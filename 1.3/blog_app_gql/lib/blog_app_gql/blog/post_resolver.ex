@@ -17,12 +17,16 @@ defmodule BlogAppGql.Web.Blog.PostResolver do
 	end
 
 	def update(%{id: id, post: post_params}, _info) do
-    Blog.get_post!(id)
-    |> Blog.update_post(post_params)
+    case find(%{id: id}, _info) do
+			{:ok, post} -> post |> Blog.update_post(post_params)
+			{:error, _} -> {:error, "Post id #{id} not found"}
+		end
   end
 
 	def delete(%{id: id}, _info) do
-		post = Blog.get_post!(id)
-		Blog.delete_post(post)
+		case find(%{id: id}, _info) do
+			{:ok, post} -> post |> Blog.delete_post()
+			{:error, _} -> {:error, "Post id #{id} not found"}
+		end
 	end
 end
