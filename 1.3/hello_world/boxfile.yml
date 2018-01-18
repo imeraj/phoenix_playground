@@ -22,7 +22,7 @@ run.config:
 deploy.config:  
   # generate the static assets digest
   extra_steps:
-    - mix phoenix.digest
+    - mix phx.digest
 
   # just before the new process comes online, 
   # let's migrate the database
@@ -34,7 +34,7 @@ deploy.config:
 # add mysql as a data component
 data.db:
   image: nanobox/mysql:5.7
-  local_only: true
+#  local_only: true
 
 web.main:  
   start: node-start mix phx.server

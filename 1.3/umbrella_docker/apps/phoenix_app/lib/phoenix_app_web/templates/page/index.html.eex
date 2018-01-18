@@ -1,0 +1,6 @@
+<div class="jumbotron">
+  <label for="name">Name</label>
+  <input type="text" name="name" id="name">
+  <button id="greet" name="greet">Greet</button>
+  <h2 id="greeting"></h2>
+</div>

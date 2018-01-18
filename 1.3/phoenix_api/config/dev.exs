@@ -40,7 +40,7 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix_api, PhoenixApi.Repo,
   adapter: Ecto.Adapters.MySQL,
   username: "root",
-  password: "phoenix",
+  password: "root",
 	hostname: "localhost",
 	port: 3306,
 	database: "phoenix_api_new_dev",

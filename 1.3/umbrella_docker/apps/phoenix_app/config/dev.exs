@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :hello_world, HelloWorld.Web.Endpoint,
+config :phoenix_app, PhoenixAppWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -31,13 +31,13 @@ config :hello_world, HelloWorld.Web.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :hello_world, HelloWorld.Web.Endpoint,
+config :phoenix_app, PhoenixAppWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/hello_world/web/views/.*(ex)$},
-      ~r{lib/hello_world/web/templates/.*(eex)$}
+      ~r{lib/phoenix_app_web/views/.*(ex)$},
+      ~r{lib/phoenix_app_web/templates/.*(eex)$}
     ]
   ]
 
@@ -48,11 +48,8 @@ config :logger, :console, format: "[$level] $message\n"
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
-# Configure your database
-config :hello_world, HelloWorld.Repo,
-  adapter: Ecto.Adapters.MySQL,
-  username: System.get_env("DATA_DB_USER"),
-  password: System.get_env("DATA_DB_PASS"),
-  database: "gonano",
-  hostname: System.get_env("DATA_DB_HOST"),
-  pool_size: 10
+config :phoenix_app, authentication: [
+  username: "user",
+  password: "password",
+  realm:    "Development Realm"
+]
