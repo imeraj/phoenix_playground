@@ -1,0 +1,23 @@
+version: "3"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: merajul/umbrella_docker:phoenix
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "4000:4000"
+    networks:
+      - webnet
+    environment:
+      - BASIC_AUTH_USERNAME=username 
+      - BASIC_AUTH_PASSWORD=password
+      - BASIC_AUTH_REALM=realm       
+networks:
+  webnet:
