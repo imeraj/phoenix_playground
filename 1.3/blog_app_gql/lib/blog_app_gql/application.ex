@@ -11,7 +11,7 @@ defmodule BlogAppGql.Application do
       # Start the Ecto repository
       supervisor(BlogAppGql.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(BlogAppGql.Web.Endpoint, []),
+      supervisor(BlogAppGql.Web.Endpoint, [])
       # Start your own worker by calling: BlogAppGql.Worker.start_link(arg1, arg2, arg3)
       # worker(BlogAppGql.Worker, [arg1, arg2, arg3]),
     ]

@@ -4,7 +4,7 @@ defmodule BlogAppGql.Web.UserController do
   alias BlogAppGql.Accounts
   alias BlogAppGql.Accounts.User
 
-  action_fallback BlogAppGql.Web.FallbackController
+  action_fallback(BlogAppGql.Web.FallbackController)
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -35,6 +35,7 @@ defmodule BlogAppGql.Web.UserController do
 
   def delete(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
+
     with {:ok, %User{}} <- Accounts.delete_user(user) do
       send_resp(conn, :no_content, "")
     end

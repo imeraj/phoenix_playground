@@ -3,12 +3,11 @@ defmodule BlogAppGql.Accounts.User do
   import Ecto.Changeset
   alias BlogAppGql.Accounts.User
 
-
   schema "accounts_users" do
-    field :email, :string
-    field :name, :string
+    field(:email, :string)
+    field(:name, :string)
 
-		has_many :blog_posts, BlogAppGql.Blog.Post, foreign_key: :accounts_user_id
+    has_many(:blog_posts, BlogAppGql.Blog.Post, foreign_key: :accounts_user_id)
 
     timestamps()
   end

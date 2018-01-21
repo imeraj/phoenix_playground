@@ -11,8 +11,6 @@ defmodule BlogAppGql.Web.PostView do
   end
 
   def render("post.json", %{post: post}) do
-    %{id: post.id,
-      title: post.title,
-      body: post.body}
+    %{id: post.id, title: post.title, body: post.body}
   end
 end
