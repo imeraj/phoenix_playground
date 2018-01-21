@@ -4,18 +4,28 @@ defmodule PhoenixApi.Web.UserController do
   alias PhoenixApi.Accounts
   alias PhoenixApi.Accounts.User
 
-  action_fallback PhoenixApi.Web.FallbackController
-  plug Guardian.Plug.EnsureAuthenticated, [handler: PhoenixApi.Web.FallbackController]
-    when action in [:index, :show, :delete, :update]
-	plug :scrub_params, "user" when action in [:create, :update]
+  action_fallback(PhoenixApi.Web.FallbackController)
 
-  def index(%{assigns: %{version: :v1}} = conn, %{"page" => page, "per_page" => page_size} ) do
+  plug(
+    Guardian.Plug.EnsureAuthenticated,
+    [handler: PhoenixApi.Web.FallbackController]
+    when action in [:index, :show, :delete, :update]
+  )
+
+  plug(:scrub_params, "user" when action in [:create, :update])
+
+  def index(%{assigns: %{version: :v1}} = conn, %{"page" => page, "per_page" => page_size}) do
     page = Accounts.get_user_page(page, page_size)
-    render(conn, "index.v1.json", users: page.entries,
-                                  page_number: page.page_number,
-                                  page_size: page.page_size,
-                                  total_pages: page.total_pages,
-                                  total_entries: page.total_entries)
+
+    render(
+      conn,
+      "index.v1.json",
+      users: page.entries,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 
   def create(%{assigns: %{version: :v1}} = conn, %{"user" => user_params}) do

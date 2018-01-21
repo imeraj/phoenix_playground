@@ -18,7 +18,7 @@ defmodule PhoenixApi.Sales do
 
   """
   def list_products do
-    Repo.all(from p in Product, where: p.published == true)
+    Repo.all(from(p in Product, where: p.published == true))
   end
 
   def get_product_page(page, page_size) do
@@ -28,11 +28,11 @@ defmodule PhoenixApi.Sales do
   end
 
   def get_products_by_ids(ids) do
-		Product
-		|> where([p], p.published == true)
-		|> where([p], p.id in ^ids)
-		|> Repo.all()
-	end
+    Product
+    |> where([p], p.published == true)
+    |> where([p], p.id in ^ids)
+    |> Repo.all()
+  end
 
   @doc """
   Gets a single product.
@@ -83,9 +83,10 @@ defmodule PhoenixApi.Sales do
   def update_product(%Product{} = product, attrs, %User{} = user) do
     cond do
       product.accounts_users_id == user.id ->
-          product
-          |> Product.changeset(attrs)
-          |> Repo.update()
+        product
+        |> Product.changeset(attrs)
+        |> Repo.update()
+
       true ->
         {:error, :unauthorized}
     end
@@ -107,6 +108,7 @@ defmodule PhoenixApi.Sales do
     cond do
       product.accounts_users_id == user.id ->
         Repo.delete(product)
+
       true ->
         {:error, :unauthorized}
     end
@@ -155,8 +157,8 @@ defmodule PhoenixApi.Sales do
 
   """
   def get_order!(id) do
-		ConCache.get_or_store(:db_cache, :get_order_by_id, fn() ->
-        Repo.get!(Order, id) |> Repo.preload(:sales_products)
+    ConCache.get_or_store(:db_cache, :get_order_by_id, fn ->
+      Repo.get!(Order, id) |> Repo.preload(:sales_products)
     end)
   end
 
@@ -187,11 +189,15 @@ defmodule PhoenixApi.Sales do
   end
 
   defp calculate_order_total(ids) do
-		query = from p in Product,
-                select: p.price,
-                where: p.id in ^ids
+    query =
+      from(
+        p in Product,
+        select: p.price,
+        where: p.id in ^ids
+      )
+
     Repo.all(query)
-		|> Enum.reduce(Decimal.new(0), &Decimal.add/2)
+    |> Enum.reduce(Decimal.new(0), &Decimal.add/2)
   end
 
   @doc """

@@ -16,15 +16,16 @@ defmodule PhoenixApi.Application do
       # Start your own worker by calling: PhoenixApi.Worker.start_link(arg1, arg2, arg3)
       # worker(PhoenixApi.Worker, [arg1, arg2, arg3]),
       supervisor(Registry, [:unique, :pubsub_elixir_registry]),
-      supervisor(ConCache, [[ttl_check: :timer.seconds(5),
-                             ttl: :timer.seconds(60),
-                             touch_on_read: true
-                            ], [name: :db_cache]])
+      supervisor(ConCache, [
+        [ttl_check: :timer.seconds(5), ttl: :timer.seconds(60), touch_on_read: true],
+        [name: :db_cache]
+      ])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: PhoenixApi.Supervisor]
+
     with {:ok, pid} <- Supervisor.start_link(children, opts) do
       PhoenixApi.EventDispatcher.subscribe_to_topic(:notification)
       {:ok, pid}

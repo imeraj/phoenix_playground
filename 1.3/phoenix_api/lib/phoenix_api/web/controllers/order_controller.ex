@@ -3,17 +3,27 @@ defmodule PhoenixApi.Web.OrderController do
 
   alias PhoenixApi.Sales
   alias PhoenixApi.Sales.Order
-	alias PhoenixApi.EventDispatcher
+  alias PhoenixApi.EventDispatcher
 
-  action_fallback PhoenixApi.Web.FallbackController
-  plug Guardian.Plug.EnsureAuthenticated, [handler: PhoenixApi.Web.FallbackController]
+  action_fallback(PhoenixApi.Web.FallbackController)
+
+  plug(
+    Guardian.Plug.EnsureAuthenticated,
+    [handler: PhoenixApi.Web.FallbackController]
     when action in [:create, :show]
-  plug :scrub_params, "order" when action in [:create]
+  )
+
+  plug(:scrub_params, "order" when action in [:create])
 
   def create(%{assigns: %{version: :v1}} = conn, %{"order" => order_params}) do
     user = Guardian.Plug.current_resource(conn)
-    with {:ok, %Order{} = order} <- Sales.create_order(Map.put_new(order_params, "accounts_users_id", user.id)) do
-      EventDispatcher.broadcast(:notification, %{event: "order_confirmation", payload: %{user: user, order: order}})
+
+    with {:ok, %Order{} = order} <-
+           Sales.create_order(Map.put_new(order_params, "accounts_users_id", user.id)) do
+      EventDispatcher.broadcast(:notification, %{
+        event: "order_confirmation",
+        payload: %{user: user, order: order}
+      })
 
       conn
       |> put_status(:created)

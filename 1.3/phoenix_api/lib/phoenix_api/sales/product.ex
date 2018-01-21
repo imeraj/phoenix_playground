@@ -4,10 +4,10 @@ defmodule PhoenixApi.Sales.Product do
   alias PhoenixApi.Sales.Product
 
   schema "sales_products" do
-    field :price, :decimal
-    field :published, :boolean, default: true
-    field :title, :string
-    field :accounts_users_id, :id
+    field(:price, :decimal)
+    field(:published, :boolean, default: true)
+    field(:title, :string)
+    field(:accounts_users_id, :id)
 
     timestamps()
   end

@@ -11,8 +11,7 @@ defmodule Versionary.Plug.PhoenixErrorHandler do
   def call(_conn) do
     verify_phoenix_dep()
 
-    raise Phoenix.NotAcceptableError,
-      message: "no supported media type in accept header"
+    raise Phoenix.NotAcceptableError, message: "no supported media type in accept header"
   end
 
   # private

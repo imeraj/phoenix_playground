@@ -40,5 +40,5 @@ defmodule Versionary.Plug.Handler do
   ```
   """
 
-  @callback call(Plug.Conn.t) :: Plug.Conn.t
+  @callback call(Plug.Conn.t()) :: Plug.Conn.t()
 end

@@ -4,10 +4,10 @@ defmodule PhoenixApi.Sales.Order do
   alias PhoenixApi.Sales.Order
 
   schema "sales_orders" do
-    field :total, :decimal
-    field :accounts_users_id, :id
+    field(:total, :decimal)
+    field(:accounts_users_id, :id)
 
-		many_to_many :sales_products, PhoenixApi.Sales.Product, join_through: "sales_orders_products"
+    many_to_many(:sales_products, PhoenixApi.Sales.Product, join_through: "sales_orders_products")
 
     timestamps()
   end

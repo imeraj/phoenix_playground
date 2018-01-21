@@ -72,13 +72,13 @@ defmodule Versionary.Plug.VerifyHeader do
   end
 
   defp get_mime_versions(%{accepts: accepts}), do: get_mime_versions(accepts)
-  defp get_mime_versions([h|t]), do: [Plug.MIME.type(h)] ++ get_mime_versions(t)
+  defp get_mime_versions([h | t]), do: [Plug.MIME.type(h)] ++ get_mime_versions(t)
   defp get_mime_versions([]), do: []
   defp get_mime_versions(nil), do: []
 
   def get_version(conn, opts) do
     case get_req_header(conn, opts[:header]) do
-      []        -> nil
+      [] -> nil
       [version] -> version
     end
   end
@@ -86,7 +86,7 @@ defmodule Versionary.Plug.VerifyHeader do
   defp verify_version(conn, opts) do
     verified = Enum.member?(get_all_versions(opts), get_version(conn, opts))
 
-		conn = assign(conn, :version, get_version(conn, opts))
+    conn = assign(conn, :version, get_version(conn, opts))
     put_private(conn, :version_verified, verified)
   end
 end

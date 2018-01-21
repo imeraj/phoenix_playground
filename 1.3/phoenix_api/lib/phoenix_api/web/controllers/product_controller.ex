@@ -4,24 +4,35 @@ defmodule PhoenixApi.Web.ProductController do
   alias PhoenixApi.Sales
   alias PhoenixApi.Sales.Product
 
-  action_fallback PhoenixApi.Web.FallbackController
-  plug Guardian.Plug.EnsureAuthenticated, [handler: PhoenixApi.Web.FallbackController]
+  action_fallback(PhoenixApi.Web.FallbackController)
+
+  plug(
+    Guardian.Plug.EnsureAuthenticated,
+    [handler: PhoenixApi.Web.FallbackController]
     when action in [:index, :create, :delete, :update]
-  plug :scrub_params, "product" when action in [:create, :update]
+  )
+
+  plug(:scrub_params, "product" when action in [:create, :update])
 
   def index(%{assigns: %{version: :v1}} = conn, %{"page" => page, "per_page" => page_size}) do
-		page = Sales.get_product_page(page, page_size)
-    render(conn, "index.v1.json",
-                      products: page.entries,
-                      page_number: page.page_number,
-                      page_size: page.page_size,
-                      total_pages: page.total_pages,
-                      total_entries: page.total_entries)
+    page = Sales.get_product_page(page, page_size)
+
+    render(
+      conn,
+      "index.v1.json",
+      products: page.entries,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 
   def create(%{assigns: %{version: :v1}} = conn, %{"product" => product_params}) do
     user = Guardian.Plug.current_resource(conn)
-    with {:ok, %Product{} = product} <- Sales.create_product(Map.put_new(product_params, "accounts_users_id", user.id)) do
+
+    with {:ok, %Product{} = product} <-
+           Sales.create_product(Map.put_new(product_params, "accounts_users_id", user.id)) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", product_path(conn, :show, product))
@@ -47,4 +58,3 @@ defmodule PhoenixApi.Web.ProductController do
     end
   end
 end
-

@@ -21,7 +21,7 @@ defmodule Versionary.Plug.EnsureVersion do
 
   import Plug.Conn
 
-	@versions Application.get_env(:mime, :types)
+  @versions Application.get_env(:mime, :types)
 
   @doc false
   def init(opts \\ []) do
@@ -35,13 +35,19 @@ defmodule Versionary.Plug.EnsureVersion do
     case conn.private[:version_verified] do
       true ->
         {:ok, [version]} = Map.fetch(@versions, conn.assigns[:version])
+
         conn
-          |> Plug.Conn.put_req_header("accept", "application/json")
-					|> assign(:version, version)
+        |> Plug.Conn.put_req_header("accept", "application/json")
+        |> assign(:version, version)
+
       false ->
         handle_error(conn, opts)
+
       nil ->
-        Logger.warn("Version has not been verified. Make sure Versionary.Plug.VerifyHeader has been called.")
+        Logger.warn(
+          "Version has not been verified. Make sure Versionary.Plug.VerifyHeader has been called."
+        )
+
         conn
     end
   end
