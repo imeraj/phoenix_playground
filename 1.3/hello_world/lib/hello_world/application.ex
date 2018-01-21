@@ -11,7 +11,7 @@ defmodule HelloWorld.Application do
       # Start the Ecto repository
       supervisor(HelloWorld.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(HelloWorld.Web.Endpoint, []),
+      supervisor(HelloWorld.Web.Endpoint, [])
       # Start your own worker by calling: HelloWorld.Worker.start_link(arg1, arg2, arg3)
       # worker(HelloWorld.Worker, [arg1, arg2, arg3]),
     ]
