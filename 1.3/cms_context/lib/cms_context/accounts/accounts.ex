@@ -25,23 +25,14 @@ defmodule CmsContext.Accounts do
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
-    |> Ecto.Changeset.put_assoc(
-      :credential,
-      %Credential{}
-      |> Credential.changeset(attrs)
-    )
+    |> Ecto.Changeset.put_assoc(:credential, %Credential{} |> Credential.changeset(attrs))
     |> Repo.insert()
   end
 
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
-    |> Ecto.Changeset.put_assoc(
-      :credential,
-      %Credential{}
-      |> Credential.changeset(attrs)
-    )
-    |> IO.inspect(label: "end")
+    |> Ecto.Changeset.put_assoc(:credential, %Credential{} |> Credential.changeset(attrs))
     |> Repo.update()
   end
 
@@ -51,5 +42,19 @@ defmodule CmsContext.Accounts do
 
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+
+  def authenticate_by_email_password(email, _password) do
+    query =
+      from(
+        u in User,
+        inner_join: c in assoc(u, :credential),
+        where: c.email == ^email
+      )
+
+    case Repo.one(query) do
+      %User{} = user -> {:ok, user}
+      nil -> {:error, :unauthorized}
+    end
   end
 end
