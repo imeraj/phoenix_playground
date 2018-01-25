@@ -74,6 +74,11 @@ defmodule CmsContext.CMS do
     Author.changeset(author, %{})
   end
 
+  def inc_page_views(%Page{} = page) do
+    Repo.update_all(from(p in Page, where: p.id == ^page.id), inc: [views: 1])
+    get_page!(page.id)
+  end
+
   def ensure_author_exists(%User{} = user) do
     %Author{user_id: user.id}
     |> Ecto.Changeset.change()
