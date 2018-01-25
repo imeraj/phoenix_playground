@@ -1,5 +1,6 @@
 defmodule CmsContextWeb.Router do
   use CmsContextWeb, :router
+  import Authentication
 
   pipeline :browser do
     plug(:accepts, ["html"])
@@ -22,8 +23,9 @@ defmodule CmsContextWeb.Router do
     resources("/sessions", SessionController, only: [:new, :create, :delete], singleton: true)
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", CmsContextWeb do
-  #   pipe_through :api
-  # end
+  scope "/cms", CmsContextWeb.CMS, as: :cms do
+    pipe_through([:browser, :authenticate_user])
+
+    resources("/pages", PageController)
+  end
 end
