@@ -75,7 +75,9 @@ defmodule CmsContext.CMS do
   end
 
   def inc_page_views(%Page{} = page) do
-    Repo.update_all(from(p in Page, where: p.id == ^page.id), inc: [views: 1])
+    query = from Page, where: [id: ^page.id], update: [inc: [views: 1]]
+    Repo.update_all(query, [])
+
     get_page!(page.id)
   end
 
