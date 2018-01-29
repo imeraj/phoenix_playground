@@ -1,4 +1,6 @@
 defmodule Rumbl.Auth.Guardian do
+  @moduledoc false
+
   use Guardian, otp_app: :rumbl
 
   alias Rumbl.Accounts
