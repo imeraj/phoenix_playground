@@ -13,13 +13,24 @@ defmodule RumblWeb.Router do
     plug(:accepts, ["json"])
   end
 
+  pipeline :auth do
+    plug(Rumbl.Auth.AuthAccessPipeline)
+  end
+
   scope "/", RumblWeb do
     # Use the default browser stack
     pipe_through(:browser)
 
     get("/", PageController, :index)
-    resources("/users", UserController, only: [:new, :create, :index, :show])
-    resources("/sessions", SessionController, only: [:new, :create, :delete])
+    resources("/users", UserController, only: [:new, :create])
+    resources("/sessions", SessionController, only: [:new, :create])
+  end
+
+  scope "/", RumblWeb do
+    pipe_through([:browser, :auth])
+
+    resources("/users", UserController, only: [:index, :show])
+    resources("/sessions", SessionController, only: [:delete])
   end
 
   # Other scopes may use custom stacks.

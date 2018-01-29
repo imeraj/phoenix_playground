@@ -25,6 +25,10 @@ config :rumbl, Rumbl.Auth.Guardian,
   issuer: "rumbl",
   secret_key: "HNinpKh9Ne3tr8BpjCpAEh0xzCqTIG3PWsfkR2AtzvUaRIpbs6oIQ9RcmjmGPekJ"
 
+config :rumbl, Rumbl.Auth.AuthAccessPipeline,
+  module: Rumbl.Auth.Guardian,
+  error_handler: Rumbl.Auth.AuthErrorHandler
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

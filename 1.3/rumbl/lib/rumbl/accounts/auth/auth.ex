@@ -3,6 +3,9 @@ defmodule Rumbl.Auth do
 
   require Ecto.Query
 
+  import Plug.Conn
+
+  alias Rumbl.Auth.Guardian
   alias Comeonin.Bcrypt
   alias Rumbl.Accounts.User
   alias Rumbl.Repo
@@ -21,5 +24,21 @@ defmodule Rumbl.Auth do
       true -> {:ok, user}
       false -> {:error, "Incorrect username or password"}
     end
+  end
+
+  def login(conn, user) do
+    conn
+    |> Guardian.Plug.sign_in(user)
+    |> assign(:current_user, user)
+  end
+
+  def logout(conn) do
+    conn
+    |> Guardian.Plug.sign_out()
+  end
+
+  def load_current_user(conn, _) do
+    conn
+    |> assign(:current_user, Guardian.Plug.current_resource(conn))
   end
 end

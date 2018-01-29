@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-<%= for user <- @users do %>
+	<%= for user <- @users do %>
     <tr>
       <td><%= user.name %></td>
       <td><%= user.username %></td>
@@ -17,7 +17,7 @@
         <span><%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
       </td>
     </tr>
-<% end %>
-  </tbody>
+	<% end %>
+</tbody>
 </table>
 
