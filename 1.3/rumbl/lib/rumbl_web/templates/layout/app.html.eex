@@ -18,7 +18,7 @@
           <span class="logo"></span>
           <ol class="breadcrumb text-right"> 
             <li><%= link "Register", to: user_path(@conn, :new) %></li> 
-            <li><%= link "Log In", to: user_path(@conn, :new) %></li> 
+            <li><%= link "Log In", to: session_path(@conn, :new) %></li> 
           </ol>
         </nav>
       </header>

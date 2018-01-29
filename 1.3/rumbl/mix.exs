@@ -45,7 +45,10 @@ defmodule Rumbl.Mixfile do
       {:mix_test_watch, "~> 0.5", only: :dev, runtime: false},
       {:ex_unit_notifier, "~> 0.1", only: :test},
       {:ex_guard, "~> 1.3", only: :dev},
-      {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
+      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
+      {:guardian, "~> 1.0"},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"}
     ]
   end
 

@@ -10,7 +10,7 @@ defmodule RumblWeb.UserController do
   end
 
   def new(conn, _params) do
-    changeset = Accounts.change_user(%User{})
+    changeset = Accounts.change_user_registration(%User{})
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -19,7 +19,7 @@ defmodule RumblWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
-        |> redirect(to: user_path(conn, :index, user))
+        |> redirect(to: user_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
