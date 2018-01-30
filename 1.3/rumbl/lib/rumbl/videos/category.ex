@@ -4,6 +4,8 @@ defmodule Rumbl.Videos.Category do
   import Ecto.Query, only: [from: 2]
   alias Rumbl.Videos.Category
 
+  @moduledoc false
+
   schema "categories" do
     field(:name, :string)
 

@@ -1,8 +1,6 @@
 defmodule RumblWeb.UserControllerTest do
   use RumblWeb.ConnCase
 
-  alias Rumbl.Accounts
-
   @create_attrs %{name: "Meraj", username: "merajul", password: "password"}
   @invalid_attrs %{name: nil, username: nil, password: nil}
 

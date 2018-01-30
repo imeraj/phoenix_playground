@@ -23,7 +23,6 @@ defmodule Rumbl.DevelopmentSeeder do
 end
 
 case Mix.env() do
-	:dev ->
+	_ ->
 		Rumbl.DevelopmentSeeder.insert_data()
-	_ -> :ignore
 end

@@ -1,6 +1,7 @@
 defmodule RumblWeb.TestHelpers do
   alias(Rumbl.Repo)
   alias Rumbl.Accounts.User
+  alias Rumbl.Videos.Video
 
   @create_attrs %{name: "Meraj", username: "meraj", password: "password"}
 
@@ -9,6 +10,13 @@ defmodule RumblWeb.TestHelpers do
 
     %User{}
     |> User.registration_changeset(changes)
+    |> Repo.insert!()
+  end
+
+  def insert_video(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:videos)
+    |> Video.changeset(attrs)
     |> Repo.insert!()
   end
 end
