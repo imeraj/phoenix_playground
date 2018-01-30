@@ -1,0 +1,32 @@
+<h2>Listing Videos</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>Title</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for video <- @videos do %>
+    <tr>
+      <td><%= video.url %></td>
+      <td><%= video.title %></td>
+      <td><%= video.description %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: video_path(@conn, :show, video), class: "btn btn-default btn-xs" %></span>
+        <%= if assigns[:current_user].id == video.user_id do %> 
+          <span><%= link "Edit", to: video_path(@conn, :edit, video), class: "btn btn-default btn-xs" %></span>
+          <span><%= link "Delete", to: video_path(@conn, :delete, video), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <% end %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Video", to: video_path(@conn, :new) %></span>

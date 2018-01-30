@@ -1,10 +1,10 @@
 defmodule RumblWeb.UserController do
   use RumblWeb, :controller
 
-  import Rumbl.Auth, only: [load_current_user: 2]
-
   alias Rumbl.Accounts
   alias Rumbl.Accounts.User
+
+  import Rumbl.Auth, only: [load_current_user: 2]
 
   plug(:load_current_user when action in [:show, :index])
 
