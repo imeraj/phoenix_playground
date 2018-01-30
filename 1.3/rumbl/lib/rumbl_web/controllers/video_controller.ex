@@ -8,6 +8,7 @@ defmodule RumblWeb.VideoController do
 
   plug(:load_current_user)
   plug(:authorize_video when action in [:edit, :update, :delete])
+  plug(:load_categories when action in [:new, :create, :edit, :update])
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user])
@@ -80,5 +81,10 @@ defmodule RumblWeb.VideoController do
       |> redirect(to: video_path(conn, :index))
       |> halt()
     end
+  end
+
+  defp load_categories(conn, _) do
+    categories = Rumbl.Videos.load_categories()
+    assign(conn, :categories, categories)
   end
 end

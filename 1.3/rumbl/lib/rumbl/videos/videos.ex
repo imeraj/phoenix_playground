@@ -6,13 +6,19 @@ defmodule Rumbl.Videos do
   import Ecto.Query, warn: false
   alias Rumbl.Repo
 
-  alias Rumbl.Videos.Video
+  alias Rumbl.Videos.{Video, Category}
 
   def list_videos do
-    Repo.all(Video)
+    Video
+    |> Repo.all()
+    |> Repo.preload(:category)
   end
 
-  def get_video!(id), do: Repo.get!(Video, id)
+  def get_video!(id) do
+    Video
+    |> Repo.get!(id)
+    |> Repo.preload(:category)
+  end
 
   def create_video(attrs \\ %{}, user) do
     changeset = change_video(%Video{}, attrs, user)
@@ -21,7 +27,7 @@ defmodule Rumbl.Videos do
     |> Repo.insert()
   end
 
-  def update_video(%Video{} = video, attrs, user) do
+  def update_video(%Video{} = video, attrs, _user) do
     video
     |> Video.changeset(attrs)
     |> Repo.update()
@@ -35,5 +41,12 @@ defmodule Rumbl.Videos do
     user
     |> Ecto.build_assoc(:videos)
     |> Video.changeset(params)
+  end
+
+  def load_categories() do
+    Category
+    |> Category.alphabetical()
+    |> Category.names_and_ids()
+    |> Repo.all()
   end
 end

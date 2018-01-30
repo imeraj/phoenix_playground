@@ -18,7 +18,7 @@
           <span class="logo"></span>
           <ol class="breadcrumb text-right"> 
             <%= if current_user = assigns[:current_user] do %> 
-              <li><%= current_user.name %></li> 
+              <li><%= link "Users", to: user_path(@conn, :index) %></li> 
               <li><%= link "Videos", to: video_path(@conn, :index) %></li>
               <li>
                 <%= link "Log out", to: session_path(@conn, :delete, current_user),

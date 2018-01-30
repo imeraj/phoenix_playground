@@ -1,6 +1,10 @@
 <h2>Show Video</h2>
 
 <ul>
+	<li>
+      <strong>Category:</strong>
+      <%= @video.category.name %>
+    </li>
 
   <li>
     <strong>Url:</strong>
