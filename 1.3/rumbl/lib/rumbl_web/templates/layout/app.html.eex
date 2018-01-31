@@ -21,7 +21,7 @@
               <li><%= link "Users", to: user_path(@conn, :index) %></li> 
               <li><%= link "Videos", to: video_path(@conn, :index) %></li>
               <li>
-                <%= link "Log out", to: session_path(@conn, :delete, current_user),
+                <%= link "Logout", to: session_path(@conn, :delete, current_user),
                                         method: "delete" %>
               </li>
             <% else %>

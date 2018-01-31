@@ -19,3 +19,6 @@ config :rumbl, Rumbl.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :bcrypt_elixir, :log_rounds, 4
+
+# Configures Phoenix Integration
+config :phoenix_integration, endpoint: RumblWeb.Endpoint
