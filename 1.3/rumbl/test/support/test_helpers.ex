@@ -1,7 +1,7 @@
 defmodule RumblWeb.TestHelpers do
   alias(Rumbl.Repo)
   alias Rumbl.Accounts.User
-  alias Rumbl.Videos.Video
+  alias Rumbl.Videos.{Video, Category}
 
   @create_attrs %{name: "Meraj", username: "meraj", password: "password"}
 
