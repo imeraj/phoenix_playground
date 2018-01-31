@@ -32,6 +32,7 @@ defmodule RumblWeb.Router do
     resources("/users", UserController, only: [:index, :show])
     resources("/videos", VideoController)
     resources("/sessions", SessionController, only: [:delete])
+    get("/watch/:id", WatchController, :show)
   end
 
   # Other scopes may use custom stacks.
