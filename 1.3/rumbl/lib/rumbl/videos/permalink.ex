@@ -1,4 +1,6 @@
 defmodule Rumbl.Video.Permalink do
+  @moduledoc false
+
   @behaviour Ecto.Type
 
   def type, do: :id

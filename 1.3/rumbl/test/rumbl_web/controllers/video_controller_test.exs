@@ -15,7 +15,7 @@ defmodule RumblWeb.VideoControllerTest do
     description: "Chris McCord | Keynote: Phoenix - Gauging Progress",
     title: "Chris McCord | Keynote: Phoenix - Gauging Progress",
     url: "https://www.youtube.com/watch?v=pfFpIjFOL-I",
-	  slug: Video.slugify("Chris McCord | Keynote: Phoenix - Gauging Progress")
+    slug: Video.slugify("Chris McCord | Keynote: Phoenix - Gauging Progress")
   }
 
   @invalid_attrs %{title: "Invalid"}

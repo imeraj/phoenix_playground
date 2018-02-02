@@ -1,5 +1,5 @@
 defmodule RumblWeb.WatchController do
-  @moduletag false
+  @moduledoc false
 
   use RumblWeb, :controller
 
