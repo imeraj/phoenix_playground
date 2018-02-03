@@ -67,7 +67,7 @@ let Video = {
 
       template.innerHTML = `
         <a href="#" data-seek="${this.esc(at)}">
-        <b>[${at / (60 * 1000)}]:${this.esc(user.username)}</b>:${this.esc(body)}
+        <b>[${(at / (60 * 1000)).toFixed(2)}]:${this.esc(user.username)}</b>:${this.esc(body)}
        </a>`
 
       msgContainer.appendChild(template)

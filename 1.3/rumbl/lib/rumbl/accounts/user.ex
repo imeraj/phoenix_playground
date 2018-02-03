@@ -11,6 +11,7 @@ defmodule Rumbl.Accounts.User do
     field(:password_hash, :string)
     field(:username, :string)
     has_many(:videos, Rumbl.Videos.Video)
+    has_many(:annotations, Rumbl.Videos.Annotation)
 
     timestamps()
   end

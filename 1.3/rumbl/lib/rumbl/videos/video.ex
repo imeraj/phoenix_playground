@@ -13,6 +13,7 @@ defmodule Rumbl.Videos.Video do
     field(:slug, :string)
     belongs_to(:user, Rumbl.Accounts.User)
     belongs_to(:category, Rumbl.Videos.Category)
+    has_many(:annotaions, Rumbl.Videos.Annotation)
 
     timestamps()
   end
