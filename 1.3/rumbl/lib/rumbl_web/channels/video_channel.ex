@@ -16,15 +16,18 @@ defmodule RumblWeb.RoomChannel do
 
     annotations =
       Repo.all(
-        from a in assoc(video, :annotations),
+        from(
+          a in assoc(video, :annotations),
           where: a.id > ^last_seen_id,
           order_by: [asc: a.at, asc: a.id],
           limit: 200,
           preload: [:user]
+        )
       )
 
     resp = %{
-      annotations: Phoenix.View.render_many(annotations, RumblWeb.AnnotationView, "annotation.json")
+      annotations:
+        Phoenix.View.render_many(annotations, RumblWeb.AnnotationView, "annotation.json")
     }
 
     {:ok, resp, assign(socket, :video_id, video_id)}
@@ -40,7 +43,6 @@ defmodule RumblWeb.RoomChannel do
       user
       |> build_assoc(:annotations, video_id: socket.assigns.video_id)
       |> Annotation.changeset(params)
-      |> IO.inspect()
 
     case Repo.insert(changeset) do
       {:ok, annotation} ->
