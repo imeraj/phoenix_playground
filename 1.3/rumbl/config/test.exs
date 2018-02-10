@@ -4,7 +4,7 @@ use Mix.Config
 # you can enable the server option below.
 config :rumbl, RumblWeb.Endpoint,
   http: [port: 4001],
-  server: false
+  server: true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
@@ -22,3 +22,5 @@ config :bcrypt_elixir, :log_rounds, 4
 
 # Configures Phoenix Integration
 config :phoenix_integration, endpoint: RumblWeb.Endpoint
+
+config :rumbl, sql_sandbox: true

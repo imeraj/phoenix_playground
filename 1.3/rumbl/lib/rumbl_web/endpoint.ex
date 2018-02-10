@@ -46,6 +46,10 @@ defmodule RumblWeb.Endpoint do
     signing_salt: "+Jx2vAnw"
   )
 
+  if Application.get_env(:rumbl, :sql_sandbox) do
+	  plug Phoenix.Ecto.SQL.Sandbox
+  end
+
   plug(RumblWeb.Router)
 
   @doc """
