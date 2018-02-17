@@ -47,7 +47,7 @@ defmodule RumblWeb.Endpoint do
   )
 
   if Application.get_env(:rumbl, :sql_sandbox) do
-	  plug Phoenix.Ecto.SQL.Sandbox
+    plug(Phoenix.Ecto.SQL.Sandbox)
   end
 
   plug(RumblWeb.Router)
