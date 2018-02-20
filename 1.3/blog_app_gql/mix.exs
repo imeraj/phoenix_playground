@@ -38,7 +38,7 @@ defmodule BlogAppGql.Mixfile do
      {:absinthe, "~> 1.3.1"},
      {:absinthe_plug, "~> 1.3.0"},
      {:poison, "~> 3.1"},
-     {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
+     {:absinthe_ecto, "~> 0.1.3"},
      {:faker, "~> 0.8"}
 		]
   end

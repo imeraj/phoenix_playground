@@ -40,7 +40,7 @@ config :phoenix, :stacktrace_depth, 20
 config :blog_app_gql, BlogAppGql.Repo,
 	adapter: Ecto.Adapters.MySQL,
   username: "root",
-  password: "phoenix",
+  password: "root",
 	hostname: "localhost",
 	port: 3306,
 	database: "blog_app_gpl_dev",

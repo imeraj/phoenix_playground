@@ -2,12 +2,6 @@ defmodule BlogAppGql.Web.Schema do
   use Absinthe.Schema
   import_types(BlogAppGql.Web.Schema.Types)
 
-  input_object :update_post_params do
-    field(:title, :string)
-    field(:body, :string)
-    field(:accounts_user_id, :id)
-  end
-
   query do
     field :blog_posts, list_of(:blog_post) do
       resolve(&BlogAppGql.Web.Blog.PostResolver.all/2)
