@@ -3,7 +3,7 @@ defmodule BlogAppGql.Repo.Migrations.CreateBlogAppGql.Accounts.User do
 
   def change do
     create table(:accounts_users) do
-      add :name, :string
+      add :name, :string, null: false
       add :email, :string
 
       timestamps()

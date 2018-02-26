@@ -12,7 +12,6 @@ defmodule BlogAppGql.Web.Router do
     resources("/posts", PostController, except: [:new, :edit])
   end
 
-  forward("/graphql", Absinthe.Plug, schema: BlogAppGql.Web.Schema)
-
+  forward("/graphql",  Absinthe.Plug,          schema: BlogAppGql.Web.Schema)
   forward("/graphiql", Absinthe.Plug.GraphiQL, schema: BlogAppGql.Web.Schema)
 end
