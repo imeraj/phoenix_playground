@@ -19,7 +19,7 @@ for _ <- 1..10 do
   Repo.insert!(%User{
     name: Faker.Name.name,
     email: Faker.Internet.safe_email(),
-    password: "password"
+    password_hash: Comeonin.Bcrypt.hashpwsalt("password")
   })
 end
 

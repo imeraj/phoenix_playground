@@ -38,10 +38,10 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :blog_app_gql, BlogAppGql.Repo,
-	adapter: Ecto.Adapters.MySQL,
+  adapter: Ecto.Adapters.MySQL,
   username: "root",
   password: "root",
-	hostname: "localhost",
-	port: 3306,
-	database: "blog_app_gpl_dev",
+  hostname: "localhost",
+  port: 3306,
+  database: "blog_app_gql_dev",
   pool_size: 10

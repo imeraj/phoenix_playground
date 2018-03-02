@@ -45,7 +45,8 @@ defmodule PhoenixApi.Mixfile do
      {:bamboo, "~> 0.8"},
      {:bamboo_smtp, "~> 1.4.0"},
      {:scout_apm, "~> 0.0"},
-     {:con_cache, "~> 0.12.0"}
+     {:con_cache, "~> 0.12.0"},
+
      ]
   end
 

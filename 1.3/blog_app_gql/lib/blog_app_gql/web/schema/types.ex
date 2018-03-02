@@ -16,9 +16,13 @@ defmodule BlogAppGql.Web.Schema.Types do
     field(:user, :accounts_user, resolve: assoc(:accounts_user))
   end
 
+  object :session do
+    field(:token, :string)
+  end
+
   input_object :update_post_params do
-	  field(:title, :string)
-	  field(:body, :string)
-	  field(:accounts_user_id, :id)
+    field(:title, :string)
+    field(:body, :string)
+    field(:accounts_user_id, :id)
   end
 end
