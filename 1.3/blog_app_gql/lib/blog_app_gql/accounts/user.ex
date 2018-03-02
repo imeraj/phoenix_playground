@@ -29,7 +29,6 @@ defmodule BlogAppGql.Accounts.User do
   def store_token_changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:token])
-    |> IO.inspect
   end
 
 
