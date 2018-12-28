@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="plug" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/plug/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/plug/lib" />
+      <root url="file://$PROJECT_DIR$/deps/plug/src" />
+    </SOURCES>
+  </library>
+</component>

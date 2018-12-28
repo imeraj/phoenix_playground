@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="plug_cowboy" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/plug_cowboy/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/plug_cowboy/lib" />
+    </SOURCES>
+  </library>
+</component>

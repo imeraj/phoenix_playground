@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="ecto" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/ecto/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/ecto/lib" />
+    </SOURCES>
+  </library>
+</component>
