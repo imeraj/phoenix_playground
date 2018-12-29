@@ -16,6 +16,15 @@
         <%= text_input f, :username, placeholder: "Username" %>
         <%= error_tag f, :username %>
     </div>
+
+    <div>
+        <%= inputs_for f, :credential, fn cf -> %>
+            <%= text_input cf, :email, placeholder: "Email" %>
+            <%= error_tag cf, :email %>
+            <%= password_input cf, :password, placeholder: "Password" %> <%= error_tag cf, :password %>
+        <% end %>
+    </div>
+
     <%= submit "Create User" %>
 <% end %>
 
