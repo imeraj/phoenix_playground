@@ -45,7 +45,8 @@ defmodule Rumbl.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:comeonin, "~> 4.1"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:pbkdf2_elixir, "~> 0.12"}
+      {:pbkdf2_elixir, "~> 0.12"},
+      {:faker, "~> 0.11.2", only: :test}
     ]
   end
 

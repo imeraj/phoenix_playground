@@ -32,6 +32,31 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/plug_crypto" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/ranch" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/telemetry" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/bcrypt_elixir" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/comeonin" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/connection" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/cowboy" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/cowlib" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/db_connection" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/decimal" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/ecto" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/ecto_sql" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/elixir_make" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/gettext" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/jason" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/mariaex" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/mime" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/pbkdf2_elixir" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/phoenix" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/phoenix_ecto" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/phoenix_html" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/phoenix_pubsub" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/plug" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/plug_cowboy" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/plug_crypto" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/ranch" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/telemetry" />
       <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix" />
       <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix_html" />
       <excludeFolder url="file://$MODULE_DIR$/cover" />
@@ -79,5 +104,7 @@
     <orderEntry type="library" name="pbkdf2_elixir" level="project" />
     <orderEntry type="library" name="argon2_elixir" level="project" />
     <orderEntry type="library" name="elixir_make" level="project" />
+    <orderEntry type="library" name="faker" level="project" />
+    <orderEntry type="library" name="credo" level="project" />
   </component>
 </module>
