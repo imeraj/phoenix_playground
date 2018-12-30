@@ -5,6 +5,11 @@
     </div>
   <% end %>
 
+  <%= label f, :category_id, "Category"%>
+  <%= select f, :category_id, category_select_options(@categories),
+    prompt: "Choose a category" %>
+  <%= error_tag f, :category_id %>
+
   <%= label f, :url %>
   <%= text_input f, :url %>
   <%= error_tag f, :url %>
