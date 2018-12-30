@@ -19,6 +19,9 @@ defmodule RumblWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
+
+      import Rumbl.TestHelpers
+
       alias RumblWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
