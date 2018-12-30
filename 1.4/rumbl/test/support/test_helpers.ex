@@ -22,12 +22,14 @@ defmodule Rumbl.TestHelpers do
   end
 
   def video_fixture(%Rumbl.Accounts.User{} = user, attrs \\ %{}) do
+    category = Multimedia.create_category("Action")
+
     attrs =
       Enum.into(attrs, %{
           url: "www.youtube.com",
           title: "A title",
           description: "Youtube",
-          category_id: 1
+          category_id: category.id
        })
     {:ok, video} = Multimedia.create_video(user, attrs)
     video
