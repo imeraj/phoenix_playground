@@ -4,7 +4,7 @@
     <%= for user <- @users do %>
         <tr>
             <td><%= render "user.html", user: user %></td>
-            <%= if user == @current_user do %>
+            <%= if @current_user do %>
                 <td><%= link "List Videos", to: Routes.video_path(@conn, :index) %> </td>
             <% end %>
         </tr>

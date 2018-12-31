@@ -20,7 +20,7 @@
       <td><%= video.description %></td>
 
       <td>
-        <%= link "Show", to: Routes.video_path(@conn, :show, video) %>
+        <%= link "Watch", to: Routes.watch_path(@conn, :show, "#{video.id}-#{video.slug}"), class: "button" %>
         <%= link "Edit", to: Routes.video_path(@conn, :edit, video) %>
         <%= link "Delete", to: Routes.video_path(@conn, :delete, video), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>

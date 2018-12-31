@@ -24,6 +24,12 @@ defmodule Rumbl.Multimedia do
     |> preload_user()
   end
 
+  def get_video!(id) do
+    Video
+    |> Repo.get!(id)
+    |> Repo.preload(:category)
+  end
+
   def create_video(%Rumbl.Accounts.User{} = user, attrs \\ %{}) do
     %Video{}
     |> Video.changeset(attrs)
