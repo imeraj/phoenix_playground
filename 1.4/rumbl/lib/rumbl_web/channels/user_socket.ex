@@ -27,7 +27,7 @@ defmodule RumblWeb.UserSocket do
   end
 
 
-  def connect(_params, socket, _connect_info), do: :error
+  def connect(_params, _socket, _connect_info), do: :error
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #
@@ -39,5 +39,5 @@ defmodule RumblWeb.UserSocket do
   #     RumblWeb.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
-  def id(socket), do: "user_socket:#{socket.assigns.user_id}"
+  def id(socket), do: "user_socket: #{socket.assigns.user_id}"
 end
