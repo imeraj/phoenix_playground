@@ -11,9 +11,10 @@ defmodule Rumbl.Application do
       # Start the Ecto repository
       Rumbl.Repo,
       # Start the endpoint when the application starts
-      RumblWeb.Endpoint
+      RumblWeb.Endpoint,
       # Starts a worker by calling: Rumbl.Worker.start_link(arg)
       # {Rumbl.Worker, arg},
+      Rumbl.InfoSys.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
