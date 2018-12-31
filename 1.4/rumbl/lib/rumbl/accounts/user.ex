@@ -17,6 +17,7 @@ defmodule Rumbl.Accounts.User do
     |> cast(attrs, [:name, :username])
     |> validate_required([:name, :username])
     |> validate_length(:username, min: 3, max: 10)
+    |> downcase_username()
     |> unique_constraint(:username)
   end
 
@@ -24,5 +25,12 @@ defmodule Rumbl.Accounts.User do
     user
     |> changeset(params)
     |> cast_assoc(:credential, with: &Credential.changeset/2, required: true)
+  end
+
+  defp downcase_username(changeset) do
+    case fetch_change(changeset, :username) do
+      {:ok, username} -> put_change(changeset, :username, String.downcase(username))
+      :error -> changeset
+    end
   end
 end
