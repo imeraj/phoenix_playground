@@ -46,7 +46,8 @@ defmodule Rumbl.MixProject do
       {:comeonin, "~> 4.1"},
       {:bcrypt_elixir, "~> 1.0"},
       {:pbkdf2_elixir, "~> 0.12"},
-      {:faker, "~> 0.11.2", only: :test}
+      {:faker, "~> 0.11.2", only: :test},
+      {:sweet_xml, "~> 0.6.5"}
     ]
   end
 
