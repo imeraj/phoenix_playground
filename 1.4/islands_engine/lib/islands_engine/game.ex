@@ -24,6 +24,9 @@ defmodule IslandsEngine.Game do
     def set_islands(game, player) when player in @players, do:
         GenServer.call(game, {:set_island, player})
 
+    def guess_coordinate(game, player, row, col) when player in @players, do:
+        GenServer.call(game, {:guess_coordinate, player, row, col})
+
     def handle_call({:add_player, name}, _from, state) do
         with {:ok, rules} <- Rules.check(state.rules, :add_player)
         do
@@ -75,6 +78,35 @@ defmodule IslandsEngine.Game do
         end
     end
 
+    def handle_call({:guess_coordinate, player, row, col}, _from, state) do
+        opponent = opponent(player)
+        opponent_board = player_board(state, opponent)
+
+        with {:ok, rules} <- Rules.check(state.rules, {:guess_coordinate, player}),
+             {:ok, coordinate} <- Coordinate.new(row, col),
+             {hit_or_miss, forested_island, win_status, opponent_board}
+                <- Board.guess(opponent_board, coordinate),
+             {:ok, rules} <- Rules.check(state.rules, {:win_check, win_status})
+        do
+            state
+            |> update_board(opponent, opponent_board)
+            |> update_guesses(player, hit_or_miss, coordinate)
+            |> update_rules(rules)
+            |> reply_success({hit_or_miss, forested_island, win_status})
+        else
+            :error ->
+                {:reply, :error, state}
+            {:error, :invalid_coordinate} ->
+                {:reply, {:error, :invalid_coordinate}, state}
+        end
+    end
+
+    defp update_guesses(state, player, hit_or_miss, coordinate) do
+        update_in(state[player].guesses, fn guesses ->
+            Guesses.add(guesses, hit_or_miss, coordinate)
+        end)
+    end
+
     defp update_player2_name(state, name), do:
         put_in(state.player2.name, name)
 
@@ -89,4 +121,7 @@ defmodule IslandsEngine.Game do
 
     defp player_board(state, player), do:
         Map.get(state, player).board
+
+    defp opponent(:player1), do: :player2
+    defp opponent(:player2), do: :player1
 end
