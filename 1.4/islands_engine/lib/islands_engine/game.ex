@@ -29,16 +29,6 @@ defmodule IslandsEngine.Game do
         {:ok, fresh_state(name)}
     end
 
-    def handle_info({:set_state, name}, _state) do
-        state =
-            case :ets.lookup(:game_state, name) do
-                [] -> fresh_state(name)
-                {_key, state} -> state
-            end
-        :ets.insert(:game_state, {name, state})
-        {:noreply, state, @timeout}
-    end
-
     def handle_call({:add_player, name}, _from, state) do
         with {:ok, rules} <- Rules.check(state.rules, :add_player)
         do
@@ -113,6 +103,16 @@ defmodule IslandsEngine.Game do
         end
     end
 
+    def handle_info({:set_state, name}, _state) do
+        state =
+            case :ets.lookup(:game_state, name) do
+                [] -> fresh_state(name)
+                {_key, state} -> state
+            end
+        :ets.insert(:game_state, {name, state})
+        {:noreply, state, @timeout}
+    end
+    
     def handle_info(:timeout, state) do
         {:stop, {:shutdown, :timeout}, state}
     end
