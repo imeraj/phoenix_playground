@@ -9,7 +9,10 @@ defmodule IslandsEngine.Game do
     def via_tuple(name), do: {:via, Registry, {Registry.Game, name}}
 
     def start_link(name) when is_binary(name) do
-        GenServer.start_link(__MODULE__, name, name: via_tuple(name))
+        case Registry.lookup(Registry.Game, name) do
+            [] -> GenServer.start_link(__MODULE__, name, name: via_tuple(name))
+            _ -> :ok
+        end
     end
 
     def add_player(game, name) when is_binary(name), do:
@@ -112,7 +115,7 @@ defmodule IslandsEngine.Game do
         :ets.insert(:game_state, {name, state})
         {:noreply, state, @timeout}
     end
-    
+
     def handle_info(:timeout, state) do
         {:stop, {:shutdown, :timeout}, state}
     end
