@@ -9,9 +9,10 @@ defmodule IslandsInterface.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      IslandsInterfaceWeb.Endpoint
+      IslandsInterfaceWeb.Endpoint,
       # Starts a worker by calling: IslandsInterface.Worker.start_link(arg)
       # {IslandsInterface.Worker, arg},
+      IslandsInterfaceWeb.Presence,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

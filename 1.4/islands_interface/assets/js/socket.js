@@ -107,6 +107,7 @@ let channel = new_channel("moon", "moon")
 
 channel.on("player_added", resp => {
     console.log("Player Added", resp)
+    channel.push("show_subscribers")
 })
 
 channel.on("player_set_islands", resp => {
@@ -115,6 +116,10 @@ channel.on("player_set_islands", resp => {
 
 channel.on("player_guessed_coordinate", resp => {
     console.log("Player Guesssd Coordinate: ", resp.result)
+})
+
+channel.on("subscribers", resp => {
+    console.log("These players have joined: ", resp)
 })
 
 join(channel)
@@ -138,6 +143,6 @@ set_islands(channel, "player2")
 
 guess_coordinate(channel, "player1", 1, 1)
 guess_coordinate(channel, "player2", 1, 1)
-guess_coordinate(channel, "player1", 10, 10)
+guess_coordinate(channel, "player1", 10, 1)
 
 export default socket
