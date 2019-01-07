@@ -91,7 +91,7 @@ defmodule IslandsEngine.Game do
              {:ok, coordinate} <- Coordinate.new(row, col),
              {hit_or_miss, forested_island, win_status, opponent_board}
                 <- Board.guess(opponent_board, coordinate),
-             {:ok, rules} <- Rules.check(state.rules, {:win_check, win_status})
+             {:ok, rules} <- Rules.check(rules, {:win_check, win_status})
         do
             state
             |> update_board(opponent, opponent_board)
