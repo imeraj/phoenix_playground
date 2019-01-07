@@ -2,7 +2,7 @@ defmodule IslandsInterfaceWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", IslandsInterfaceWeb.RoomChannel
+  channel "game:*", IslandsInterfaceWeb.GameChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

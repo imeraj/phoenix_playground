@@ -55,9 +55,89 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+function new_channel(subtopic, screen_name) {
+    return socket.channel("game:" + subtopic, {screen_name: screen_name})
+}
+
+function join(channel) {
+    channel.join()
+      .receive("ok", resp => { console.log("Joined successfully", resp) })
+      .receive("error", resp => { console.log("Unable to join", resp) })
+}
+
+function leave(channel) {
+    channel.leave()
+      .receive("ok", resp => { console.log("Left successfully", resp) })
+      .receive("error", resp => { console.log("Unable to leave", resp) })
+}
+
+function new_game(channel) {
+    channel.push("new_game")
+      .receive("ok", resp => { console.log("New Game!", resp.message) })
+      .receive("error", resp => { console.log("Unable to start a new game", resp.message) })
+}
+
+function add_player(channel, player) {
+    channel.push("add_player", player)
+      .receive("error", resp => { console.log("Unable to add new player: " + player.resp) })
+}
+
+function position_island(channel, player, island, row, col) {
+    var params = {"player": player, "island": island, "row": row, "col": col}
+    channel.push("position_island", params)
+      .receive("ok", resp => { console.log("Island positioned!", resp.message) })
+      .receive("error", resp => { console.log("Unable to position island", resp.message) })
+}
+
+function set_islands(channel, player) {
+    channel.push("set_islands", player)
+      .receive("ok", resp => { console.log("Island set") })
+      .receive("error", resp => { console.log("Unable to set island" ) })
+}
+
+function guess_coordinate(channel, player, row, col) {
+    var params = {"player": player, "row": row, "col": col}
+    channel.push("guess_coordinate", params)
+      .receive("error", resp => {
+          console.log("Unable to guess coordinate", resp)
+      })
+}
+
+let channel = new_channel("moon", "moon")
+
+channel.on("player_added", resp => {
+    console.log("Player Added", resp)
+})
+
+channel.on("player_set_islands", resp => {
+    console.log("Player Set Islands", resp)
+})
+
+channel.on("player_guessed_coordinate", resp => {
+    console.log("Player Guesssd Coordinate: ", resp.result)
+})
+
+join(channel)
+new_game(channel)
+add_player(channel, "Meraj")
+
+position_island(channel, "player1", "dot", 1, 5)
+position_island(channel, "player1", "atoll", 1, 1)
+position_island(channel, "player1", "l_shape", 1, 7)
+position_island(channel, "player1", "s_shape", 5, 1)
+position_island(channel, "player1", "square", 5, 5)
+
+position_island(channel, "player2", "dot", 1, 5)
+position_island(channel, "player2", "atoll", 1, 1)
+position_island(channel, "player2", "l_shape", 1, 7)
+position_island(channel, "player2", "s_shape", 5, 1)
+position_island(channel, "player2", "square", 5, 5)
+
+set_islands(channel, "player1")
+set_islands(channel, "player2")
+
+guess_coordinate(channel, "player1", 1, 1)
+guess_coordinate(channel, "player2", 1, 1)
+guess_coordinate(channel, "player1", 10, 10)
 
 export default socket
