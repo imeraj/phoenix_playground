@@ -16,7 +16,9 @@ defmodule MinitwitterWeb.Router do
   scope "/", MinitwitterWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", PageController, :home
+    get "/home", PageController, :home
+    get "/help", PageController, :help
   end
 
   # Other scopes may use custom stacks.
