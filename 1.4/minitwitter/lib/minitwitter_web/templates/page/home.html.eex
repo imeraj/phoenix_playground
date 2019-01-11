@@ -1,2 +1,6 @@
-<h1>Minitwitter App</h1>
-<p>This is the homepage for the Minitwitter App</p>
+<h2>Welcome to Minitwitter App!</h2>
+<center>
+    <button class="button button-outline">
+        Please <%= link "Sign up now!", to: Routes.page_path(@conn, :home) %>
+    </button>
+</center>

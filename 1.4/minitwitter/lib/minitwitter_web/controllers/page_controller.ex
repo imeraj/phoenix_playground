@@ -5,7 +5,7 @@ defmodule MinitwitterWeb.PageController do
     render(conn, "home.html")
   end
 
-  def help(conn, _params) do
-     render(conn, "help.html")
+  def contact(conn, _params) do
+     render(conn, "contact.html")
   end
 end

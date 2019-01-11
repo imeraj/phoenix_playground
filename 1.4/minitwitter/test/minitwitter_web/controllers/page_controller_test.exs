@@ -17,9 +17,9 @@ defmodule MinitwitterWeb.PageControllerTest do
     assert html_response(conn, 200) =~ "Home | #{base_title}"
   end
 
-  test "should get help", %{conn: conn, base_title: base_title} do
-      conn = get(conn, Routes.page_path(conn, :help))
+  test "should get contact", %{conn: conn, base_title: base_title} do
+      conn = get(conn, Routes.page_path(conn, :contact))
       assert html_response(conn, 200) =~ "Meraj"
-      assert html_response(conn, 200) =~ "Help | #{base_title}"
+      assert html_response(conn, 200) =~ "Contact | #{base_title}"
   end
 end

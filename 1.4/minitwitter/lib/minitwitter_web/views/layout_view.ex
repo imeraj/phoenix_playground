@@ -1,6 +1,10 @@
 defmodule MinitwitterWeb.LayoutView do
   use MinitwitterWeb, :view
 
-  def title("home.html", _assigns), do: "Home"
-  def title("help.html", _assigns), do: "Help"
+  def full_title(template, _assigns), do:
+    title(template) <> " | Minitwitter Phoenix App"
+
+    defp title("home.html"), do: "Home"
+    defp title("contact.html"), do: "Contact"
+    defp title(_), do: "Minitwitter Phoenix App"    
 end
