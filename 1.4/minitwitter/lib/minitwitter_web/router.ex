@@ -19,6 +19,9 @@ defmodule MinitwitterWeb.Router do
     get "/", PageController, :home
     get "/home", PageController, :home
     get "/contact", PageController, :contact
+    get "/signup", UserController, :new
+
+    resources "/users", UserController, only: [:index, :show, :create, :edit] 
   end
 
   # Other scopes may use custom stacks.
