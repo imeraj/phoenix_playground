@@ -15,5 +15,16 @@
         <%= error_tag f, :email %>
     </div>
 
+    <div>
+        <%= password_input f, :password, placeholder: "Password" %>
+        <%= error_tag f, :password %>
+    </div>
+
+    <div>
+        <%= password_input f, :password_confirmation,
+            placeholder: "Please type the same password again" %>
+        <%= error_tag f, :password_confirmation %>
+    </div>
+
     <%= submit "Create my account" %>
 <% end %>

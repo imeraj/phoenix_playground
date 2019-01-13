@@ -6,7 +6,8 @@ defmodule Minitwitter.AccountsTest do
   describe "users" do
     alias Minitwitter.Accounts.User
 
-    @valid_attrs %{name: "meraj", email: "meraj.enigma@gmail.com"}
+    @valid_attrs %{name: "meraj", email: "meraj.enigma@gmail.com",
+        password: "phoenix", password_confirmation: "phoenix"}
     # @update_attrs %{}
     @invalid_attrs %{}
 

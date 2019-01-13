@@ -1,6 +1,7 @@
 <section class="phx-hero">
 <h2>Welcome to Minitwitter App!</h2>
+    Please
     <button class="button button-outline">
-        Please <%= link "Sign up now!", to: Routes.user_path(@conn, :new) %>
+        <%= link "Sign up now!", to: Routes.user_path(@conn, :new) %>
     </button>
 </section>

@@ -1,8 +1,10 @@
-<h1>Show User</h1>
-
-<ul>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>
+<div class="row">
+    <aside class="col-md-4">
+        <section class="user_info">
+            <h1>
+                <%= gravatar_for(@user) %>
+                <%= @user.name %>
+            </h1>
+        </section>
+    </aside>
+<div>
