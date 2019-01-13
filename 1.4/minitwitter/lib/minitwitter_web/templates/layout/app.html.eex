@@ -17,7 +17,23 @@
                   <ul>
                       <li><%= link "Home", to: Routes.page_path(@conn, :home) %></li>
                       <li><%= link "Contact", to: Routes.page_path(@conn, :contact) %></li>
-                      <li><%= link "Log in", to: Routes.page_path(@conn, :home) %></li>
+                        <%= if @current_user do %>
+                            <li><%= link "Users", to: Routes.user_path(@conn, :index) %></li>
+                            <div class="dropdown">
+                                <button class="dropbtn">Account</button>
+                                <div class="dropdown-content">
+                                    <ul>
+                                        <li><%= link "Profile", to: Routes.user_path(@conn, :show, @current_user) %></li>
+                                        <li><%= link "Settings", to: '#' %></li>
+                                        <li class="divider"></li>
+                                        <li><%= link "Log out", to: Routes.session_path(@conn, :delete, @current_user),
+                                                                method: "delete" %></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <% else %>
+                            <li><%= link "Log in", to: Routes.session_path(@conn, :new) %></li>
+                        <% end %>
                   </ul>
               </nav>
           </div>
@@ -26,11 +42,6 @@
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
-      <div class="container">
-          <%= if Mix.env() == :dev do %>
-            
-          <% end %>
-      </div>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>

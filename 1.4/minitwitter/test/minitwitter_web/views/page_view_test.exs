@@ -21,7 +21,7 @@ defmodule MinitwitterWeb.PageViewTest do
   end
 
   test "check app layout", %{conn: conn} do
-      content = render_to_string(MinitwitterWeb.PageView, "home.html", conn: conn, layout: {MinitwitterWeb.LayoutView, "app.html"})
+      content = render_to_string(MinitwitterWeb.PageView, "home.html", conn: conn, current_user: nil, layout: {MinitwitterWeb.LayoutView, "app.html"})
       assert String.contains?(content, "Home")
       assert String.contains?(content, "Contact")
       assert String.contains?(content, "Log in")
