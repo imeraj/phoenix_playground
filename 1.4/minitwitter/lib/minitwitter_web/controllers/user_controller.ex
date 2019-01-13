@@ -3,6 +3,7 @@ defmodule MinitwitterWeb.UserController do
 
   alias Minitwitter.Accounts
   alias Minitwitter.Accounts.User
+  alias MinitwitterWeb.Auth
 
   plug :authenticate_user when action in [:index, :show]
 
@@ -21,6 +22,7 @@ defmodule MinitwitterWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Welcome to Minitwitter App!")
+        |> Auth.login(user)
         |> redirect(to: Routes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->

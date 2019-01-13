@@ -27,7 +27,7 @@
                                         <li><%= link "Settings", to: '#' %></li>
                                         <li class="divider"></li>
                                         <li><%= link "Log out", to: Routes.session_path(@conn, :delete, @current_user),
-                                                                method: "delete" %></li>
+                                                                method: "delete" %></li>                      
                                     </ul>
                                 </div>
                             </div>

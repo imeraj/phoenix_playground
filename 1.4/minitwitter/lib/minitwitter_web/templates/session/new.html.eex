@@ -7,6 +7,11 @@
         <%= password_input f, :password, placeholder: "Password" %>
     </div>
 
+    <%= label f, :remember_me, class: "checkbox inline" do %>
+        <%= checkbox f, :remember_me %>
+        <span>Remember me on this computer</span>
+    <% end %>
+
     <%= submit "Log in" %>
 
     <p> New user? <%= link "Sign up now!", to: Routes.user_path(@conn, :new) %>

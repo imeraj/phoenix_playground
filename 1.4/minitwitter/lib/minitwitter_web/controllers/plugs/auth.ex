@@ -5,6 +5,8 @@ defmodule MinitwitterWeb.Auth do
   alias Minitwitter.Accounts
   alias MinitwitterWeb.Router.Helpers, as: Routes
 
+  @max_age 7 * 24 * 60 * 60
+
   def init(opts), do: opts
 
   def call(conn, _opts) do
@@ -35,14 +37,30 @@ defmodule MinitwitterWeb.Auth do
   end
 
   def authenticate_user(conn, _opts) do
-    if conn.assigns.current_user do
-      conn
-    else
-      conn
-      |> put_flash(:error, "You must be logged in to access that page!")
-      |> redirect(to: Routes.page_path(conn, :home))
-      |> halt()
+    cond do
+      conn.assigns.current_user ->
+        conn
+
+      remember_token = conn.cookies["remember_token"] ->
+        user_id = conn.cookies["user_id"]
+        user = Accounts.get_user(user_id)
+
+        if user && Accounts.authenticated?(user, remember_token) do
+          login(conn, user)
+        else
+          halt_connection(conn)
+        end
+
+      true ->
+        halt_connection(conn)
     end
+  end
+
+  defp halt_connection(conn) do
+    conn
+    |> put_flash(:error, "You must be logged in to access that page!")
+    |> redirect(to: Routes.page_path(conn, :home))
+    |> halt()
   end
 
   def login_by_email_and_pass(conn, email, given_pass) do
@@ -54,6 +72,22 @@ defmodule MinitwitterWeb.Auth do
   end
 
   def logout(conn) do
-    configure_session(conn, drop: true)
+    if conn.assigns.current_user do
+      Accounts.forget_user(conn.assigns.current_user)
+
+      conn
+      |> delete_resp_cookie("user_id")
+      |> delete_resp_cookie("remember_token")
+      |> configure_session(drop: true)
+    end
+  end
+
+  def remember(conn, user, token) do
+    conn =
+      conn
+      |> put_resp_cookie("user_id", Integer.to_string(user.id), max_age: @max_age)
+      |> put_resp_cookie("remember_token", token, max_age: @max_age)
+
+    conn
   end
 end
