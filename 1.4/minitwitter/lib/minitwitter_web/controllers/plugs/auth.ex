@@ -24,6 +24,22 @@ defmodule MinitwitterWeb.Auth do
     end
   end
 
+  def admin_user(conn, _opts) do
+    current_user = conn.assigns[:current_user]
+
+    conn =
+      case current_user.admin do
+        true ->
+          conn
+
+        _ ->
+          redirect(conn, to: Routes.user_path(conn, :show, current_user))
+          clear_location(conn)
+      end
+
+    conn
+  end
+
   def login(conn, user) do
     conn
     |> put_current_user(user)
@@ -56,8 +72,45 @@ defmodule MinitwitterWeb.Auth do
     end
   end
 
+  def correct_user(conn, _opts) do
+    user = Accounts.get_user(conn.params["id"])
+    current_user = conn.assigns[:current_user]
+
+    conn =
+      if current_user == user do
+        conn
+      else
+        redirect(conn, to: Routes.user_path(conn, :show, current_user))
+        clear_location(conn)
+      end
+
+    conn
+  end
+
+  def redirect_back_or(conn, default) do
+    redirect(conn, to: conn.cookies["forwarding_url"] || default)
+    clear_location(conn)
+  end
+
+  defp clear_location(conn) do
+    conn =
+      conn
+      |> delete_resp_cookie("forwarding_url")
+
+    conn
+  end
+
+  defp store_location(conn) do
+    conn =
+      conn
+      |> put_resp_cookie("forwarding_url", conn.request_path, max_age: @max_age)
+
+    conn
+  end
+
   defp halt_connection(conn) do
     conn
+    |> store_location()
     |> put_flash(:error, "You must be logged in to access that page!")
     |> redirect(to: Routes.page_path(conn, :home))
     |> halt()
@@ -78,6 +131,7 @@ defmodule MinitwitterWeb.Auth do
       conn
       |> delete_resp_cookie("user_id")
       |> delete_resp_cookie("remember_token")
+      |> clear_location()
       |> configure_session(drop: true)
     end
   end

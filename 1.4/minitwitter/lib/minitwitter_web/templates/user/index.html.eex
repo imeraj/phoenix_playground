@@ -1,1 +1,33 @@
-<h1>Listing Users</h1>
+<h1 align="center">All users</h1>
+<center>
+<%= if @page.page_number > 1 do %>
+  <%= link "Prev Page", to: Routes.user_path(@conn, :index, page: @page.page_number - 1) %>
+<% end %>
+
+<%= if @page.page_number < @page.total_pages do %>
+  <%= link "Next Page", to: Routes.user_path(@conn, :index, page: @page.page_number + 1) %>
+<% end %>
+</center>
+
+<ul class="users">
+    <%= for user <- @users do %>
+        <li>
+            <%= gravatar_for(user, 40) %>
+            <%= link user.name, to: Routes.user_path(@conn, :show, user) %>
+            <%= if @current_user.admin && @current_user != user do %>
+                | <%= link "Delete", to: Routes.user_path(@conn, :delete, user),
+                        method: :delete, data: [confirm: "Are you sure?"] %>
+            <% end %>
+        </li><br>
+    <% end %>
+</ul>
+
+<center>
+<%= if @page.page_number > 1 do %>
+  <%= link "Prev Page", to: Routes.user_path(@conn, :index, page: @page.page_number - 1) %>
+<% end %>
+
+<%= if @page.page_number < @page.total_pages do %>
+  <%= link "Next Page", to: Routes.user_path(@conn, :index, page: @page.page_number + 1) %>
+<% end %>
+</center>

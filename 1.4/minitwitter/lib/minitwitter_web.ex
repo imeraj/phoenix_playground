@@ -23,7 +23,7 @@ defmodule MinitwitterWeb do
 
       import Plug.Conn
       import MinitwitterWeb.Gettext
-      import MinitwitterWeb.Auth, only: [authenticate_user: 2]
+      import MinitwitterWeb.Auth, only: [authenticate_user: 2, correct_user: 2, admin_user: 2]
       alias MinitwitterWeb.Router.Helpers, as: Routes
     end
   end

@@ -3,6 +3,10 @@ defmodule MinitwitterWeb.UserView do
 
   @gravatar_url "https://secure.gravatar.com/avatar/"
 
+  def button_label("new.html", _assigns), do: "Create my account"
+  def button_label("edit.html", _assigns), do: "Save changes"
+  def button_label(_, _), do: ""
+
   def gravatar_for(user, size \\ 80) do
     gravatar_id =
       :crypto.hash(:md5, String.downcase(user.email))

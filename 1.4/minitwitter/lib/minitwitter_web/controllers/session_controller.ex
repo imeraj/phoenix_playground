@@ -25,7 +25,7 @@ defmodule MinitwitterWeb.SessionController do
 
         conn
         |> put_flash(:info, "Welcome back!")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> MinitwitterWeb.Auth.redirect_back_or(Routes.user_path(conn, :show, user))
 
       {:error, _reason, conn} ->
         conn

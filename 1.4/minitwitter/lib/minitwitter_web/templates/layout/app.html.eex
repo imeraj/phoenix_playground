@@ -24,10 +24,10 @@
                                 <div class="dropdown-content">
                                     <ul>
                                         <li><%= link "Profile", to: Routes.user_path(@conn, :show, @current_user) %></li>
-                                        <li><%= link "Settings", to: '#' %></li>
+                                        <li><%= link "Settings", to: Routes.user_path(@conn, :edit, @current_user) %></li>
                                         <li class="divider"></li>
                                         <li><%= link "Log out", to: Routes.session_path(@conn, :delete, @current_user),
-                                                                method: "delete" %></li>                      
+                                                                method: "delete" %></li>
                                     </ul>
                                 </div>
                             </div>

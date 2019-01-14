@@ -8,8 +8,9 @@ defmodule Minitwitter.Accounts do
 
   alias Minitwitter.Accounts.User
 
-  def list_users do
-    Repo.all(User)
+  def list_users(params) do
+    User
+    |> Minitwitter.Repo.paginate(params)
   end
 
   def get_user(id), do: Repo.get(User, id)

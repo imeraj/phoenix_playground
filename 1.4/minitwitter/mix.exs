@@ -20,7 +20,7 @@ defmodule Minitwitter.MixProject do
   def application do
     [
       mod: {Minitwitter.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :scrivener_ecto]
     ]
   end
 
@@ -45,7 +45,9 @@ defmodule Minitwitter.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:comeonin, "~> 4.1"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:pbkdf2_elixir, "~> 0.12"}
+      {:pbkdf2_elixir, "~> 0.12"},
+      {:faker, "~> 0.11"},
+      {:scrivener_ecto, "~> 2.0"}
     ]
   end
 

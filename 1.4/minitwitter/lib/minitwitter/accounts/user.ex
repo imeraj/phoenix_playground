@@ -9,6 +9,7 @@ defmodule Minitwitter.Accounts.User do
     field :password_confirmation, :string, virtual: true
     field :password_hash, :string
     field :remember_hash, :string
+    field :admin, :boolean, dafault: false
 
     timestamps()
   end
@@ -33,6 +34,7 @@ defmodule Minitwitter.Accounts.User do
   def update_changeset(user, attrs) do
     user
     |> cast(attrs, [:name, :email, :password, :password_confirmation, :remember_hash])
+    |> validate_required([:name, :email])
     |> validate_length(:name, min: 3, max: 50)
     |> validate_length(:email, max: 255)
     |> validate_format(:email, @email_regex)

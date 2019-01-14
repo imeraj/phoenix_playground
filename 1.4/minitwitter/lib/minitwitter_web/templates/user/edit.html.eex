@@ -1,5 +1,9 @@
-<h1>Edit User</h1>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
-
-<span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>
+<h1 align="center">Update profile</h1>
+<div>
+    <div>
+        <%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
+    <div class="gravatar_edit">
+      <%= gravatar_for @user %>
+      <a href="http://gravatar.com/emails" target="_blank">Change</a>
+    </div>
+</div>
