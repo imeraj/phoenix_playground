@@ -3,7 +3,8 @@ defmodule MinitwitterWeb.UserController do
 
   alias Minitwitter.Accounts
   alias Minitwitter.Accounts.User
-  alias MinitwitterWeb.Auth
+  alias MinitwitterWeb.Email
+  alias Minitwitter.Mailer
 
   plug :authenticate_user when action in [:index, :show, :edit, :delete]
   plug :correct_user when action in [:edit, :update]
@@ -26,10 +27,12 @@ defmodule MinitwitterWeb.UserController do
   def create(conn, %{"user" => user_params}) do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
+        Email.account_activation_html_email(conn, user)
+        |> Mailer.deliver_later()
+
         conn
-        |> put_flash(:info, "Welcome to Minitwitter App!")
-        |> Auth.login(user)
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> put_flash(:info, "Please check your email to activate your account.")
+        |> redirect(to: Routes.page_path(conn, :home))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -63,13 +66,6 @@ defmodule MinitwitterWeb.UserController do
 
   def delete(conn, %{"id" => id}) do
     user = Accounts.get_user(id)
-
-    # conn =
-    #   case Auth.admin_user?(conn) do
-    #     true -> conn
-    #     _ -> Auth.correct_user(conn, user)
-    #   end
-
     {:ok, _user} = Accounts.delete_user(user)
 
     conn

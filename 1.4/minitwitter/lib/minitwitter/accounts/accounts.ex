@@ -39,10 +39,10 @@ defmodule Minitwitter.Accounts do
     User.changeset(user, %{})
   end
 
-  defp new_token(), do: User.new_token()
+  defp remember_token(), do: User.new_token()
 
   def remember_user(user) do
-    token = new_token()
+    token = remember_token()
 
     update_user(
       user,
@@ -59,9 +59,20 @@ defmodule Minitwitter.Accounts do
     )
   end
 
-  def authenticated?(user, remember_token) do
+  def authenticated?(user, :remember, remember_token) do
     cond do
       user.remember_hash && Comeonin.Pbkdf2.checkpw(remember_token, user.remember_hash) ->
+        true
+
+      true ->
+        Comeonin.Bcrypt.dummy_checkpw()
+        false
+    end
+  end
+
+  def authenticated?(user, :activation, activation_token) do
+    cond do
+      user.activation_hash && Comeonin.Pbkdf2.checkpw(activation_token, user.activation_hash) ->
         true
 
       true ->

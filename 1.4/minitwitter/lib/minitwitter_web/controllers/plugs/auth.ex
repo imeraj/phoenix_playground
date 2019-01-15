@@ -61,7 +61,7 @@ defmodule MinitwitterWeb.Auth do
         user_id = conn.cookies["user_id"]
         user = Accounts.get_user(user_id)
 
-        if user && Accounts.authenticated?(user, remember_token) do
+        if user && Accounts.authenticated?(user, :remember, remember_token) do
           login(conn, user)
         else
           halt_connection(conn)

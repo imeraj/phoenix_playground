@@ -10,6 +10,10 @@ defmodule Minitwitter.Accounts.User do
     field :password_hash, :string
     field :remember_hash, :string
     field :admin, :boolean, dafault: false
+    field :activation_token, :string, virtual: true
+    field :activation_hash, :string
+    field :activated, :boolean, default: false
+    field :activated_at, :utc_datetime
 
     timestamps()
   end
@@ -29,11 +33,20 @@ defmodule Minitwitter.Accounts.User do
     |> downcase_email()
     |> unique_constraint(:email)
     |> put_pass_hash()
+    |> put_activation_hash()
   end
 
   def update_changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password, :password_confirmation, :remember_hash])
+    |> cast(attrs, [
+      :name,
+      :email,
+      :password,
+      :password_confirmation,
+      :remember_hash,
+      :activated,
+      :activated_at
+    ])
     |> validate_required([:name, :email])
     |> validate_length(:name, min: 3, max: 50)
     |> validate_length(:email, max: 255)
@@ -54,6 +67,24 @@ defmodule Minitwitter.Accounts.User do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
         put_change(changeset, :password_hash, Comeonin.Pbkdf2.hashpwsalt(pass))
+
+      _ ->
+        changeset
+    end
+  end
+
+  defp activation_token() do
+    new_token()
+  end
+
+  defp put_activation_hash(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true} ->
+        token = activation_token()
+
+        changeset
+        |> put_change(:activation_token, token)
+        |> put_change(:activation_hash, Comeonin.Pbkdf2.hashpwsalt(token))
 
       _ ->
         changeset

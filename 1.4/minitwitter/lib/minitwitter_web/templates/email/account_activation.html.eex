@@ -1,0 +1,7 @@
+<h1>Minitwitter App</h1>
+   <p>Hi <%= @user.name %>,</p>
+<p>
+   Welcome to the Minitwitter! Click on the link below to activate your
+   account:
+</p>
+<%= Routes.account_activations_url(@conn, :edit, @user.activation_token, email: @user.email) %>

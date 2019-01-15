@@ -19,7 +19,9 @@ defmodule MinitwitterWeb.DevelopmentSeeder do
       email: "meraj.enigma@gmail.com",
       password: "phoenix",
       password_hash: Comeonin.Pbkdf2.hashpwsalt("phoenix"),
-      admin: true
+      admin: true,
+      activated: true,
+      activated_at: DateTime.truncate(DateTime.utc_now(), :second)
     })
 
     for _ <- 1..100,
@@ -28,7 +30,9 @@ defmodule MinitwitterWeb.DevelopmentSeeder do
             name: Faker.Name.name(),
             email: Faker.Internet.email(),
             password: "phoenix",
-            password_hash: Comeonin.Pbkdf2.hashpwsalt("phoenix")
+            password_hash: Comeonin.Pbkdf2.hashpwsalt("phoenix"),
+            activated: true,
+            activated_at: DateTime.truncate(DateTime.utc_now(), :second)
           })
   end
 end

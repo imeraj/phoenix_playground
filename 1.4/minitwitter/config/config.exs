@@ -25,6 +25,20 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :minitwitter, Minitwitter.Mailer, adapter: Bamboo.LocalAdapter
+
+config :minitwitter, Minitwitter.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: "smtp.gmail.com",
+  port: 587,
+  username: "demo.rails007",
+  password: "mcmxcd123",
+  # can be `:always` or `:never`
+  tls: :if_available,
+  # can be `true`
+  ssl: false,
+  retries: 3
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

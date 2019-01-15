@@ -14,6 +14,10 @@ defmodule MinitwitterWeb.Router do
     plug :accepts, ["json"]
   end
 
+  if Mix.env() == :dev do
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+  end
+
   scope "/", MinitwitterWeb do
     pipe_through :browser
 
@@ -24,6 +28,7 @@ defmodule MinitwitterWeb.Router do
 
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete]
+    resources "/account_activations", AccountActivationsController, only: [:edit]
     get "/*path", ErrorController, :index
   end
 
