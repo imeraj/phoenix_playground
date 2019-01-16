@@ -1,0 +1,8 @@
+<h1 align="center">Forgot password</h1>
+<%= form_for @conn, Routes.password_resets_path(@conn, :create), [as: :password_reset], fn f -> %>
+    <div>
+        <%= text_input f, :email, placeholder: "Email" %>
+    </div>
+
+    <%= submit "Submit" %>
+<% end %>

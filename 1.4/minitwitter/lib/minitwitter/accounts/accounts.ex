@@ -8,6 +8,8 @@ defmodule Minitwitter.Accounts do
 
   alias Minitwitter.Accounts.User
 
+  @two_hours 60 * 60 * 2
+
   def list_users(params) do
     User
     |> Minitwitter.Repo.paginate(params)
@@ -31,6 +33,14 @@ defmodule Minitwitter.Accounts do
     |> Repo.update()
   end
 
+  def reset_user_pass(%User{} = user, attrs) do
+    attrs = Map.put(attrs, "reset_hash", nil)
+
+    user
+    |> User.reset_pass_changeset(attrs)
+    |> Repo.update()
+  end
+
   def delete_user(%User{} = user) do
     Repo.delete(user)
   end
@@ -39,10 +49,8 @@ defmodule Minitwitter.Accounts do
     User.changeset(user, %{})
   end
 
-  defp remember_token(), do: User.new_token()
-
   def remember_user(user) do
-    token = remember_token()
+    token = User.new_token()
 
     update_user(
       user,
@@ -57,6 +65,20 @@ defmodule Minitwitter.Accounts do
       user,
       %{remember_hash: nil}
     )
+  end
+
+  def reset_hash(user) do
+    token = User.new_token()
+
+    update_user(
+      user,
+      %{
+        reset_hash: Comeonin.Pbkdf2.hashpwsalt(token),
+        reset_sent_at: DateTime.truncate(DateTime.utc_now(), :second)
+      }
+    )
+
+    token
   end
 
   def authenticated?(user, :remember, remember_token) do
@@ -81,6 +103,17 @@ defmodule Minitwitter.Accounts do
     end
   end
 
+  def authenticated?(user, :reset, reset_token) do
+    cond do
+      user.reset_hash && Comeonin.Pbkdf2.checkpw(reset_token, user.reset_hash) ->
+        true
+
+      true ->
+        Comeonin.Bcrypt.dummy_checkpw()
+        false
+    end
+  end
+
   def authenticate_by_email_and_pass(email, given_pass) do
     user = get_user_by(%{email: email})
 
@@ -96,4 +129,20 @@ defmodule Minitwitter.Accounts do
         {:error, :not_found}
     end
   end
+
+  def valid_user?(email, token) do
+    with user <- get_user_by(%{email: email}),
+         true <- user.activated,
+         true <- authenticated?(user, :reset, token),
+         false <- reset_expired?(user) do
+      true
+    else
+      _ -> false
+    end
+  end
+
+  defp reset_expired?(user),
+    do:
+      Time.diff(DateTime.truncate(DateTime.utc_now(), :second), user.reset_sent_at, :second) >
+        @two_hours
 end

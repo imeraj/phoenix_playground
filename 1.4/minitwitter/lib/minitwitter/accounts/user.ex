@@ -14,6 +14,8 @@ defmodule Minitwitter.Accounts.User do
     field :activation_hash, :string
     field :activated, :boolean, default: false
     field :activated_at, :utc_datetime
+    field :reset_hash, :string
+    field :reset_sent_at, :utc_datetime
 
     timestamps()
   end
@@ -36,6 +38,15 @@ defmodule Minitwitter.Accounts.User do
     |> put_activation_hash()
   end
 
+  def reset_pass_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:password, :password_confirmation, :reset_hash])
+    |> validate_required([:password, :password_confirmation])
+    |> validate_length(:password, min: 6, max: 32)
+    |> validate_confirmation(:password)
+    |> put_pass_hash()
+  end
+
   def update_changeset(user, attrs) do
     user
     |> cast(attrs, [
@@ -45,7 +56,9 @@ defmodule Minitwitter.Accounts.User do
       :password_confirmation,
       :remember_hash,
       :activated,
-      :activated_at
+      :activated_at,
+      :reset_hash,
+      :reset_sent_at
     ])
     |> validate_required([:name, :email])
     |> validate_length(:name, min: 3, max: 50)
@@ -73,14 +86,10 @@ defmodule Minitwitter.Accounts.User do
     end
   end
 
-  defp activation_token() do
-    new_token()
-  end
-
   defp put_activation_hash(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true} ->
-        token = activation_token()
+        token = new_token()
 
         changeset
         |> put_change(:activation_token, token)

@@ -15,7 +15,7 @@ defmodule MinitwitterWeb.AccountActivationsController do
 
       conn
       |> Auth.login(user)
-      |> put_flash(:info, "Account activated!")
+      |> put_flash(:info, "Account activated.")
       |> redirect(to: Routes.user_path(conn, :show, user))
     else
       _ ->
