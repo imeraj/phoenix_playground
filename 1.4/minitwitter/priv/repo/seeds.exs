@@ -10,7 +10,10 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 defmodule MinitwitterWeb.DevelopmentSeeder do
+  import Ecto.Query, only: [from: 2]
+
   alias Minitwitter.Accounts
+  alias Minitwitter.Microposts
   alias Minitwitter.Repo
 
   def insert_data do
@@ -24,7 +27,7 @@ defmodule MinitwitterWeb.DevelopmentSeeder do
       activated_at: DateTime.truncate(DateTime.utc_now(), :second)
     })
 
-    for _ <- 1..100,
+    for _ <- 1..50,
         do:
           Repo.insert!(%Accounts.User{
             name: Faker.Name.name(),
@@ -34,11 +37,27 @@ defmodule MinitwitterWeb.DevelopmentSeeder do
             activated: true,
             activated_at: DateTime.truncate(DateTime.utc_now(), :second)
           })
+
+    query =
+      from u in "users",
+        select: u.id
+
+    ids = Repo.all(query)
+
+    Enum.each(ids, fn id ->
+      for i <- 1..50,
+          do:
+            Repo.insert!(%Microposts.Post{
+              content: Faker.Lorem.sentence(5),
+              user_id: id
+            })
+    end)
   end
 end
 
 case Mix.env() do
   :dev ->
+    Faker.Config.locale = 'en_US'
     MinitwitterWeb.DevelopmentSeeder.insert_data()
 
   _ ->

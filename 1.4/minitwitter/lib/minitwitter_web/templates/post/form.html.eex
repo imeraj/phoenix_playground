@@ -1,0 +1,9 @@
+<%= form_for @changeset, Routes.user_post_path(@conn, :create, @user), fn f -> %>
+     
+  <%= textarea f, :content, placeholder: "Compose new micropost..." %>
+  <%= error_tag f, :content %>
+
+  <div>
+    <%= submit "Post" %>
+  </div>
+<% end %>

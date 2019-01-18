@@ -10,7 +10,7 @@
     <%= label f, :remember_me, class: "checkbox inline" do %>
         <%= checkbox f, :remember_me %>
         <span>Remember me on this computer</span>
-        <%= link " (forgot password) ", to: Routes.password_resets_path(@conn, :new) %>
+        <%= link " (forgot password) ", to: Routes.password_reset_path(@conn, :new) %>
     <% end %>
 
     <%= submit "Log in" %>

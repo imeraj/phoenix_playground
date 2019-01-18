@@ -4,4 +4,4 @@ Hi <%= @user.name %>,
 
 Welcome to the Minitwitter! Click on the link below to activate your account:
 
-<%= Routes.account_activations_url(@conn, :edit, @user.activation_token, email: @user.email) %>
+<%= Routes.account_activation_url(@conn, :edit, @user.activation_token, email: @user.email) %>

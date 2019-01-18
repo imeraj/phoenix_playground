@@ -1,4 +1,4 @@
-defmodule MinitwitterWeb.AccountActivationsController do
+defmodule MinitwitterWeb.AccountActivationController do
   use MinitwitterWeb, :controller
 
   alias Minitwitter.Accounts

@@ -1,4 +1,4 @@
-defmodule MinitwitterWeb.PasswordResetsController do
+defmodule MinitwitterWeb.PasswordResetController do
   use MinitwitterWeb, :controller
 
   alias Minitwitter.Accounts

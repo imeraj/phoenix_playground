@@ -6,5 +6,40 @@
                 <%= @user.name %>
             </h1>
         </section>
+        <section class="micropost_form">
+            <%= render MinitwitterWeb.PostView, "form.html", conn: @conn, user: @user, changeset: @changeset %>
+        </section>
     </aside>
-<div>
+
+    <div class="main">
+		<%= unless Enum.empty?(@posts) do %>
+			<h3>Microposts (<%= (@page.total_entries) %>)</h3>
+            <ol class="microposts">
+                <%= for post <- @posts do %>
+                    <li id="micropost-<%= post.id %>">
+                        <%= link gravatar_for(@user, 50), to: Routes.user_path(@conn, :show, @user) %>
+                        <span class="user"><%= link @user.name, to: Routes.user_path(@conn, :show, @user) %></span>
+                        <span class="content"><%= post.content %></span><br>
+                        <span class="timestamp">
+                            Posted <%= Timex.from_now(post.inserted_at) %>.
+                        </span>
+                        <%= if @current_user.id == @user.id do %>
+                            <%= link "Delete", to: Routes.user_post_path(@conn, :delete, @user, post),
+                                    method: :delete, data: [confirm: "Are you sure?"] %>
+                            <% end %>
+                    </li>
+                <% end %>
+            </ol>
+        <% end %>
+	</div>
+</div>
+
+<center>
+<%= if @page.page_number > 1 do %>
+  <%= link "Prev Page", to: Routes.user_post_path(@conn, :index, @user.id, page: @page.page_number - 1) %>
+<% end %>
+
+<%= if @page.page_number < @page.total_pages do %>
+  <%= link "Next Page", to: Routes.user_post_path(@conn, :index, @user.id, page: @page.page_number + 1) %>
+<% end %>
+</center>

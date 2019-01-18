@@ -17,6 +17,8 @@ defmodule Minitwitter.Accounts.User do
     field :reset_hash, :string
     field :reset_sent_at, :utc_datetime
 
+    has_many(:posts, Minitwitter.Microposts.Post)
+
     timestamps()
   end
 

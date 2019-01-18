@@ -1,5 +1,5 @@
 <h1 align="center">Reset password</h1>
-<%= form_for @changeset, Routes.password_resets_path(@conn, :update, @user), fn f -> %>
+<%= form_for @changeset, Routes.password_reset_path(@conn, :update, @user), fn f -> %>
     <%= if @changeset.action do %>
         <div class="alert alert-danger">
             <p>Oops, something went wrong! Please check the errors below.</p>

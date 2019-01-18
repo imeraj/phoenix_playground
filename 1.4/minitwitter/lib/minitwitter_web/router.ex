@@ -26,10 +26,13 @@ defmodule MinitwitterWeb.Router do
     get "/contact", PageController, :contact
     get "/signup", UserController, :new
 
-    resources "/users", UserController
+    resources "/users", UserController do
+      resources "/post", PostController, only: [:new, :create, :index, :delete]
+    end
+
     resources "/sessions", SessionController, only: [:new, :create, :delete]
-    resources "/account_activations", AccountActivationsController, only: [:edit]
-    resources "/password_resets", PasswordResetsController, only: [:new, :create, :edit, :update]
+    resources "/account_activation", AccountActivationController, only: [:edit]
+    resources "/password_reset", PasswordResetController, only: [:new, :create, :edit, :update]
 
     get "/*path", ErrorController, :index
   end
