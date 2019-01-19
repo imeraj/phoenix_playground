@@ -11,11 +11,9 @@ defmodule MinitwitterWeb.SessionController do
         "session" => %{"email" => email, "password" => password, "remember_me" => remember_me}
       }) do
     with user <- Accounts.get_user_by(%{email: email}),
-         true <- user.activated do
+         true <- user && user.activated do
       case MinitwitterWeb.Auth.login_by_email_and_pass(conn, email, password) do
         {:ok, conn} ->
-          user = Accounts.get_user_by(%{email: email})
-
           conn =
             if String.to_atom(remember_me) do
               token = Accounts.remember_user(user)

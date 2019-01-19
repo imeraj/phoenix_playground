@@ -26,7 +26,8 @@ defmodule Minitwitter.MixProject do
         :scrivener_ecto,
         :bamboo,
         :bamboo_smtp,
-        :timex
+        :timex,
+        :arc_ecto
       ]
     ]
   end
@@ -57,7 +58,9 @@ defmodule Minitwitter.MixProject do
       {:scrivener_ecto, "~> 2.0"},
       {:bamboo, "~> 1.1"},
       {:bamboo_smtp, "~> 1.6.0"},
-      {:timex, "~> 3.4"}
+      {:timex, "~> 3.4"},
+      {:arc, "~> 0.11.0"},
+      {:arc_ecto, "~> 0.11.1"}
     ]
   end
 

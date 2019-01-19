@@ -1,9 +1,23 @@
-<%= form_for @changeset, Routes.user_post_path(@conn, :create, @user), fn f -> %>
-     
+<%= form_for @changeset, Routes.user_post_path(@conn, :create, @user), [multipart: true], fn f -> %>
+
   <%= textarea f, :content, placeholder: "Compose new micropost..." %>
   <%= error_tag f, :content %>
+
+  <div class=”form-group”>
+    <%= file_input f, :picture, accept: "image/gif, image/jpeg, image/png"%>
+    <%= error_tag f, :picture %>
+  </div>
 
   <div>
     <%= submit "Post" %>
   </div>
 <% end %>
+
+<script>
+document.getElementById("post_picture").addEventListener("change", function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+        alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+});
+</script>

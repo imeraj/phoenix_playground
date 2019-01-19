@@ -18,8 +18,8 @@ defmodule MinitwitterWeb.DevelopmentSeeder do
 
   def insert_data do
     Repo.insert!(%Accounts.User{
-      name: "Meraj",
-      email: "meraj.enigma@gmail.com",
+      name: "Admin",
+      email: "demo.rails007@gmail.com",
       password: "phoenix",
       password_hash: Comeonin.Pbkdf2.hashpwsalt("phoenix"),
       admin: true,
@@ -57,7 +57,6 @@ end
 
 case Mix.env() do
   :dev ->
-    Faker.Config.locale = 'en_US'
     MinitwitterWeb.DevelopmentSeeder.insert_data()
 
   _ ->

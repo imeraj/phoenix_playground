@@ -21,9 +21,11 @@ defmodule MinitwitterWeb.PostController do
     )
   end
 
-  def create(conn, %{"user_id" => user_id, "post" => %{"content" => content}}) do
-    case Microposts.create_post(%{content: content, user_id: user_id}) do
-      {:ok, _post} ->
+  def create(conn, %{"user_id" => user_id, "post" => post_params}) do
+    post_params = Map.put(post_params, "user_id", user_id)
+
+    case Microposts.create_post(post_params) do
+      {:ok, post} ->
         user = Accounts.get_user(user_id)
 
         conn
@@ -51,8 +53,6 @@ defmodule MinitwitterWeb.PostController do
       else
         conn
       end
-
-    IO.inspect(conn)
 
     user = Accounts.get_user(user_id)
 
