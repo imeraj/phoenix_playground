@@ -9,7 +9,7 @@ defmodule MinitwitterWeb.UserController do
   alias Minitwitter.Microposts
 
   plug :authenticate_user when action in [:index, :edit, :update, :show]
-  plug :correct_user when action in [:index, :edit, :update, :show]
+  plug :correct_user when action in [:edit, :update, :show]
   plug :admin_user when action in [:delete]
 
   def index(conn, params) do
