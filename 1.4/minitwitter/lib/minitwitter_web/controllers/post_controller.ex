@@ -7,16 +7,22 @@ defmodule MinitwitterWeb.PostController do
 
   plug :authenticate_user when action in [:index, :create, :delete]
 
-  def index(conn, %{"user_id" => id, "page" => page}) do
+  def index(conn, %{"user_id" => id, "page" => page_id}) do
     user = Accounts.get_user(id)
-    page = Microposts.get_posts_page(user, page)
+    page = Microposts.feed_page(user.id, page_id)
+    count = Microposts.get_posts_page(user, page).total_entries
+    followers = Accounts.followers(user)
+    following = Accounts.following(user)
 
     conn
     |> put_view(MinitwitterWeb.UserView)
     |> render("show.html",
       user: user,
+      count: count,
       page: page,
       posts: page.entries,
+      following: following,
+      followers: followers,
       changeset: Microposts.change_post(%Post{})
     )
   end

@@ -1,0 +1,62 @@
+<div class="row">
+    <aside class="col-md-4">
+        <section class="user_info">
+            <h1>
+                <%= gravatar_for(@user, 50) %>
+                <%= @user.name %>
+            </h1>
+            <%= link "View my profile", to: Routes.user_path(@conn, :show, @current_user) %><br>
+            <b>Microposts:</b> <%= @count %>
+        </section>
+        <section class="stats">
+            <div class="stats">
+                <%= link to: Routes.user_follower_path(@conn, :following, @user) do %>
+                    <strong id="following" class="stat">
+                        <%= Enum.count(@following) %>
+                    </strong>
+                    following
+                <% end %>
+                <%= link to: Routes.user_follower_path(@conn, :followers, @user) do %>
+                    <strong id="followers" class="stat">
+                        <%= Enum.count(@followers) %>
+                    </strong>
+                    followers
+                <% end %>
+            </div>
+        </section>
+        <%= if String.equivalent?(@title, "Followers") do %>
+            <%= render "users.html", conn: @conn, users: @followers %>
+        <% else %>
+            <%= render "users.html", conn: @conn, users: @following %>
+        <% end %>
+    </aside>
+
+    <div class="main">
+        <h2><%= @title %></h2>
+        <ul class="users follow">
+        <%= if String.equivalent?(@title, "Followers") do %>
+            <%= unless Enum.empty?(@followers) do %>
+                <div class="user_avatars">
+                    <%= for user <- @followers do %>
+                        <li>
+                            <%= gravatar_for(@user, 30) %>
+                            <%= link user.name, to: Routes.user_path(@conn, :show, user) %>
+                        </li>
+                    <% end %>
+                </div>
+        <% end %>
+        <% else %>
+        <%= unless Enum.empty?(@following) do %>
+            <div class="user_avatars">
+                <%= for user <- @following do %>
+                    <li>
+                        <%= gravatar_for(@user, 30) %>
+                        <%= link user.name, to: Routes.user_path(@conn, :show, user) %>
+                    </li>
+                <% end %>
+            </div>
+            <% end %>
+        <% end %>
+        </ul>
+    </ul>
+</div>

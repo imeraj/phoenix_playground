@@ -9,7 +9,7 @@ defmodule MinitwitterWeb.UserController do
   alias Minitwitter.Microposts
 
   plug :authenticate_user when action in [:index, :edit, :update, :show]
-  plug :correct_user when action in [:edit, :update, :show]
+  plug :correct_user when action in [:edit, :update]
   plug :admin_user when action in [:delete]
 
   def index(conn, params) do
@@ -43,10 +43,16 @@ defmodule MinitwitterWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Accounts.get_user(id)
-    page = Microposts.get_posts_page(user, 1)
+    page = Microposts.feed_page(user.id, 1)
+    count = Microposts.get_posts_page(user, 1).total_entries
+    followers = Accounts.followers(user)
+    following = Accounts.following(user)
 
     render(conn, "show.html",
       user: user,
+      count: count,
+      followers: followers,
+      following: following,
       page: page,
       posts: page.entries,
       changeset: Microposts.change_post(%Post{})

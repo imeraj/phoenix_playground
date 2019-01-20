@@ -7,6 +7,7 @@ defmodule Minitwitter.Accounts do
   alias Minitwitter.Repo
 
   alias Minitwitter.Accounts.User
+  alias Minitwitter.Accounts.Relationship
 
   @two_hours 60 * 60 * 2
 
@@ -145,4 +146,38 @@ defmodule Minitwitter.Accounts do
     do:
       Time.diff(DateTime.truncate(DateTime.utc_now(), :second), user.reset_sent_at, :second) >
         @two_hours
+
+  def followers(user) do
+    list = user |> Minitwitter.Repo.preload(:followers)
+    list.followers
+  end
+
+  def following(user) do
+    list = user |> Minitwitter.Repo.preload(:following)
+    list.following
+  end
+
+  def follow(current_user, other_user) do
+    %Relationship{}
+    |> Relationship.changeset(%{follower_id: other_user.id, followed_id: current_user.id})
+    |> Repo.insert()
+  end
+
+  def following?(current_user, other_user) do
+    Enum.member?(following(current_user), other_user)
+  end
+
+  def unfollow(current_user, other_user) do
+    Repo.get_by!(Relationship, follower_id: current_user.id, followed_id: other_user.id)
+    |> Repo.delete()
+  end
+
+  def following_ids(user_id) do
+    query =
+      from r in Relationship,
+        where: r.follower_id == ^user_id,
+        select: r.followed_id
+
+    Repo.all(query)
+  end
 end

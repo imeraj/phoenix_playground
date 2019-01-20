@@ -3,5 +3,5 @@ defmodule Minitwitter.Repo do
     otp_app: :minitwitter,
     adapter: Ecto.Adapters.MySQL
 
-  use Scrivener, page_size: 10
+  use Scrivener, page_size: 50
 end

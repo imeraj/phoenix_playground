@@ -5,8 +5,9 @@ defmodule Minitwitter.Microposts.Post do
 
   schema "posts" do
     field :content, :string
-    field :user_id, :id
     field :picture, Minitwitter.ImageUploader.Type
+
+    belongs_to(:user, Minitwitter.Accounts.User)
 
     timestamps()
   end

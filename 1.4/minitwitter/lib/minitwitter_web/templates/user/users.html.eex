@@ -1,0 +1,7 @@
+<%= unless Enum.empty?(@users) do %>
+    <div class="wrap">
+        <%= for user <- @users do %>
+            <%= link gravatar_for(user, 30), to: Routes.user_path(@conn, :show, user) %>
+        <% end %>
+    </div>
+<% end %>

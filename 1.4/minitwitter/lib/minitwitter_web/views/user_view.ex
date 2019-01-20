@@ -2,8 +2,7 @@ defmodule MinitwitterWeb.UserView do
   use MinitwitterWeb, :view
   use Timex
 
-  alias Minitwitter.Microposts
-  alias Minitwitter.Microposts.Post
+  alias Minitwitter.Accounts
 
   @gravatar_url "https://secure.gravatar.com/avatar/"
 

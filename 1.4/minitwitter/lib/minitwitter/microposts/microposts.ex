@@ -6,6 +6,7 @@ defmodule Minitwitter.Microposts do
   import Ecto.Query, warn: false
   alias Minitwitter.Repo
 
+  alias Minitwitter.Accounts
   alias Minitwitter.Microposts.Post
 
   def list_posts do
@@ -41,5 +42,17 @@ defmodule Minitwitter.Microposts do
 
   def change_post(%Post{} = post) do
     Post.changeset(post, %{})
+  end
+
+  def feed_page(user_id, page) do
+    following_ids = Accounts.following_ids(user_id)
+
+    query =
+      from p in Post,
+        where: p.user_id in ^following_ids or p.user_id == ^user_id,
+        order_by: [desc: p.inserted_at],
+        preload: [:user]
+
+    Repo.paginate(query, page: page)
   end
 end

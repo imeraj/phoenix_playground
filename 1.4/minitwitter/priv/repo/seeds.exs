@@ -13,10 +13,12 @@ defmodule MinitwitterWeb.DevelopmentSeeder do
   import Ecto.Query, only: [from: 2]
 
   alias Minitwitter.Accounts
+  alias Minitwitter.Accounts.User
   alias Minitwitter.Microposts
   alias Minitwitter.Repo
 
   def insert_data do
+    # users
     Repo.insert!(%Accounts.User{
       name: "Admin",
       email: "demo.rails007@gmail.com",
@@ -38,6 +40,7 @@ defmodule MinitwitterWeb.DevelopmentSeeder do
             activated_at: DateTime.truncate(DateTime.utc_now(), :second)
           })
 
+    # Microposts
     query =
       from u in "users",
         select: u.id
@@ -45,13 +48,22 @@ defmodule MinitwitterWeb.DevelopmentSeeder do
     ids = Repo.all(query)
 
     Enum.each(ids, fn id ->
-      for i <- 1..50,
+      for _ <- 1..50,
           do:
             Repo.insert!(%Microposts.Post{
               content: Faker.Lorem.sentence(5),
               user_id: id
             })
     end)
+
+    # Follwing relationships
+    users = Repo.all(User)
+    user = Enum.at(users, 0)
+    following = Enum.slice(users, 2, 50)
+    followers = Enum.slice(users, 3, 40)
+    for followed <- following, do: Minitwitter.Accounts.follow(followed, user)
+
+    for follower <- followers, do: Minitwitter.Accounts.follow(user, follower)
   end
 end
 

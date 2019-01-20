@@ -19,6 +19,11 @@ defmodule Minitwitter.Accounts.User do
 
     has_many(:posts, Minitwitter.Microposts.Post)
 
+    has_many(:active_relationships, Minitwitter.Accounts.Relationship, foreign_key: :follower_id)
+    has_many(:passive_relationships, Minitwitter.Accounts.Relationship, foreign_key: :followed_id)
+    has_many(:following, through: [:active_relationships, :followed])
+    has_many(:followers, through: [:passive_relationships, :follower])
+
     timestamps()
   end
 
