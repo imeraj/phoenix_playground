@@ -13,11 +13,30 @@ defmodule PlateslateWeb.Schema do
     @desc "Matching a tag"
     field :tag, :string
 
-    @desc "Matching above a value"
+    @desc "Priced above a value"
     field :priced_above, :float
 
     @desc "Priced below a value"
     field :priced_below, :float
+
+    @desc "Added to the menu before this date"
+    field :added_before, :dateTime
+
+    @desc "Added to the menu after this date"
+    field :added_after, :dateTime
+  end
+
+  scalar :dateTime do
+    parse(fn input ->
+      case NaiveDateTime.from_iso8601(input.value) do
+        {:ok, date} -> {:ok, date}
+        _ -> :error
+      end
+    end)
+
+    serialize(fn date ->
+      NaiveDateTime.to_iso8601(date)
+    end)
   end
 
   query do
@@ -38,5 +57,6 @@ defmodule PlateslateWeb.Schema do
     field :id, :id
     field :name, :string
     field :description, :string
+    field :added_on, :dateTime
   end
 end
