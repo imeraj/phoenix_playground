@@ -41,7 +41,7 @@ defmodule PlateslateWeb.Schema.Query.MenuItemsTest do
 
   @query """
   {
-    menuItems(matching: "reu") {
+    menuItems(filter: {name: "reu"}) {
       name
     }
   }
@@ -62,14 +62,13 @@ defmodule PlateslateWeb.Schema.Query.MenuItemsTest do
 
   @query """
   {
-    menuItems(matching: 123) {
+    menuItems(filter: {name: 123}) {
       name
     }
   }
   """
-  test "menuItems field returns erros when using a bad value" do
-    conn = build_conn()
-    response = get(conn, "/api", query: @query)
+  test "menuItems field returns errors when using a bad value" do
+    response = get(build_conn(), "/api", query: @query)
 
     assert %{
              "errors" => [
@@ -77,7 +76,8 @@ defmodule PlateslateWeb.Schema.Query.MenuItemsTest do
              ]
            } = json_response(response, 200)
 
-    assert message == "Argument \"matching\" has invalid value 123."
+    assert message ==
+             "Argument \"filter\" has invalid value {name: 123}.\nIn field \"name\": Expected type \"String\", found 123."
   end
 
   @query """
@@ -133,5 +133,38 @@ defmodule PlateslateWeb.Schema.Query.MenuItemsTest do
     assert %{
              "data" => %{"menuItems" => [%{"name" => "Bánh mì"} | _]}
            } = json_response(response, 200)
+  end
+
+  @query """
+  {
+    menuItems(filter: {category: "Sandwiches", tag: "Vegetarian"}) {
+      name
+    }
+  }
+  """
+
+  test "menuItems filed returns menuItems, filtering with a literal" do
+    response = get(build_conn(), "/api", query: @query)
+
+    assert %{
+             "data" => %{"menuItems" => [%{"name" => "Vada Pav"}]}
+           } = json_response(response, 200)
+  end
+
+  @query """
+  query ($filter: MenuItemFilter!) {
+    menuItems(filter: $filter) {
+      name
+    }
+  }
+  """
+
+  @variables %{filter: %{"tag" => "Vegetarian", "category" => "Sandwiches"}}
+  test "menuItems field returns menuItems, filtering with a variable" do
+    response = get(build_conn(), "/api", query: @query, variables: @variables)
+
+    assert %{
+             "data" => %{"menuItems" => [%{"name" => "Vada Pav"}]}
+           } == json_response(response, 200)
   end
 end
