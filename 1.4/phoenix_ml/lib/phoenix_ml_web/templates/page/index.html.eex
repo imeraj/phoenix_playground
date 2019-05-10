@@ -1,0 +1,5 @@
+<h1>Iris Classifier</h1>
+<h2>Please input parameters: <h2>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.page_path(@conn, :show, %{})) %>
+

@@ -1,0 +1,17 @@
+<%= form_for @conn, @action, fn f -> %>
+  <%= label f, :sepal_legth, "Sepal Length (cm)"%>
+  <%= text_input f, :sepal_length %>
+
+  <%= label f, :sepal_legth, "Sepal Width (cm)"%>
+  <%= text_input f, :sepal_width %>
+
+  <%= label f, :sepal_legth, "Petal Length (cm)"%>
+  <%= text_input f, :petal_length %>
+
+  <%= label f, :sepal_legth, "Petal Width (cm)"%>
+  <%= text_input f, :petal_width %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>
