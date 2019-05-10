@@ -12,6 +12,6 @@
   <%= text_input f, :petal_width %>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Predict" %>
   </div>
 <% end %>
