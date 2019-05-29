@@ -2,6 +2,7 @@ defmodule PhoenixMlWeb.PageController do
   use PhoenixMlWeb, :controller
 
   alias PhoenixMl.ModelPredictor, as: ML
+  alias PhoenixMl.IrisParams, as: Iris
 
   def index(conn, _params) do
     render(conn, "index.html")
@@ -17,7 +18,14 @@ defmodule PhoenixMlWeb.PageController do
          {sepal_width, _} <- Float.parse(sepal_width),
          {petal_length, _} <- Float.parse(petal_length),
          {petal_width, _} <- Float.parse(petal_width) do
-      class = ML.predict([[sepal_length, sepal_width, petal_length, petal_width]])
+      iris_params = %Iris{
+        sepal_length: sepal_length,
+        sepal_width: sepal_width,
+        petal_length: petal_length,
+        petal_width: petal_width
+      }
+
+      class = ML.predict([Iris.encode(iris_params)])
 
       conn
       |> put_flash(:info, "Predicted class: " <> class)

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package PhoenixMl;
+
+message IrisParams {
+    float sepal_length = 1;
+    float sepal_width = 2;
+    float petal_length = 3;
+    float petal_width = 4;
+}

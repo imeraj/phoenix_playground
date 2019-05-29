@@ -39,7 +39,11 @@ defmodule PhoenixMl.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:erlport, "~> 0.10.0"}
+      {:erlport, "~> 0.10.0"},
+      {:protobuf, "~> 0.5.3"},
+      # Only for files generated from Google's protos.
+      # Can be ignored if you don't use Google's protos.
+      {:google_protos, "~> 0.1"}
     ]
   end
 end
