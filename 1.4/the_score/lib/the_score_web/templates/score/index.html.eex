@@ -1,0 +1,56 @@
+
+<h1 align="center">All Rushings (Page: <%= @page.page_number %>) </h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.score_path(@conn, :filter)) %>
+<%= render "sort_form.html", Map.put(assigns, :action, Routes.score_path(@conn, :sort)) %>
+
+
+
+<table>
+  <tr>
+    <th>Player</th>
+    <th>Team</th>
+    <th>Pos</th> 
+    <th>Att/G</th>
+    <th>Att</th>
+    <th>Yrds</th>
+    <th>Avg</th>
+    <th>Yds/G</th>
+    <th>TD</th>
+    <th>Lng</th>
+    <th>1st</th>
+    <th>1st%</th>
+    <th>20+</th>
+    <th>40+</th>
+    <th>FUM</th>
+  </tr>
+  <%= for rushing <- @rushings do %>
+    <tr>
+     <td><%= rushing.name %></td>
+     <td><%= rushing.team  %></td>
+     <td><%= rushing.pos %></td>
+     <td><%= rushing.att_per_game %></td>
+     <td><%= rushing.att %></td>
+     <td><%= rushing.total_rush %></td>
+     <td><%= rushing.rush_per_yard %></td>
+     <td><%= rushing.rush_per_game %></td>
+     <td><%= rushing.rush_td %></td>
+     <td><%= rushing.long_rush %></td>
+     <td><%= rushing.rush_1st_down %></td>
+     <td><%= rushing.rush_1st_down_per %></td>
+     <td><%= rushing.rush_20_yards %></td>
+     <td><%= rushing.rush_40_yards %></td>
+     <td><%= rushing.fumble %></td>
+    </tr>
+  <% end  %>
+</table>
+
+<center>
+(Page: <%= @page.page_number %>) <br>
+[
+<%= for {_,i} <- Enum.with_index(1..@page.total_pages) do %>
+  <%= link i+1, to: Routes.score_path(@conn, :index, page: i + 1) %>
+<% end %>
+</div>
+]
+</center>
