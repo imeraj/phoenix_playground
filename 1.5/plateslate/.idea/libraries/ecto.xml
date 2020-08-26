@@ -2,6 +2,7 @@
   <library name="ecto" type="mix">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/_build/dev/lib/ecto/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/ecto/ebin" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -3,9 +3,8 @@ defmodule PlateslateWeb.Schema do
   alias Plateslate.{Repo, Menu}
 
   query do
-    field :menu_item, list_of(:menu_item),
-          description: "The list of available menu items" do
-      resolve(fn end_, _, _ ->
+    field :menu_items, list_of(:menu_item), description: "The list of available menu items" do
+      resolve(fn _, _, _ ->
         {:ok, Repo.all(Menu.Item)}
       end)
     end

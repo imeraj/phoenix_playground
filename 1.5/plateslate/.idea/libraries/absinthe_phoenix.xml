@@ -2,6 +2,7 @@
   <library name="absinthe_phoenix" type="mix">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/_build/dev/lib/absinthe_phoenix/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/absinthe_phoenix/ebin" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

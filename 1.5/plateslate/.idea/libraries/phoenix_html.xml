@@ -2,6 +2,7 @@
   <library name="phoenix_html" type="mix">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/_build/dev/lib/phoenix_html/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/phoenix_html/ebin" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

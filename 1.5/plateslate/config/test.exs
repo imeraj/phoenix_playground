@@ -6,8 +6,8 @@ use Mix.Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :plateslate, Plateslate.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "meraj",
+  password: "",
   database: "plateslate_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

@@ -2,6 +2,7 @@
   <library name="phoenix_live_dashboard" type="mix">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/_build/dev/lib/phoenix_live_dashboard/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/phoenix_live_dashboard/ebin" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

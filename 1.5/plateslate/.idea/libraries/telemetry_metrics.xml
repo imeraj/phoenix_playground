@@ -2,6 +2,7 @@
   <library name="telemetry_metrics" type="mix">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/_build/dev/lib/telemetry_metrics/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/telemetry_metrics/ebin" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

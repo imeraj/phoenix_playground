@@ -2,6 +2,7 @@
   <library name="phoenix" type="mix">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/_build/dev/lib/phoenix/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/phoenix/ebin" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -2,6 +2,7 @@
   <library name="cowboy" type="mix">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/_build/dev/lib/cowboy/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/cowboy/ebin" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
