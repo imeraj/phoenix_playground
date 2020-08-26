@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="phoenix_live_dashboard" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/phoenix_live_dashboard/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/phoenix_live_dashboard/lib" />
+      <root url="file://$PROJECT_DIR$/deps/phoenix_live_dashboard/priv" />
+    </SOURCES>
+  </library>
+</component>

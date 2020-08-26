@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="absinthe_phoenix" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/absinthe_phoenix/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/absinthe_phoenix/lib" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="absinthe" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/absinthe/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/absinthe/lib" />
+      <root url="file://$PROJECT_DIR$/deps/absinthe/src" />
+      <root url="file://$PROJECT_DIR$/deps/absinthe/priv" />
+    </SOURCES>
+  </library>
+</component>

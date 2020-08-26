@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="ecto_sql" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/ecto_sql/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/ecto_sql/lib" />
+    </SOURCES>
+  </library>
+</component>

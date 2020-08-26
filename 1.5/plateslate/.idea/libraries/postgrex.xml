@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="postgrex" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/postgrex/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/postgrex/lib" />
+    </SOURCES>
+  </library>
+</component>
