@@ -6,15 +6,8 @@ defmodule PlateslateWeb.Schema do
   query do
     field :menu_items, list_of(:menu_item), description: "The list of available menu items" do
       arg(:matching, :string)
-
-      resolve(fn
-        _, %{matching: name}, _ when is_binary(name) ->
-          query = from t in Menu.Item, where: ilike(t.name, ^"%#{name}%")
-          {:ok, Repo.all(query)}
-
-        _, _, _ ->
-          {:ok, Repo.all(Menu.Item)}
-      end)
+      arg(:order, :sort_order)
+      resolve(&Graphql.Resolvers.Menu.menu_items/3)
     end
   end
 
@@ -22,5 +15,10 @@ defmodule PlateslateWeb.Schema do
     field :id, :id
     field :name, :string
     field :description, :string
+  end
+
+  enum :sort_order do
+    value(:asc)
+    value(:desc)
   end
 end
