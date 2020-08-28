@@ -7,7 +7,7 @@ defmodule PlateslateWeb.Schema.Query.MenuItemsTest do
 
   @query """
   {
-    menuItems {
+    menuItems(filter: {category: "Sandwiches"}) {
       name
     }
   }
@@ -20,20 +20,11 @@ defmodule PlateslateWeb.Schema.Query.MenuItemsTest do
     assert json_response(conn, 200) == %{
              "data" => %{
                "menuItems" => [
-                 %{"name" => "Reuben"},
+                 %{"name" => "Bánh mì"},
                  %{"name" => "Croque Monsieur"},
                  %{"name" => "Muffuletta"},
-                 %{"name" => "Bánh mì"},
-                 %{"name" => "Vada Pav"},
-                 %{"name" => "French Fries"},
-                 %{"name" => "Papadum"},
-                 %{"name" => "Pasta Salad"},
-                 %{"name" => "Water"},
-                 %{"name" => "Soft Drink"},
-                 %{"name" => "Lemonade"},
-                 %{"name" => "Masala Chai"},
-                 %{"name" => "Vanilla Milkshake"},
-                 %{"name" => "Chocolate Milkshake"}
+                 %{"name" => "Reuben"},
+                 %{"name" => "Vada Pav"}
                ]
              }
            }
@@ -41,7 +32,7 @@ defmodule PlateslateWeb.Schema.Query.MenuItemsTest do
 
   @query """
     query ($term: String) {
-      menuItems(matching: $term) {
+      menuItems(filter: {name: $term, category: "sandwiches"}) {
       name
     }
   }
@@ -62,21 +53,7 @@ defmodule PlateslateWeb.Schema.Query.MenuItemsTest do
 
   @query """
   {
-    menuItems(matching: 123) {
-      name
-    }
-  }
-  """
-
-  test "menuItems field returns errors when using a bad value" do
-    response = get(build_conn(), "/api", query: @query)
-    assert %{"errors" => [%{"message" => message}]} = json_response(response, 200)
-    assert message == "Argument \"matching\" has invalid value 123."
-  end
-
-  @query """
-  {
-    menuItems(order: DESC) {
+    menuItems(order: DESC, filter: {category: "Sandwiches"}) {
       name
     }
   }
@@ -87,8 +64,71 @@ defmodule PlateslateWeb.Schema.Query.MenuItemsTest do
 
     assert %{
              "data" => %{
-               "menuItems" => [%{"name" => "Water"} | _]
+               "menuItems" => [%{"name" => "Vada Pav"} | _]
              }
            } = json_response(response, 200)
+  end
+
+  @query """
+  {
+    menuItems(filter: {category: "Sandwiches", tag: "Vegetarian"}) {
+      name
+    }
+  }
+  """
+
+  test "menuItems field returns menuItems, filtering with a literal" do
+    response = get(build_conn(), "/api", query: @query)
+
+    assert %{
+             "data" => %{"menuItems" => [%{"name" => "Vada Pav"}]}
+           } == json_response(response, 200)
+  end
+
+  @query """
+  query ($filter: MenuItemFilter!) {
+    menuItems(filter: $filter) {
+      name
+    }
+  }
+  """
+
+  @variables %{filter: %{"tag" => "Vegetarian", "category" => "Sandwiches"}}
+  test "menuItems field returns menuItems, filtering with a variable" do
+    response = get(build_conn(), "/api", query: @query, variables: @variables)
+
+    assert %{
+             "data" => %{"menuItems" => [%{"name" => "Vada Pav"}]}
+           } == json_response(response, 200)
+  end
+
+  @query """
+  query ($filter: MenuItemFilter!) {
+    menuItems(filter: $filter) {
+      name
+      addedOn
+    }
+  }
+  """
+
+  @variables %{filter: %{"addedBefore" => "2017-01-20", category: "Sides"}}
+  test "menuItems filtered by custom scalar" do
+    sides = Plateslate.Repo.get_by!(Plateslate.Menu.Category, name: "Sides")
+
+    %Plateslate.Menu.Item{
+      name: "Garlic Fries",
+      added_on: ~D[2017-01-01],
+      price: 2.50,
+      category: sides
+    }
+    |> Plateslate.Repo.insert!()
+
+    response = get(build_conn(), "/api", query: @query, variables: @variables)
+
+    assert %{
+             "data" => %{
+               "menuItems" => [%{"name" => "Garlic Fries", "addedOn" => "2017-01-01"}]
+             }
+           } == json_response(response, 200)
   end
 end
