@@ -1,4 +1,4 @@
-defmodule PlateslateWeb.Graphql.Types.MenuTypes do
+defmodule PlateslateWeb.Graphql.Types.MenuType do
   use Absinthe.Schema.Notation
 
   import_types(PlateslateWeb.Graphql.Enums.SortOrder)

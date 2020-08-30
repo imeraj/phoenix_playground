@@ -1,4 +1,4 @@
-defmodule PlateslateWeb.Schema.Query.MenuItemsTest do
+defmodule PlateslateWeb.Schema.Query.MenuTest do
   use PlateslateWeb.ConnCase, async: true
 
   setup do

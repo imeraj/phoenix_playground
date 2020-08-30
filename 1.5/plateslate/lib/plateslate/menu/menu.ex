@@ -12,7 +12,7 @@ defmodule Plateslate.Menu do
   """
 
   import Ecto.Query, warn: false
-  alias Plateslate.{Repo, Menu.Item}
+  alias Plateslate.{Repo, Menu.Item, Menu.Category}
 
   def list_items(args) do
     args
@@ -26,7 +26,7 @@ defmodule Plateslate.Menu do
     |> Repo.all()
   end
 
-  defp filter_with(query, filter) do
+  defp filter_with(_query, filter) do
     filter
     |> Enum.reduce(Item, fn
       {:name, name}, query ->
@@ -54,5 +54,18 @@ defmodule Plateslate.Menu do
           join: t in assoc(q, :tags),
           where: ilike(t.name, ^"%#{tag_name}%")
     end)
+  end
+
+  @search [Item, Category]
+  def search(term) do
+    pattern = "%#{term}%"
+    Enum.flat_map(@search, &search_ecto(&1, pattern))
+  end
+
+  defp search_ecto(ecto_schema, pattern) do
+    Repo.all(
+      from q in ecto_schema,
+        where: ilike(q.name, ^pattern) or ilike(q.description, ^pattern)
+    )
   end
 end
