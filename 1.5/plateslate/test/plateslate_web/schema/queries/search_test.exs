@@ -1,4 +1,4 @@
-defmodule PlateslateWeb.Schema.Query.SearchTest do
+defmodule PlateslateWeb.Schema.Queries.SearchTest do
   use PlateslateWeb.ConnCase, async: true
 
   setup do
