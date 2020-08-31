@@ -26,6 +26,12 @@ defmodule Plateslate.Menu do
     |> Repo.all()
   end
 
+  def create_item(attrs \\ %{}) do
+    %Item{}
+    |> Item.changeset(attrs)
+    |> Repo.insert(returning: true)
+  end
+
   defp filter_with(_query, filter) do
     filter
     |> Enum.reduce(Item, fn

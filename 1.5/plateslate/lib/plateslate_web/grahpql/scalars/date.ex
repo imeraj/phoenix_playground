@@ -1,4 +1,4 @@
-defmodule PlateslateWeb.Graphql.Enums.Date do
+defmodule PlateslateWeb.Graphql.Scalars.Date do
   use Absinthe.Schema.Notation
 
   scalar :date do

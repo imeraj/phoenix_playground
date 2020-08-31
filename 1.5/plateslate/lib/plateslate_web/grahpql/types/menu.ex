@@ -1,8 +1,8 @@
-defmodule PlateslateWeb.Graphql.Types.MenuType do
+defmodule PlateslateWeb.Graphql.Types.Menu do
   use Absinthe.Schema.Notation
 
   import_types(PlateslateWeb.Graphql.Enums.SortOrder)
-  import_types(PlateslateWeb.Graphql.Enums.Date)
+  import_types(PlateslateWeb.Graphql.Scalars.Date)
 
   @desc "Filtering options for the menu item list"
   input_object :menu_item_filter do
@@ -33,6 +33,7 @@ defmodule PlateslateWeb.Graphql.Types.MenuType do
     field :id, :id
     field :name, :string
     field :description, :string
+    field :price, :decimal
     field :added_on, :date
   end
 end

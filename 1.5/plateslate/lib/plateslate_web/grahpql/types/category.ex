@@ -1,4 +1,4 @@
-defmodule PlateslateWeb.Graphql.Types.CategoryType do
+defmodule PlateslateWeb.Graphql.Types.Category do
   use Absinthe.Schema.Notation
 
   object :category do

@@ -9,7 +9,7 @@
 defmodule Plateslate.Menu.Item do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Plateslate.Menu.Item
+  alias Plateslate.Menu.{Item, Category}
 
   schema "items" do
     field :added_on, :date
@@ -27,8 +27,8 @@ defmodule Plateslate.Menu.Item do
   @doc false
   def changeset(%Item{} = item, attrs) do
     item
-    |> cast(attrs, [:name, :description, :price, :added_on])
-    |> validate_required([:name, :price])
+    |> cast(attrs, [:name, :description, :price, :category_id])
+    |> validate_required([:name, :price, :category_id])
     |> foreign_key_constraint(:category)
   end
 end

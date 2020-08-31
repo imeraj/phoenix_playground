@@ -1,4 +1,4 @@
-defmodule PlateslateWeb.Graphql.Types.SearchResultType do
+defmodule PlateslateWeb.Graphql.Types.SearchResult do
   use Absinthe.Schema.Notation
 
   union :search_result do
