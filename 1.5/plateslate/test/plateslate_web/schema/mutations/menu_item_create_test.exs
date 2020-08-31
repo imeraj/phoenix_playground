@@ -18,9 +18,18 @@ defmodule PlateslateWeb.Schema.Mutations.MenuItemsTest do
   @query """
   mutation ($menuItem: MenuItemInput!) {
     menuItemCreate(input: $menuItem) {
-      name
-      description
-      price
+      ... on Errors {
+       errors {
+          key
+          message
+        }
+      }
+
+      ... on MenuItem {
+    	  name
+    	  description
+    	  price
+      }
     }
   }
   """
@@ -61,15 +70,11 @@ defmodule PlateslateWeb.Schema.Mutations.MenuItemsTest do
         variables: %{"menuItem" => menu_item}
 
     assert json_response(conn, 200) == %{
-             "data" => %{"menuItemCreate" => nil},
-             "errors" => [
-               %{
-                 "locations" => [%{"column" => 3, "line" => 2}],
-                 "message" => "Could not create menu item",
-                 "path" => ["menuItemCreate"],
-                 "details" => %{"name" => ["has already been taken"]}
+             "data" => %{
+               "menuItemCreate" => %{
+                 "errors" => [%{"key" => "name", "message" => "has already been taken"}]
                }
-             ]
+             }
            }
   end
 end

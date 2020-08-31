@@ -4,6 +4,7 @@ defmodule PlateslateWeb.Schema do
   import_types(PlateslateWeb.Graphql.Types.Menu)
   import_types(PlateslateWeb.Graphql.Types.Category)
   import_types(PlateslateWeb.Graphql.Types.SearchResult)
+  import_types(PlateslateWeb.Graphql.Types.MenuItemCreateResult)
 
   import_types(PlateslateWeb.Graphql.InputTypes.MenuItemInput)
 
@@ -32,7 +33,7 @@ defmodule PlateslateWeb.Schema do
   end
 
   object :menu_item_create do
-    field :menu_item_create, :menu_item do
+    field :menu_item_create, :menu_item_create_result do
       arg(:input, non_null(:menu_item_input))
       resolve(&Graphql.Resolvers.Menu.create_item/3)
     end
