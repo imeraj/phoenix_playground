@@ -14,9 +14,10 @@ defmodule Plateslate.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Plateslate.PubSub},
       # Start the Endpoint (http/https)
-      PlateslateWeb.Endpoint
+      PlateslateWeb.Endpoint,
       # Start a worker by calling: Plateslate.Worker.start_link(arg)
       # {Plateslate.Worker, arg}
+      {Absinthe.Subscription, [PlateslateWeb.Endpoint]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

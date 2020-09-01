@@ -74,4 +74,6 @@ defmodule Plateslate.Menu do
         where: ilike(q.name, ^pattern) or ilike(q.description, ^pattern)
     )
   end
+
+  def get_item!(id), do: Repo.get!(Item, id)
 end

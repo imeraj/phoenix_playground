@@ -5,7 +5,9 @@ defmodule PlateslateWeb.Schema do
   import_types(PlateslateWeb.Graphql.Types.Category)
   import_types(PlateslateWeb.Graphql.Types.SearchResult)
   import_types(PlateslateWeb.Graphql.Types.MenuItemCreateResult)
+  import_types(PlateslateWeb.Graphql.Types.OrderPlaceResult)
 
+  import_types(PlateslateWeb.Graphql.InputTypes.OrderPlaceInput)
   import_types(PlateslateWeb.Graphql.InputTypes.MenuItemInput)
 
   query do
@@ -15,6 +17,7 @@ defmodule PlateslateWeb.Schema do
 
   mutation do
     import_fields(:menu_item_create)
+    import_fields(:order_place)
   end
 
   object :menu_queries do
@@ -36,6 +39,13 @@ defmodule PlateslateWeb.Schema do
     field :menu_item_create, :menu_item_create_result do
       arg(:input, non_null(:menu_item_input))
       resolve(&Graphql.Resolvers.Menu.create_item/3)
+    end
+  end
+
+  object :order_place do
+    field :order_place, :order_place_result do
+      arg(:input, non_null(:order_place_input))
+      resolve(&Graphql.Resolvers.Ordering.order_place/3)
     end
   end
 end
