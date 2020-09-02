@@ -20,6 +20,14 @@ defmodule PlateslateWeb.Schema do
     import_fields(:order_place)
   end
 
+  subscription do
+    field :new_order, :order do
+      config(fn _args, _info ->
+        {:ok, topic: "*"}
+      end)
+    end
+  end
+
   object :menu_queries do
     field :menu_items, list_of(:menu_item), description: "The list of available menu items" do
       arg(:filter, non_null(:menu_item_filter))

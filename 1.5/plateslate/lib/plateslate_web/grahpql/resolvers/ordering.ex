@@ -6,8 +6,9 @@ defmodule Graphql.Resolvers.Ordering do
       {:error, changeset} ->
         {:ok, %{errors: transform_errors(changeset)}}
 
-      {:ok, menu_item} ->
-        {:ok, menu_item}
+      {:ok, order} ->
+        Absinthe.Subscription.publish(PlateslateWeb.Endpoint, order, new_order: "*")
+        {:ok, order}
     end
   end
 
