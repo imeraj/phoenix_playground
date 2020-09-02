@@ -3,12 +3,34 @@ defmodule Graphql.Resolvers.Ordering do
 
   def order_place(_, %{input: order_place_input}, _) do
     case Ordering.create_order(order_place_input) do
-      {:error, changeset} ->
-        {:ok, %{errors: transform_errors(changeset)}}
-
       {:ok, order} ->
         Absinthe.Subscription.publish(PlateslateWeb.Endpoint, order, new_order: "*")
         {:ok, order}
+
+      {:error, changeset} ->
+        {:ok, %{errors: transform_errors(changeset)}}
+    end
+  end
+
+  def ready_order(_, %{id: id}, _) do
+    order = Ordering.get_order!(id)
+
+    with {:ok, order} <- Ordering.update_order(order, %{state: "ready"}) do
+      {:ok, order}
+    else
+      {:error, changeset} ->
+        {:ok, %{errors: transform_errors(changeset)}}
+    end
+  end
+
+  def complete_order(_, %{id: id}, _) do
+    order = Ordering.get_order!(id)
+
+    with {:ok, order} <- Ordering.update_order(order, %{state: "complete"}) do
+      {:ok, order}
+    else
+      {:error, changeset} ->
+        {:ok, %{errors: transform_errors(changeset)}}
     end
   end
 

@@ -22,4 +22,12 @@ defmodule Plateslate.Ordering do
       %{name: menu_item.name, quantity: item.quantity, price: menu_item.price}
     end
   end
+
+  def get_order!(id), do: Repo.get!(Order, id)
+
+  def update_order(%Order{} = order, attrs) do
+    order
+    |> Order.changeset(attrs)
+    |> Repo.update()
+  end
 end

@@ -32,12 +32,13 @@ defmodule PlateslateWeb.Schema.Subscription.NewOrderTest do
 
     ref = push_doc(socket, @mutation, variables: %{"input" => order_input})
     assert_reply ref, :ok, reply
-    assert %{data: %{"orderPlace" =>  %{"id" => _}}} = reply
+    assert %{data: %{"orderPlace" => %{"id" => _}}} = reply
 
     expected = %{
       result: %{data: %{"newOrder" => %{"customerNumber" => 24}}},
       subscriptionId: subscription_id
     }
+
     assert_push "subscription:data", push
     assert expected == push
   end

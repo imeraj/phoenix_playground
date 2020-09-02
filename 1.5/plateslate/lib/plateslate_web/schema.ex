@@ -1,6 +1,8 @@
 defmodule PlateslateWeb.Schema do
   use Absinthe.Schema
 
+  alias Plateslate.Ordering.Order
+
   import_types(PlateslateWeb.Graphql.Types.Menu)
   import_types(PlateslateWeb.Graphql.Types.Category)
   import_types(PlateslateWeb.Graphql.Types.SearchResult)
@@ -18,12 +20,33 @@ defmodule PlateslateWeb.Schema do
   mutation do
     import_fields(:menu_item_create)
     import_fields(:order_place)
+    import_fields(:ready_order)
+    import_fields(:complete_order)
   end
 
   subscription do
     field :new_order, :order do
       config(fn _args, _info ->
         {:ok, topic: "*"}
+      end)
+    end
+
+    field :update_order, :order do
+      arg(:id, non_null(:id))
+
+      config(fn args, _info ->
+        {:ok, topic: args.id}
+      end)
+
+      trigger([:ready_order, :complete_order],
+        topic: fn
+          order = %Order{} -> [order.id]
+          _ -> []
+        end
+      )
+
+      resolve(fn order = %Order{}, _, _ ->
+        {:ok, order}
       end)
     end
   end
@@ -54,6 +77,20 @@ defmodule PlateslateWeb.Schema do
     field :order_place, :order_place_result do
       arg(:input, non_null(:order_place_input))
       resolve(&Graphql.Resolvers.Ordering.order_place/3)
+    end
+  end
+
+  object :ready_order do
+    field :ready_order, :order_place_result do
+      arg(:id, non_null(:id))
+      resolve(&Graphql.Resolvers.Ordering.ready_order/3)
+    end
+  end
+
+  object :complete_order do
+    field :complete_order, :order_place_result do
+      arg(:id, non_null(:id))
+      resolve(&Graphql.Resolvers.Ordering.complete_order/3)
     end
   end
 end
