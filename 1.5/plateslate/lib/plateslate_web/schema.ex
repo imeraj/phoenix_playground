@@ -2,6 +2,7 @@ defmodule PlateslateWeb.Schema do
   use Absinthe.Schema
 
   alias Plateslate.Ordering.Order
+  alias PlateslateWeb.Graphql.Middleware.ChangesetErrors
 
   import_types(PlateslateWeb.Graphql.Types.Menu)
   import_types(PlateslateWeb.Graphql.Types.Category)
@@ -11,6 +12,14 @@ defmodule PlateslateWeb.Schema do
 
   import_types(PlateslateWeb.Graphql.InputTypes.OrderPlaceInput)
   import_types(PlateslateWeb.Graphql.InputTypes.MenuItemInput)
+
+  def middleware(middleware, _field, %{identifier: :mutation}) do
+    middleware ++ [ChangesetErrors]
+  end
+
+  def middleware(middleware, _field, _object) do
+    middleware
+  end
 
   query do
     import_fields(:menu_queries)
