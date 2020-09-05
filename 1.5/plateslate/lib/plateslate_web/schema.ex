@@ -9,7 +9,9 @@ defmodule PlateslateWeb.Schema do
   import_types(PlateslateWeb.Graphql.Types.SearchResult)
   import_types(PlateslateWeb.Graphql.Types.MenuItemCreateResult)
   import_types(PlateslateWeb.Graphql.Types.OrderPlaceResult)
+  import_types(PlateslateWeb.Graphql.Types.SignupResult)
 
+  import_types(PlateslateWeb.Graphql.InputTypes.SignupInput)
   import_types(PlateslateWeb.Graphql.InputTypes.OrderPlaceInput)
   import_types(PlateslateWeb.Graphql.InputTypes.MenuItemInput)
 
@@ -27,6 +29,7 @@ defmodule PlateslateWeb.Schema do
   end
 
   mutation do
+    import_fields(:signup)
     import_fields(:menu_item_create)
     import_fields(:order_place)
     import_fields(:ready_order)
@@ -57,6 +60,13 @@ defmodule PlateslateWeb.Schema do
       resolve(fn order = %Order{}, _, _ ->
         {:ok, order}
       end)
+    end
+  end
+
+  object :signup do
+    field :signup, :signup_result do
+      arg(:input, non_null(:signup_input))
+      resolve(&Graphql.Resolvers.Account.signup/3)
     end
   end
 

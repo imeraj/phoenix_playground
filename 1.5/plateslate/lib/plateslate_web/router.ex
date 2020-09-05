@@ -20,7 +20,6 @@ defmodule PlateslateWeb.Router do
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: PlateslateWeb.Schema,
-      interface: :simple,
       socket: PlateslateWeb.UserSocket
   end
 

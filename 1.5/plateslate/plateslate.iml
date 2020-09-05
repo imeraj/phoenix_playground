@@ -11,6 +11,8 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/absinthe_phoenix" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/absinthe_plug" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/absinthe_relay" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/comeonin" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/comeonin_ecto_password" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/connection" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/cowboy" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/cowlib" />
@@ -23,6 +25,7 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/jason" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/mime" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/nimble_parsec" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/pbkdf2_elixir" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/phoenix" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/phoenix_ecto" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/phoenix_html" />
@@ -122,5 +125,10 @@
     <orderEntry type="library" name="dataloader" level="project" />
     <orderEntry type="library" name="mix_test_watch" level="project" />
     <orderEntry type="library" name="poison" level="project" />
+    <orderEntry type="library" name="comeonin_ecto_password" level="project" />
+    <orderEntry type="library" name="pbkdf2_elixir" level="project" />
+    <orderEntry type="library" name="bcrypt_elixir" level="project" />
+    <orderEntry type="library" name="argon2_elixir" level="project" />
+    <orderEntry type="library" name="comeonin" level="project" />
   </component>
 </module>
