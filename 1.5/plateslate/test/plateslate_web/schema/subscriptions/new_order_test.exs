@@ -1,5 +1,3 @@
-### This test is broken. Need to check how to make it work with authorization
-
 defmodule PlateslateWeb.Schema.Subscription.NewOrderTest do
   use PlateslateWeb.SubscriptionCase
 
@@ -32,17 +30,21 @@ defmodule PlateslateWeb.Schema.Subscription.NewOrderTest do
       "items" => [%{"quantity" => 2, "menuItemId" => menu_item("Reuben").id}]
     }
 
-    ref = push_doc(socket, @mutation, variables: %{"input" => order_input})
-    assert_reply ref, :ok, reply
-    assert %{ errors: [%{locations: [%{column: 3, line: 2}], message: "unauthorized", path: ["orderPlace"]}]
-           } = reply
+    customer = Factory.create_user("customer")
+    {:ok, %{data: %{"orderPlace" => _}}} =
+      Absinthe.run(
+        @mutation,
+        PlateslateWeb.Schema,
+        context: %{current_user: customer},
+        variables: %{"input" => order_input}
+      )
 
-#    expected = %{
-#      result: %{data: %{"newOrder" => %{"customerNumber" => 24}}},
-#      subscriptionId: subscription_id
-#    }
-#
-#    assert_push "subscription:data", push
-#    assert expected == push
+    expected = %{
+      result: %{data: %{"newOrder" => %{"customerNumber" => 24}}},
+      subscriptionId: subscription_id
+    }
+
+    assert_push "subscription:data", push
+    assert expected == push
   end
 end
