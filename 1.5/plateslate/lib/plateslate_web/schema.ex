@@ -4,8 +4,18 @@ defmodule PlateslateWeb.Schema do
   alias Plateslate.Ordering.Order
   alias PlateslateWeb.Graphql.Middleware.ChangesetErrors
 
+  import_types(PlateslateWeb.Graphql.Enums.Role)
+  import_types(PlateslateWeb.Graphql.Enums.SortOrder)
+  import_types(PlateslateWeb.Graphql.Scalars.Date)
+  import_types(PlateslateWeb.Graphql.Scalars.Decimal)
+
+  import_types(PlateslateWeb.Graphql.Types.Error)
+  import_types(PlateslateWeb.Graphql.Types.Order)
+  import_types(PlateslateWeb.Graphql.Types.User)
+  import_types(PlateslateWeb.Graphql.Types.Session)
   import_types(PlateslateWeb.Graphql.Types.Menu)
   import_types(PlateslateWeb.Graphql.Types.Category)
+
   import_types(PlateslateWeb.Graphql.Types.SearchResult)
   import_types(PlateslateWeb.Graphql.Types.MenuItemCreateResult)
   import_types(PlateslateWeb.Graphql.Types.OrderPlaceResult)
@@ -14,6 +24,7 @@ defmodule PlateslateWeb.Schema do
   import_types(PlateslateWeb.Graphql.InputTypes.SignupInput)
   import_types(PlateslateWeb.Graphql.InputTypes.OrderPlaceInput)
   import_types(PlateslateWeb.Graphql.InputTypes.MenuItemInput)
+  import_types(PlateslateWeb.Graphql.InputTypes.LoginInput)
 
   def middleware(middleware, _field, %{identifier: :mutation}) do
     middleware ++ [ChangesetErrors]
@@ -30,6 +41,7 @@ defmodule PlateslateWeb.Schema do
 
   mutation do
     import_fields(:signup)
+    import_fields(:login)
     import_fields(:menu_item_create)
     import_fields(:order_place)
     import_fields(:ready_order)
@@ -67,6 +79,13 @@ defmodule PlateslateWeb.Schema do
     field :signup, :signup_result do
       arg(:input, non_null(:signup_input))
       resolve(&Graphql.Resolvers.Account.signup/3)
+    end
+  end
+
+  object :login do
+    field :login, :session do
+      arg(:input, non_null(:login_input))
+      resolve(&Graphql.Resolvers.Account.login/3)
     end
   end
 

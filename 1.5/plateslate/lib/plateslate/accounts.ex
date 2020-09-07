@@ -7,10 +7,22 @@ defmodule Plateslate.Accounts do
 
   alias Plateslate.Repo
   alias Plateslate.Accounts.User
+  alias Comeonin.Ecto.Password
 
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def authenticate(email, password) do
+    user = Repo.get_by(User, email: email)
+
+    with %{password: digest} <- user,
+         true <- Password.valid?(password, digest) do
+      {:ok, user}
+    else
+      _ -> :error
+    end
   end
 end

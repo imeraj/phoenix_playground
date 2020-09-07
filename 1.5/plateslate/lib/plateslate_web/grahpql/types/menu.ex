@@ -1,9 +1,6 @@
 defmodule PlateslateWeb.Graphql.Types.Menu do
   use Absinthe.Schema.Notation
 
-  import_types(PlateslateWeb.Graphql.Enums.SortOrder)
-  import_types(PlateslateWeb.Graphql.Scalars.Date)
-
   @desc "Filtering options for the menu item list"
   input_object :menu_item_filter do
     @desc "Matching a name"

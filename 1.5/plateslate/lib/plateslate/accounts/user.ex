@@ -16,5 +16,6 @@ defmodule Plateslate.Accounts.User do
     user
     |> cast(attrs, [:name, :email, :password, :role])
     |> validate_required([:name, :email, :password, :role])
+    |> unique_constraint([:email, :role])
   end
 end
