@@ -1,6 +1,6 @@
 defmodule Graphql.Resolvers.Account do
   alias Plateslate.Accounts
-  alias PlateslateWeb.Authentication
+  alias PlateslateWeb.Graphql.Authentication
 
   def signup(_, %{input: params}, _) do
     with {:ok, user} <- Accounts.create_user(params) do

@@ -42,7 +42,9 @@ defmodule PlateslateWeb.Schema.Mutations.MenuItemsTest do
       "categoryId" => category_id
     }
 
-    conn = post build_conn(), "/api", query: @query, variables: %{menuItem: menu_item}
+    user = Factory.create_user("employee")
+    conn = build_conn() |> auth_user(user)
+    conn = post conn, "/api", query: @query, variables: %{menuItem: menu_item}
 
     assert json_response(conn, 200) == %{
              "data" => %{
@@ -64,8 +66,11 @@ defmodule PlateslateWeb.Schema.Mutations.MenuItemsTest do
       "categoryId" => category_id
     }
 
+    user = Factory.create_user("employee")
+    conn = build_conn() |> auth_user(user)
+
     conn =
-      post build_conn(), "/api",
+      post conn, "/api",
         query: @query,
         variables: %{"menuItem" => menu_item}
 
@@ -76,5 +81,10 @@ defmodule PlateslateWeb.Schema.Mutations.MenuItemsTest do
                }
              }
            }
+  end
+
+  defp auth_user(conn, user) do
+    token = PlateslateWeb.Graphql.Authentication.sign(%{role: user.role, id: user.id})
+    put_req_header(conn, "authorization", "Bearer #{token}")
   end
 end

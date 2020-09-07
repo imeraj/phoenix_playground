@@ -1,4 +1,4 @@
-defmodule PlateslateWeb.Authentication do
+defmodule PlateslateWeb.Graphql.Authentication do
   @user_salt "user salt"
   @max_age 365 * 24 * 3600
 

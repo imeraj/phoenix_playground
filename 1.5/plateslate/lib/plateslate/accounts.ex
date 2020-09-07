@@ -25,4 +25,8 @@ defmodule Plateslate.Accounts do
       _ -> :error
     end
   end
+
+  def lookup(id, role) do
+    Repo.get_by(User, id: id, role: role)
+  end
 end

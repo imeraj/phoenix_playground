@@ -36,6 +36,6 @@ defmodule PlateslateWeb.Schema.Mutation.LoginEmployeeTest do
     assert %{"name" => user.name} == user_data
 
     assert {:ok, %{role: "employee", id: user.id}} ==
-             PlateslateWeb.Authentication.verify(token)
+             PlateslateWeb.Graphql.Authentication.verify(token)
   end
 end

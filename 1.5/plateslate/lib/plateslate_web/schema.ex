@@ -3,6 +3,7 @@ defmodule PlateslateWeb.Schema do
 
   alias Plateslate.Ordering.Order
   alias PlateslateWeb.Graphql.Middleware.ChangesetErrors
+  alias PlateSlateWeb.Graphql.Middleware.Authorize
 
   import_types(PlateslateWeb.Graphql.Enums.Role)
   import_types(PlateslateWeb.Graphql.Enums.SortOrder)
@@ -100,6 +101,7 @@ defmodule PlateslateWeb.Schema do
   object :search_queries do
     field :search, list_of(:search_result) do
       arg(:matching, non_null(:string))
+      middleware(Authorize, :any)
       resolve(&Graphql.Resolvers.SearchResult.search/3)
     end
   end
@@ -107,6 +109,7 @@ defmodule PlateslateWeb.Schema do
   object :menu_item_create do
     field :menu_item_create, :menu_item_create_result do
       arg(:input, non_null(:menu_item_input))
+      middleware(Authorize, "employee")
       resolve(&Graphql.Resolvers.Menu.create_item/3)
     end
   end
@@ -114,6 +117,7 @@ defmodule PlateslateWeb.Schema do
   object :order_place do
     field :order_place, :order_place_result do
       arg(:input, non_null(:order_place_input))
+      middleware(Authorize, "customer")
       resolve(&Graphql.Resolvers.Ordering.order_place/3)
     end
   end

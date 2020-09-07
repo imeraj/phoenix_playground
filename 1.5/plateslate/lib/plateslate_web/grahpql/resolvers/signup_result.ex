@@ -7,6 +7,7 @@ defmodule Graphql.Resolvers.SignupResult do
       "employee" -> :employee
     end
   end
+
   def signup_result(%{errors: _}, _), do: :errors
   def signup_result(_, _), do: nil
 end

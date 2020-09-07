@@ -11,6 +11,7 @@ defmodule PlateslateWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug PlateslateWeb.Graphql.Context
   end
 
   scope "/" do
