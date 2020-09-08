@@ -87,6 +87,12 @@ defmodule PlateslateWeb.Schema do
     field :login, :session do
       arg(:input, non_null(:login_input))
       resolve(&Graphql.Resolvers.Account.login/3)
+
+      middleware(fn res, _ ->
+        with %{value: %{user: user}} <- res do
+          %{res | context: Map.put(res.context, :current_user, user)}
+        end
+      end)
     end
   end
 
