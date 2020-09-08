@@ -4,7 +4,7 @@ defmodule PlateslateWeb.Schema.Subscription.NewOrderTest do
   @subscription """
   subscription {
     newOrder {
-      customerNumber
+      customerId
     }
   }
   """
@@ -26,11 +26,11 @@ defmodule PlateslateWeb.Schema.Subscription.NewOrderTest do
 
     # run a mutation to trigger the subscription
     order_input = %{
-      "customerNumber" => 24,
       "items" => [%{"quantity" => 2, "menuItemId" => menu_item("Reuben").id}]
     }
 
     customer = Factory.create_user("customer")
+
     {:ok, %{data: %{"orderPlace" => _}}} =
       Absinthe.run(
         @mutation,
@@ -40,7 +40,7 @@ defmodule PlateslateWeb.Schema.Subscription.NewOrderTest do
       )
 
     expected = %{
-      result: %{data: %{"newOrder" => %{"customerNumber" => 24}}},
+      result: %{data: %{"newOrder" => %{"customerId" => customer.id }}},
       subscriptionId: subscription_id
     }
 

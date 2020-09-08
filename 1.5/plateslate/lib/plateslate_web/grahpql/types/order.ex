@@ -3,7 +3,7 @@ defmodule PlateslateWeb.Graphql.Types.Order do
 
   object :order do
     field :id, :id
-    field :customer_number, :integer
+    field :customer_id, :integer
     field :items, list_of(:order_item)
     field :state, :string
   end

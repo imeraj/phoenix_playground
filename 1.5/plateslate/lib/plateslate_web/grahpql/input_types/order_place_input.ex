@@ -2,7 +2,6 @@ defmodule PlateslateWeb.Graphql.InputTypes.OrderPlaceInput do
   use Absinthe.Schema.Notation
 
   input_object(:order_place_input) do
-    field :customer_number, :integer
     field :items, non_null(list_of(non_null(:order_item_input)))
   end
 
