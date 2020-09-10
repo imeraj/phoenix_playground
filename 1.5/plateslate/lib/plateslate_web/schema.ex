@@ -65,6 +65,21 @@ defmodule PlateslateWeb.Schema do
       end)
     end
 
+    def dataloader() do
+      alias Plateslate.Menu
+
+      Dataloader.new()
+      |> Dataloader.add_source(Menu, Menu.data())
+    end
+
+    def context(ctx) do
+      Map.put(ctx, :loader, dataloader())
+    end
+
+    def plugins do
+      [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults()]
+    end
+
     field :update_order, :order do
       arg(:id, non_null(:id))
 

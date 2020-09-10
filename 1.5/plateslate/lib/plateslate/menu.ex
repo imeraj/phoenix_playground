@@ -76,4 +76,13 @@ defmodule Plateslate.Menu do
   end
 
   def get_item!(id), do: Repo.get!(Item, id)
+
+  # dataloader
+  def data() do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  def query(queryable, _) do
+    queryable
+  end
 end

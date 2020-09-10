@@ -16,6 +16,7 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/connection" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/cowboy" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/cowlib" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/dataloader" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/db_connection" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/decimal" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/ecto" />
@@ -50,6 +51,7 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/connection" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/cowboy" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/cowlib" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/dataloader" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/db_connection" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/decimal" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/ecto" />
