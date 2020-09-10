@@ -1,5 +1,7 @@
 defmodule PlateslateWeb.Graphql.Types.Category do
   use Absinthe.Schema.Notation
+  alias Plateslate.Menu
+  import Absinthe.Resolution.Helpers
 
   object :category do
     field :id, :id
@@ -7,7 +9,7 @@ defmodule PlateslateWeb.Graphql.Types.Category do
     field :description, :string
 
     field :items, list_of(:menu_item) do
-      resolve(&Graphql.Resolvers.Menu.items_for_category/3)
+      resolve dataloader(Menu, :items)
     end
   end
 end

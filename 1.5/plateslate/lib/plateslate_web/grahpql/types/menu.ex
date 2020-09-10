@@ -1,5 +1,7 @@
 defmodule PlateslateWeb.Graphql.Types.Menu do
   use Absinthe.Schema.Notation
+  import Absinthe.Resolution.Helpers
+  alias Plateslate.Menu
 
   @desc "Filtering options for the menu item list"
   input_object :menu_item_filter do
@@ -34,7 +36,7 @@ defmodule PlateslateWeb.Graphql.Types.Menu do
     field :added_on, :date
 
     field :category, :category do
-      resolve(&Graphql.Resolvers.Menu.category_for_item/3)
+      resolve dataloader(Menu, :category)
     end
   end
 end
