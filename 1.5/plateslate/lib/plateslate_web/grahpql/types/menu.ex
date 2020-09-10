@@ -32,5 +32,9 @@ defmodule PlateslateWeb.Graphql.Types.Menu do
     field :description, :string
     field :price, :decimal
     field :added_on, :date
+
+    field :category, :category do
+      resolve &Graphql.Resolvers.Menu.category_for_item/3
+    end
   end
 end

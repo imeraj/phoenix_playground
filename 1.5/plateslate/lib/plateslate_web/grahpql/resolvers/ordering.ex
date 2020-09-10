@@ -12,7 +12,10 @@ defmodule Graphql.Resolvers.Ordering do
       end
 
     with {:ok, order} <- Ordering.create_order(order_place_input) do
-      Absinthe.Subscription.publish(PlateslateWeb.Endpoint, order, new_order: [order.customer_id, "*"])
+      Absinthe.Subscription.publish(PlateslateWeb.Endpoint, order,
+        new_order: [order.customer_id, "*"]
+      )
+
       {:ok, order}
     end
   end

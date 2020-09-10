@@ -2,15 +2,12 @@ defmodule PlateslateWeb.Graphql.Types.Category do
   use Absinthe.Schema.Notation
 
   object :category do
+    field :id, :id
     field :name, :string
     field :description, :string
 
     field :items, list_of(:menu_item) do
-      resolve(fn category, _, _ ->
-        # N + 1 Query
-        query = Ecto.assoc(category, :items)
-        {:ok, Plateslate.Repo.all(query)}
-      end)
+      resolve &Graphql.Resolvers.Menu.item_for_category/3
     end
   end
 end
