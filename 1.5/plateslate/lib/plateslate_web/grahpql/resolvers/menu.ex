@@ -12,6 +12,7 @@ defmodule Graphql.Resolvers.Menu do
     end
   end
 
+  ### unused since we are using datalaoder()
   def category_for_item(menu_item, _, %{context: %{loader: loader}}) do
     loader
     |> Dataloader.load(Menu, :category, menu_item)
