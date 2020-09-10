@@ -7,7 +7,7 @@ defmodule PlateslateWeb.Graphql.Types.Category do
     field :description, :string
 
     field :items, list_of(:menu_item) do
-      resolve &Graphql.Resolvers.Menu.item_for_category/3
+      resolve(&Graphql.Resolvers.Menu.item_for_category/3)
     end
   end
 end
