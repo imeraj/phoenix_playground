@@ -24,6 +24,24 @@ defmodule PlateslateWeb.Router do
       socket: PlateslateWeb.UserSocket
   end
 
+  pipeline :admin_auth do
+    plug PlateslateWeb.Plugs.AdminAuth
+  end
+
+  scope "/admin", PlateslateWeb do
+    pipe_through :browser
+
+    resources "/session", SessionController,
+      only: [:new, :create, :delete],
+      singleton: true
+  end
+
+  scope "/admin", PlateslateWeb do
+    pipe_through [:browser, :admin_auth]
+
+    resources "/items", ItemController
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", PlateslateWeb do
   #   pipe_through :api

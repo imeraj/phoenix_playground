@@ -36,7 +36,7 @@ defmodule PlateslateWeb.Graphql.Types.Menu do
     field :added_on, :date
 
     field :category, :category do
-      resolve dataloader(Menu, :category)
+      resolve(dataloader(Menu, :category))
     end
   end
 end

@@ -5,6 +5,16 @@ defmodule PlateslateWeb.Schema do
   alias PlateslateWeb.Graphql.Middleware.ChangesetErrors
   alias PlateSlateWeb.Graphql.Middleware.Authorize
 
+  #  import_types(Absinthe.Phoenix.Types)
+  directive :put do
+    on([:field, :fragment_spread, :inline_fragment])
+
+    expand(fn
+      _, node ->
+        Absinthe.Blueprint.put_flag(node, :put, __MODULE__)
+    end)
+  end
+
   import_types(PlateslateWeb.Graphql.Enums.Role)
   import_types(PlateslateWeb.Graphql.Enums.SortOrder)
   import_types(PlateslateWeb.Graphql.Scalars.Date)
@@ -122,7 +132,7 @@ defmodule PlateslateWeb.Schema do
 
   object :menu_queries do
     field :menu_items, list_of(:menu_item), description: "The list of available menu items" do
-      arg(:filter, non_null(:menu_item_filter))
+      arg(:filter, :menu_item_filter)
       arg(:order, :sort_order, default_value: :asc)
       resolve(&Graphql.Resolvers.Menu.menu_items/3)
     end

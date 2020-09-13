@@ -9,7 +9,7 @@ defmodule PlateslateWeb.Graphql.Types.Category do
     field :description, :string
 
     field :items, list_of(:menu_item) do
-      resolve dataloader(Menu, :items)
+      resolve(dataloader(Menu, :items))
     end
   end
 end

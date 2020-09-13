@@ -11,6 +11,7 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/absinthe_phoenix" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/absinthe_plug" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/absinthe_relay" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/atomic_map" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/comeonin" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/comeonin_ecto_password" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/connection" />
@@ -135,5 +136,7 @@
     <orderEntry type="library" name="bcrypt_elixir" level="project" />
     <orderEntry type="library" name="argon2_elixir" level="project" />
     <orderEntry type="library" name="comeonin" level="project" />
+    <orderEntry type="library" name="atomic_map" level="project" />
+    <orderEntry type="library" name="benchfella" level="project" />
   </component>
 </module>
