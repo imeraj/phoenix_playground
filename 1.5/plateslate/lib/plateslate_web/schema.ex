@@ -26,15 +26,18 @@ defmodule PlateslateWeb.Schema do
   import_types(PlateslateWeb.Graphql.Types.Session)
   import_types(PlateslateWeb.Graphql.Types.Menu)
   import_types(PlateslateWeb.Graphql.Types.Category)
+  import_types(PlateslateWeb.Graphql.Types.OrderHistory)
 
   import_types(PlateslateWeb.Graphql.Types.SearchResult)
   import_types(PlateslateWeb.Graphql.Types.MenuItemCreateResult)
   import_types(PlateslateWeb.Graphql.Types.OrderPlaceResult)
   import_types(PlateslateWeb.Graphql.Types.SignupResult)
+  import_types(PlateslateWeb.Graphql.Types.MenuItemResult)
 
   import_types(PlateslateWeb.Graphql.InputTypes.SignupInput)
   import_types(PlateslateWeb.Graphql.InputTypes.OrderPlaceInput)
   import_types(PlateslateWeb.Graphql.InputTypes.MenuItemInput)
+  import_types(PlateslateWeb.Graphql.InputTypes.MenuItemCreateInput)
   import_types(PlateslateWeb.Graphql.InputTypes.LoginInput)
 
   def middleware(middleware, _field, %{identifier: :mutation}) do
@@ -46,6 +49,7 @@ defmodule PlateslateWeb.Schema do
   end
 
   query do
+    import_fields(:menu_item_queries)
     import_fields(:menu_queries)
     import_fields(:search_queries)
   end
@@ -146,9 +150,17 @@ defmodule PlateslateWeb.Schema do
     end
   end
 
+  object :menu_item_queries do
+    field :menu_item, :menu_item_result do
+      arg(:input, non_null(:menu_item_input))
+      middleware(Authorize, "employee")
+      resolve(&Graphql.Resolvers.Menu.get_item/3)
+    end
+  end
+
   object :menu_item_create do
     field :menu_item_create, :menu_item_create_result do
-      arg(:input, non_null(:menu_item_input))
+      arg(:input, non_null(:menu_item_create_input))
       middleware(Authorize, "employee")
       resolve(&Graphql.Resolvers.Menu.create_item/3)
     end

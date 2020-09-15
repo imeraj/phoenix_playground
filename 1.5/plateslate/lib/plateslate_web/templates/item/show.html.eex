@@ -1,8 +1,42 @@
-<h1>Show Item</h1>
+<h2>
+    <%= @item.name %>
+</h2>
 
-<ul>
+<%= form_tag Routes.item_path(@conn, :show, @item), method: :get do %>
+  <div class="form-group">
+    <label for="since">Since</label>
+    <input type="date" id="since" name="since" value="<%= @since %>"/>
+  </div>
+  <%= submit "Filter Orders", class: "btn btn-primary" %>
+<% end %>
 
-</ul>
+<%= if Enum.empty?(@item.order_history.orders) do %>
+  <p>No units have been sold during this time period.</p>
+<% else %>
+  <h3>
+    Sold
+    <%= @item.order_history.quantity %>
+    ($<%= @item.order_history.gross %> gross)
+  </h3>
 
-<span><%= link "Edit", to: Routes.item_path(@conn, :edit, @item) %></span>
-<span><%= link "Back", to: Routes.item_path(@conn, :index) %></span>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Count</th>
+    </tr>
+    </thead>
+      <tbody>
+        <%= for order <- @item.order_history.orders do %>
+         <tr>
+           <td><%= order.ordered_at |> DateTime.to_date %></td>
+           <td><%= order.items |> Enum.map(&(&1.quantity)) |> Enum.sum %></td>
+         </tr>
+        <% end %>
+      </tbody>
+  </table>
+<% end %>
+
+<p>
+  <%= link "Back", to: Routes.item_path(@conn, :index), class: "btn btn-default btn-xs" %>
+</p>

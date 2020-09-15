@@ -16,7 +16,7 @@ defmodule PlateslateWeb.Schema.Mutations.MenuItemsTest do
   end
 
   @query """
-  mutation ($menuItem: MenuItemInput!) {
+  mutation ($menuItem: MenuItemCreateInput!) {
     menuItemCreate(input: $menuItem) {
       ... on Errors {
        errors {

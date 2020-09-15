@@ -30,4 +30,12 @@ defmodule Graphql.Resolvers.Menu do
       {:ok, items}
     end)
   end
+
+  def get_item(_, %{input: %{id: id}}, %{context: %{loader: loader}}) do
+    loader
+    |> Dataloader.load(Menu, Menu.Item, id)
+    |> on_load(fn loader ->
+      {:ok, Dataloader.get(loader, Menu, Menu.Item, id)}
+    end)
+  end
 end

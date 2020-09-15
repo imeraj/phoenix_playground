@@ -30,4 +30,38 @@ defmodule Plateslate.Ordering do
     |> Order.changeset(attrs)
     |> Repo.update()
   end
+
+  def orders_by_item_name(%{since: since}, names) do
+    query =
+      from [i, o] in name_query(since, names),
+        order_by: [desc: o.ordered_at],
+        select: %{name: i.name, order: o}
+
+    query
+    |> Repo.all()
+    |> Enum.group_by(& &1.name, & &1.order)
+  end
+
+  defp name_query(since, names) do
+    from i in "order_items",
+      join: o in Order,
+      on: o.id == i.order_id,
+      where: o.ordered_at >= type(^since, :date),
+      where: i.name in ^names
+  end
+
+  def orders_stats_by_name(%{since: since}, names) do
+    Map.new(
+      Repo.all(
+        from i in name_query(since, names),
+          group_by: i.name,
+          select:
+            {i.name,
+             %{
+               quantity: sum(i.quantity),
+               gross: sum(fragment("? * ?", i.price, i.quantity))
+             }}
+      )
+    )
+  end
 end
