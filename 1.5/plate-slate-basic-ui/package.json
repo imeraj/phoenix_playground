@@ -1,0 +1,12 @@
+{
+  "name": "plate-slate-basic-ui",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "dev": "node ./"
+  }
+}
