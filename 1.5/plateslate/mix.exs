@@ -51,7 +51,8 @@ defmodule Plateslate.MixProject do
       {:absinthe_relay, "~> 1.5"},
       {:comeonin_ecto_password, "~> 3.0"},
       {:pbkdf2_elixir, "~> 1.2"},
-      {:dataloader, "~> 1.0"}
+      {:dataloader, "~> 1.0"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 

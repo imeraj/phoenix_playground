@@ -1,7 +1,11 @@
 <component name="libraryTable">
   <library name="cors_plug" type="mix">
-    <CLASSES />
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/cors_plug/ebin" />
+    </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/cors_plug/lib" />
+    </SOURCES>
   </library>
 </component>
