@@ -1,0 +1,181 @@
+schema {
+  query: RootQueryType
+  mutation: RootMutationType
+  subscription: RootSubscriptionType
+}
+
+directive @put on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+type Category {
+  description: String
+  id: ID
+  items: [MenuItem]
+  name: String
+}
+
+type Customer implements User {
+  email: String
+  id: ID
+  name: String
+}
+
+scalar Date
+
+scalar Decimal
+
+type Employee implements User {
+  email: String
+  id: ID
+  name: String
+}
+
+"""An error encountered"""
+type Error {
+  key: String!
+  message: String!
+}
+
+type Errors {
+  errors: [Error]
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+"""A menu item"""
+type MenuItem {
+  addedOn: Date
+  category: Category
+  description: String
+  id: ID
+  name: String
+  price: Decimal
+}
+
+input MenuItemCreateInput {
+  categoryId: ID!
+  description: String
+  name: String!
+  price: Decimal!
+}
+
+union MenuItemCreateResult = Errors | MenuItem
+
+"""Filtering options for the menu item list"""
+input MenuItemFilter {
+  """Added to the menu after this date"""
+  addedAfter: Date
+
+  """Added to the menu before this date"""
+  addedBefore: Date
+
+  """Matching a category name"""
+  category: String!
+
+  """Matching a name"""
+  name: String
+
+  """Priced above a value"""
+  pricedAbove: Float
+
+  """Priced below a value"""
+  pricedBelow: Float
+
+  """Matching a tag"""
+  tag: String
+}
+
+input MenuItemInput {
+  id: ID!
+}
+
+type MenuItemResult {
+  menuItem: MenuItem
+  orderHistory(since: Date): OrderHistory
+}
+
+type Order {
+  customerId: Int
+  id: ID
+  items: [OrderItem]
+  state: String
+}
+
+type OrderHistory {
+  gross: Float!
+  orders: [Order]
+  quantity: Int!
+}
+
+type OrderItem {
+  name: String
+  quantity: Int
+}
+
+input OrderItemInput {
+  menuItemId: ID!
+  quantity: Int!
+}
+
+input OrderPlaceInput {
+  items: [OrderItemInput!]!
+}
+
+union OrderPlaceResult = Errors | Order
+
+enum Role {
+  CUSTOMER
+  EMPLOYEE
+}
+
+type RootMutationType {
+  completeOrder(id: ID!): OrderPlaceResult
+  login(input: LoginInput!): Session
+  menuItemCreate(input: MenuItemCreateInput!): MenuItemCreateResult
+  orderPlace(input: OrderPlaceInput!): OrderPlaceResult
+  readyOrder(id: ID!): OrderPlaceResult
+  signup(input: SignupInput!): SignupResult
+}
+
+type RootQueryType {
+  menuItem(input: MenuItemInput!): MenuItemResult
+
+  """The list of available menu items"""
+  menuItems(filter: MenuItemFilter, order: SortOrder = ASC): [MenuItem]
+  search(matching: String!): [SearchResult]
+}
+
+type RootSubscriptionType {
+  newOrder: Order
+  updateOrder(id: ID!): Order
+}
+
+union SearchResult = Category | MenuItem
+
+type Session {
+  token: String
+  user: User
+}
+
+input SignupInput {
+  email: String!
+  name: String!
+  password: String!
+  role: Role!
+}
+
+union SignupResult = Customer | Employee | Errors
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+interface User {
+  email: String
+  id: ID
+  name: String
+}
+
