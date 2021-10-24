@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="ecto_psql_extras" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/ecto_psql_extras/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/ecto_psql_extras/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/ecto_psql_extras/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/ecto_psql_extras/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/ecto_psql_extras/lib" />
+      <root url="file://$PROJECT_DIR$/deps/ecto_psql_extras/lib" />
+    </SOURCES>
+  </library>
+</component>

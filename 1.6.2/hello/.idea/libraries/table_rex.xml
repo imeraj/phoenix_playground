@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="table_rex" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/table_rex/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/table_rex/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/table_rex/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/table_rex/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/table_rex/lib" />
+      <root url="file://$PROJECT_DIR$/deps/table_rex/lib" />
+    </SOURCES>
+  </library>
+</component>
