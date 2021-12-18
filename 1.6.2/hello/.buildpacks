@@ -1,3 +1,4 @@
-https://github.com/HashNuke/heroku-buildpack-elixir
-https://github.com/gjaldon/heroku-buildpack-phoenix-static
-https://github.com/gigalixir/gigalixir-buildpack-mix.git
+https://github.com/HashNuke/heroku-buildpack-elixir.git
+https://github.com/gjaldon/heroku-buildpack-phoenix-static.git
+https://github.com/gigalixir/gigalixir-buildpack-releases.git
+
