@@ -34,11 +34,11 @@ products = [
   }
 ]
 
-
 products =
   products
   |> Enum.map(fn product ->
-    now = NaiveDateTime.truncate(NaiveDateTime.utc_now(),:second)
+    now = NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second)
+
     product
     |> Map.put(:inserted_at, now)
     |> Map.put(:updated_at, now)
