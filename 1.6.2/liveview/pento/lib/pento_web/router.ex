@@ -27,6 +27,8 @@ defmodule PentoWeb.Router do
     live "/products/:id", ProductLive.Show, :show
     live "/products/:id/show/edit", ProductLive.Show, :edit
 
+    live "/promo", PromoLive
+
     live "/guess", WrongLive
     get "/", PageController, :index
   end

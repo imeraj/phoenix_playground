@@ -10,7 +10,13 @@ defmodule PentoWeb.ProductLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign(:changeset, changeset)
+     |> allow_upload(:image,
+       accept: ~w(.jpg .jpeg .png),
+       max_entries: 1,
+       auto_upload: false,
+       progress: &handle_progress/3
+     )}
   end
 
   @impl true
@@ -27,7 +33,12 @@ defmodule PentoWeb.ProductLive.FormComponent do
     save_product(socket, socket.assigns.action, product_params)
   end
 
+  def update_changeset(%{assigns: %{changeset: changeset}} = socket, key, value) do
+    socket |> assign(:changeset, Ecto.Changeset.put_change(changeset, key, value))
+  end
+
   defp save_product(socket, :edit, product_params) do
+    product_params = Map.put(product_params, "image_upload", Map.get(socket.assigns.changeset.changes, :image_upload, socket.assigns.product.image_upload))
     case Catalog.update_product(socket.assigns.product, product_params) do
       {:ok, _product} ->
         {:noreply,
@@ -41,6 +52,7 @@ defmodule PentoWeb.ProductLive.FormComponent do
   end
 
   defp save_product(socket, :new, product_params) do
+    product_params = Map.put(product_params, "image_upload", Map.get(socket.assigns.changeset.changes, :image_upload, ""))
     case Catalog.create_product(product_params) do
       {:ok, _product} ->
         {:noreply,
@@ -52,4 +64,29 @@ defmodule PentoWeb.ProductLive.FormComponent do
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
+
+  defp handle_progress(:image, entry, socket) do
+    if entry.done? do
+      path = consume_uploaded_entry(socket, entry, &upload_static_file(&1, socket))
+
+      {:noreply,
+       socket
+       |> put_flash(:info, "file #{entry.client_name} uploaded")
+       |> update_changeset(:image_upload, path)}
+    else
+      {:noreply, socket}
+    end
+  end
+
+  defp upload_static_file(%{path: path}, socket) do
+    # Plug in your production image file persistence implementation here
+
+    dest = Path.join("priv/static/images", Path.basename(path))
+    File.cp!(path, dest)
+    Routes.static_path(socket, "/images/#{Path.basename(dest)}")
+  end
+
+  def error_to_string(:too_large), do: "Too large"
+  def error_to_string(:too_many_files), do: "You have selected too many files"
+  def error_to_string(:not_accepted), do: "You have selected an unacceptable file type"
 end

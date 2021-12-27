@@ -24,7 +24,25 @@
     <%= label f, :sku %>
     <%= number_input f, :sku %>
     <%= error_tag f, :sku %>
-  
+
+    <%= label f, :image %>
+    <%= for entry <- @uploads.image.entries do %>
+      <%= for err <- upload_errors(@uploads.image, entry) do %>
+        <div class="alert alert-danger">
+          <%= error_to_string(err) %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="container" phx-drop-target={@uploads.image.ref}>
+        <%= live_file_input @uploads.image %>
+        <%= for entry <- @uploads.image.entries do %>
+          <%= live_img_preview entry, width: 75 %>
+        <% end %>
+    </div>
+
+    <%= hidden_input f, :image_upload %>
+
     <div>
       <%= submit "Save", phx_disable_with: "Saving..." %>
     </div>
