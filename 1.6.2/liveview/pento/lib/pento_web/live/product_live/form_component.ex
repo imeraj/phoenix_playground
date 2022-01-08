@@ -38,7 +38,17 @@ defmodule PentoWeb.ProductLive.FormComponent do
   end
 
   defp save_product(socket, :edit, product_params) do
-    product_params = Map.put(product_params, "image_upload", Map.get(socket.assigns.changeset.changes, :image_upload, socket.assigns.product.image_upload))
+    product_params =
+      Map.put(
+        product_params,
+        "image_upload",
+        Map.get(
+          socket.assigns.changeset.changes,
+          :image_upload,
+          socket.assigns.product.image_upload
+        )
+      )
+
     case Catalog.update_product(socket.assigns.product, product_params) do
       {:ok, _product} ->
         {:noreply,
@@ -52,7 +62,13 @@ defmodule PentoWeb.ProductLive.FormComponent do
   end
 
   defp save_product(socket, :new, product_params) do
-    product_params = Map.put(product_params, "image_upload", Map.get(socket.assigns.changeset.changes, :image_upload, ""))
+    product_params =
+      Map.put(
+        product_params,
+        "image_upload",
+        Map.get(socket.assigns.changeset.changes, :image_upload, "")
+      )
+
     case Catalog.create_product(product_params) do
       {:ok, _product} ->
         {:noreply,

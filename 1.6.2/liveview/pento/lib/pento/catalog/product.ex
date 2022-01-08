@@ -2,6 +2,8 @@ defmodule Pento.Catalog.Product do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Pento.Survey.Rating
+
   schema "products" do
     field :description, :string
     field :name, :string
@@ -10,6 +12,8 @@ defmodule Pento.Catalog.Product do
     field(:image_upload, :string)
 
     timestamps()
+
+    has_many :ratings, Rating
   end
 
   @doc false

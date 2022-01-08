@@ -29,6 +29,8 @@ defmodule PentoWeb.Router do
 
     live "/promo", PromoLive
 
+    live "/survey", SurveyLive, :index
+
     live "/guess", WrongLive
     get "/", PageController, :index
   end
