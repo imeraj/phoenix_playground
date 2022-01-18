@@ -1,0 +1,40 @@
+.survey-component-container {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.survey-component-container label{
+  padding: 10px;
+}
+
+
+.survey-component-container input {
+  margin-right: 10px;
+}
+
+.survey-component-container select {
+  margin-right: 10px;
+}
+
+.survey-component-container h4 {
+  font-weight: bold;
+}
+
+.fa.fa-star.checked {
+  color: orange;
+}
+
+.fa.fa-star {
+  padding: 3px;
+}
+
+.survey-component-container ul li{
+  list-style: none;
+}
+
+.fa.fa-check.survey {
+  color: green;
+}

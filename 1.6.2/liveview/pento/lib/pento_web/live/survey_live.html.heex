@@ -3,10 +3,24 @@
 </section>
 
 <section class="row">
-    <.live_component @socket,
-        id={"demographic-form-#{@current_user.id}"},
-        module={PentoWeb.DemographicLive.FormComponent},
-        content={"Hello to the Demographic Form Component"},
-        user={@current_user}
-    />
+    <%= if @demographic do %>
+        <.live_component @socket,
+            id={:new},
+            module={PentoWeb.DemographicLive.ShowComponent},
+            demographic={@demographic}
+        />
+        <.live_component @socket,
+            id={"rating-form-#{@current_user.id}"},
+            module={PentoWeb.RatingLive.IndexComponent},
+            products={@products},
+            user={@current_user}
+        />
+    <% else %>
+        <.live_component @socket,
+            id={"demographic-form-#{@current_user.id}"},
+            module={PentoWeb.DemographicLive.FormComponent},
+            content={"Hello to the Demographic Form Component"},
+            user={@current_user}
+        />
+    <% end %>
 </section>
