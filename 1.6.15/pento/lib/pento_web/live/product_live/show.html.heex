@@ -15,6 +15,26 @@
 
 <ul></ul>
 
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Unit price</th>
+      <th>Sku</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="product">
+      <tr id={"@product-#{@product.id}"}>
+        <td><%= @product.name %></td>
+        <td><%= @product.description %></td>
+        <td><%= @product.unit_price %></td>
+        <td><%= @product.sku %></td>
+      </tr>
+  </tbody>
+</table>
+
 <span>
   <%= live_patch("Edit", to: Routes.product_show_path(@socket, :edit, @product), class: "button") %>
 </span>
