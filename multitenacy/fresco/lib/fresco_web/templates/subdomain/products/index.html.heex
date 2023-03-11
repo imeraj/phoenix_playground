@@ -1,0 +1,17 @@
+<section class="phx-hero" style={@style}>
+  <h1><%= gettext "Welcome to %{name}!", name: @subdomain %></h1>
+  <p>Peace of mind from prototype to production</p>
+</section>
+
+<section class="row">
+  <article class="column">
+    <h2>Products</h2>
+    <ul>
+      <%= for product <- @products do %>
+        <li>
+          Product: <%= product.name %> | Price: <%= product.price %>
+        </li>
+      <% end %>
+    </ul>
+  </article>
+</section>

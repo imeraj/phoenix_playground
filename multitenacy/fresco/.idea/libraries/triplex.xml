@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="triplex" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/triplex/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/triplex/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/triplex/lib" />
+      <root url="file://$PROJECT_DIR$/deps/triplex/lib" />
+    </SOURCES>
+  </library>
+</component>
