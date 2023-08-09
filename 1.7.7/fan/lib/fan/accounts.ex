@@ -127,6 +127,9 @@ defmodule Fan.Accounts do
   end
 
   def following?(current_user, other_user) do
-    Enum.member?(followings(current_user), other_user)
+    query =
+      from r in Relationship, where: [follower_id: ^current_user.id, followed_id: ^other_user.id]
+
+    Repo.exists?(query)
   end
 end
