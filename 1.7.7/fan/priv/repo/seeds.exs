@@ -22,8 +22,8 @@ for _ <- 1..5,
 # Following relationships
 users = Accounts.list_users()
 user = Enum.at(users, 0)
-following = Enum.slice(users, 2, 10)
-followers = Enum.slice(users, 3, 10)
+following = Enum.slice(users, 2, 5)
+followers = Enum.slice(users, 3, 5)
 
 for followed <- following, do: Accounts.follow(followed, user)
 for follower <- followers, do: Accounts.follow(user, follower)
